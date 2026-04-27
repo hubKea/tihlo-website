@@ -1,0 +1,52 @@
+---
+title: "Closing the weighbridge handshake gap"
+subtitle: "Why a truck should never load without a 3-point verification"
+date: "February 2026"
+index: "No. 02"
+excerpt: "The gate opened. The truck loaded. The weighbridge issued a ticket. Nobody had confirmed the truck was on the fleet list. Nobody had confirmed the tracker was live."
+heroImage: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=2400&q=85"
+---
+
+The gate opened. The truck loaded. The weighbridge issued a ticket. The truck left.
+
+Nobody had confirmed the truck was on the approved fleet list. Nobody had confirmed the tracker was live and accurately reporting. Nobody had verified the route allocation against the ticket destination.
+
+This is the weighbridge handshake gap. It exists on most operations. It is where coal disappears.
+
+## The gap in structural terms
+
+A weighbridge system does three things: it records the vehicle, records the weight, and issues a ticket. A good weighbridge system does these three things accurately and quickly. What it does not do — cannot do — is verify that the vehicle presenting is authorised to be there, that the tracking feed from that vehicle is legitimate, or that the destination on the ticket is the destination the vehicle is actually routed to.
+
+Those three verifications require an external data source — a current, maintained fleet list, a live telematics feed, and a route allocation system. They also require a human to confirm that all three align before the gate opens.
+
+Without that confirmation, the weighbridge is a precise instrument recording movements that may be completely unauthorised.
+
+## What a ghost truck looks like
+
+In one operating context, a vehicle that had been removed from the approved haulier fleet list — following a sanction — continued to present at the weighbridge for seventeen days. The weighbridge system had not been updated with the removal. The gate opened because the vehicle number was in the system. The tracker on the vehicle was reporting a location that did not match actual vehicle position — a known spoofing technique.
+
+Seventeen loads. No authorised fleet status. No live tracking. Destination unknown.
+
+The coal was recovered through a separate investigation, not through the weighbridge system.
+
+## The 3-point verification structure
+
+The structural fix is straightforward: no truck loads without three independent confirmations, made in sequence, each logged under a controller name.
+
+**Point one — fleet list confirmation.** The presenting vehicle is cross-referenced against the current approved fleet list for that haulier. Not the fleet list from onboarding six months ago. The current list, maintained daily, with removals applied immediately.
+
+**Point two — tracker verification.** The vehicle's telematics feed is confirmed live, confirmed accurate to position, and confirmed reporting to the monitoring layer. A tracker that is offline, delayed, or reporting a suspicious position does not clear this gate.
+
+**Point three — route authorisation.** The allocated route is confirmed against the ticket destination. The controller signs off on the load and the route simultaneously. Deviation from the authorised route triggers the suspension protocol automatically — but the route must be logged at load time for the protocol to activate correctly.
+
+## What the log produces
+
+The three-point verification produces a record at the moment of highest risk — the handover from mine to transport. Each confirmation is timestamped. Each is attributed to a named controller. The log is continuous and tamper-evident.
+
+In a dispute context — commodity shortage, insurance claim, audit — this log is the primary evidence document. It answers three questions that matter: was this vehicle authorised? Was it tracked? Was it routed correctly? If the answer to any of those is no, the log identifies when the answer became no and who was responsible for the decision.
+
+---
+
+The weighbridge handshake gap closes when verification is structural, not procedural. Procedures depend on people remembering to follow them under pressure. Structural verification — where the gate cannot open without confirmation — does not.
+
+Three points. One controller. One signed record. Every load.

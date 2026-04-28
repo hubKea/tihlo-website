@@ -12,11 +12,15 @@ export const BRAND = {
 
 export const HERO = {
   eyebrow: 'Active monitoring · 24 / 7 · Mpumalanga · Limpopo · Northern Cape',
-  headline: ['Movement,', 'monitored.'],
-  accentWord: 'monitored.',
-  lede: "TIHLO operates the active monitoring layer for mining fleets, yellow plant and weighbridges. We watch what your operation does, catch what shouldn't happen, and log the consequence — every shift, in writing.",
-  cta_primary: 'Request a briefing',
-  cta_secondary: 'How we operate',
+  headline: ['The eye that', 'never misses.'],
+  accentWord: '.',
+  lede: 'TIHLO helps operations detect fuel loss, asset misuse, commodity leakage, contractor risk and movement exceptions before they become accepted cost.',
+  cta_primary: 'Request a consultation',
+  cta_secondary: 'What we monitor',
+  image: {
+    src: '/images/hero-operations.webp',
+    alt: 'Aerial mining operation rendered as an iris — haul trucks circling the rim of an open pit',
+  },
 } as const;
 
 export const STATS = [

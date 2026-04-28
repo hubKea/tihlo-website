@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import NumberRoll from '@/components/ui/NumberRoll';
@@ -12,17 +11,11 @@ import ScrambleText from '@/components/motion/ScrambleText';
 import { HERO, STATS } from '@/lib/constants';
 import { ease, durations } from '@/lib/motion';
 
-const HeroTerrain = dynamic(() => import('@/components/3d/HeroTerrain'), {
-  ssr: false,
-  loading: () => null,
-});
-
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>();
 
-  // Lightweight rAF parallax — no pin, no choreography lock-in
+  // Lightweight rAF parallax for the background image
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) return;
@@ -33,7 +26,7 @@ export default function Hero() {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
         if (!img) return;
-        img.style.transform = `translate3d(0, ${window.scrollY * 0.28}px, 0)`;
+        img.style.transform = `translate3d(0, ${window.scrollY * 0.22}px, 0)`;
       });
     }
 
@@ -45,37 +38,28 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden pt-28 lg:pt-32"
-    >
-      {/* Background image */}
-      <div className="absolute inset-0">
+    <section className="relative isolate flex min-h-screen flex-col justify-end overflow-hidden pt-28 lg:pt-32">
+      {/* Background image — abstract eye composition */}
+      <div className="absolute inset-0 -z-10">
         <div
           ref={imgRef}
-          className="absolute -inset-[8%] will-change-transform"
-          style={{ marginTop: '-8%', marginBottom: '-8%' }}
+          className="absolute -inset-[6%] will-change-transform"
         >
-          <div
-            className="absolute inset-0"
-            style={{ animation: 'ken-burns 24s ease-in-out infinite alternate' }}
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1509390836518-c3a0d09f3d0d?auto=format&fit=crop&w=2400&q=85"
-              alt="Aerial view of mining haul truck on corridor"
-              fill
-              priority
-              quality={85}
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div>
+          <Image
+            src={HERO.image.src}
+            alt={HERO.image.alt}
+            fill
+            priority
+            quality={90}
+            className="object-cover object-right"
+            sizes="100vw"
+          />
         </div>
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/70 to-[var(--ink)]/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--ink)]/60 via-transparent to-transparent" />
 
-        {/* 3D wireframe terrain — institutional WebGL moment */}
-        <HeroTerrain />
+        {/* Left-fade dark overlay for text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+        {/* Subtle bottom anchor */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent" />
       </div>
 
       {/* Content */}
@@ -87,7 +71,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: durations.short, ease: ease.soft }}
-              className="mono-label mb-6 flex items-center gap-3 text-white/60"
+              className="mono-label mb-6 flex items-center gap-3 text-white/65"
             >
               <span className="block h-px w-6 bg-[var(--red)]" />
               {HERO.eyebrow}
@@ -95,13 +79,13 @@ export default function Hero() {
 
             <div className="mb-8 overflow-hidden">
               <MaskReveal delay={0.1}>
-                <h1 className="font-display text-[clamp(64px,11vw,152px)] font-medium leading-[0.88] tracking-[-0.055em] text-[var(--paper)]">
+                <h1 className="font-display text-[clamp(56px,9vw,128px)] font-medium leading-[0.9] tracking-[-0.05em] text-[var(--paper)]">
                   {HERO.headline[0]}
                 </h1>
               </MaskReveal>
               <MaskReveal delay={0.22}>
-                <h1 className="font-display text-[clamp(64px,11vw,152px)] font-medium leading-[0.88] tracking-[-0.055em] text-[var(--paper)]">
-                  monitored<em className="not-italic text-[var(--red)]">.</em>
+                <h1 className="font-display text-[clamp(56px,9vw,128px)] font-medium leading-[0.9] tracking-[-0.05em] text-[var(--paper)]">
+                  never misses<em className="not-italic text-[var(--red)]">.</em>
                 </h1>
               </MaskReveal>
             </div>
@@ -110,7 +94,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.5 }}
-              className="mb-8 max-w-[480px] text-[17px] leading-[1.65] text-white/70"
+              className="mb-8 max-w-[520px] text-[17px] leading-[1.65] text-white/75"
             >
               {HERO.lede}
             </motion.p>
@@ -129,7 +113,7 @@ export default function Hero() {
               <MagneticButton strength={0.18}>
                 <Button
                   variant="ghost"
-                  href="/how-we-operate"
+                  href="/sectors"
                   className="border-white/30 text-white hover:border-white"
                 >
                   {HERO.cta_secondary}
@@ -138,26 +122,26 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — stats strip */}
+          {/* Right — stats strip (preserves brief's right-rail credibility cluster) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.8 }}
             className="hidden lg:block"
           >
-            <div className="border border-white/12 bg-white/5 backdrop-blur-sm">
+            <div className="border border-white/15 bg-black/25 backdrop-blur-md">
               {STATS.map((stat, i) => (
                 <div
                   key={i}
-                  className={`px-8 py-7 ${i < STATS.length - 1 ? 'border-b border-white/10' : ''}`}
+                  className={`px-8 py-7 ${i < STATS.length - 1 ? 'border-b border-white/12' : ''}`}
                 >
                   <div className="tabular-nums font-display text-[clamp(36px,4vw,52px)] font-medium leading-none tracking-[-0.04em] text-[var(--paper)]">
                     {'prefix' in stat && stat.prefix && (
-                      <span className="text-[0.55em] text-white/60">{stat.prefix}</span>
+                      <span className="text-[0.55em] text-white/65">{stat.prefix}</span>
                     )}
                     <NumberRoll value={stat.value} suffix={'suffix' in stat ? stat.suffix : ''} />
                   </div>
-                  <p className="mono-id mt-2.5 text-white/50">{stat.label}</p>
+                  <p className="mono-id mt-2.5 text-white/55">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -169,27 +153,20 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: durations.long, ease: ease.cinematic, delay: 1.0 }}
-          className="mt-10 flex items-end justify-between border-t border-white/12 pt-6"
+          className="mt-10 flex items-end justify-between border-t border-white/15 pt-6"
         >
           <ScrambleText
             as="div"
-            className="mono-id text-white/40"
+            className="mono-id text-white/45"
             value={`REC § ${new Date().toLocaleDateString('en-ZA', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()} · OBS FRAME 001 · SECTOR COAL-MPU`}
             duration={900}
           />
-          <div className="flex flex-col items-center gap-2 text-white/40">
+          <div className="flex flex-col items-center gap-2 text-white/45">
             <span className="mono-id">SCROLL</span>
-            <span className="block h-8 w-px animate-scroll-cue bg-white/30" />
+            <span className="block h-8 w-px animate-scroll-cue bg-white/40" />
           </div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes ken-burns {
-          from { transform: scale(1.02) translateY(0); }
-          to   { transform: scale(1.10) translateY(-2%); }
-        }
-      `}</style>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface Props {
   children: React.ReactNode;
@@ -9,6 +10,11 @@ interface Props {
   radius?: number;
 }
 
+/**
+ * Magnetic hover wrapper.
+ * Uses framer-motion motion values so transforms run outside React's render cycle —
+ * no re-renders, no perf collapse on mobile.
+ */
 export default function MagneticButton({
   children,
   className = '',
@@ -16,6 +22,13 @@ export default function MagneticButton({
   radius = 90,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
+  const dx = useMotionValue(0);
+  const dy = useMotionValue(0);
+  const x = useSpring(dx, { stiffness: 220, damping: 22, mass: 0.6 });
+  const y = useSpring(dy, { stiffness: 220, damping: 22, mass: 0.6 });
+  // identity transforms keep TS happy + enable GPU compositor
+  const tx = useTransform(x, (v) => v);
+  const ty = useTransform(y, (v) => v);
 
   useEffect(() => {
     const el = ref.current;
@@ -24,60 +37,40 @@ export default function MagneticButton({
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!fine || reduced) return;
 
-    let raf = 0;
-    let tx = 0;
-    let ty = 0;
-    let cx = 0;
-    let cy = 0;
-
     function move(e: PointerEvent) {
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const mx = rect.left + rect.width / 2;
       const my = rect.top + rect.height / 2;
-      const dx = e.clientX - mx;
-      const dy = e.clientY - my;
-      const dist = Math.hypot(dx, dy);
+      const ddx = e.clientX - mx;
+      const ddy = e.clientY - my;
+      const dist = Math.hypot(ddx, ddy);
       if (dist < radius) {
         const f = (1 - dist / radius) * strength;
-        tx = dx * f;
-        ty = dy * f;
+        dx.set(ddx * f);
+        dy.set(ddy * f);
       } else {
-        tx = 0;
-        ty = 0;
+        dx.set(0);
+        dy.set(0);
       }
     }
 
     function leave() {
-      tx = 0;
-      ty = 0;
-    }
-
-    function loop() {
-      cx += (tx - cx) * 0.18;
-      cy += (ty - cy) * 0.18;
-      if (el) el.style.transform = `translate3d(${cx.toFixed(2)}px, ${cy.toFixed(2)}px, 0)`;
-      raf = requestAnimationFrame(loop);
+      dx.set(0);
+      dy.set(0);
     }
 
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('pointerleave', leave);
-    raf = requestAnimationFrame(loop);
-
     return () => {
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerleave', leave);
-      cancelAnimationFrame(raf);
     };
-  }, [strength, radius]);
+  }, [strength, radius, dx, dy]);
 
   return (
-    <span
-      ref={ref}
-      className={`inline-block will-change-transform ${className}`}
-      style={{ transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
-    >
+    <motion.span ref={ref} className={`inline-block ${className}`} style={{ x: tx, y: ty }}>
       {children}
-    </span>
+    </motion.span>
   );
 }

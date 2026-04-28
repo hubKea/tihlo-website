@@ -6,7 +6,6 @@ import './globals.css';
 import Nav from '@/components/layout/Nav';
 import UtilBar from '@/components/layout/UtilBar';
 import Footer from '@/components/layout/Footer';
-import ReticleCursor from '@/components/motion/ReticleCursor';
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +34,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
-        <ReticleCursor />
         <UtilBar />
         <Nav />
         <main>{children}</main>

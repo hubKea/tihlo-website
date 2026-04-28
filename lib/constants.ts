@@ -11,22 +11,38 @@ export const BRAND = {
 } as const;
 
 export const HERO = {
-  eyebrow: 'Active monitoring · 24 / 7 · Mpumalanga · Limpopo · Northern Cape',
+  eyebrow: 'Active monitoring · 24 / 7 · across South African operations',
   headline: ['The eye that', 'never misses.'],
   accentWord: '.',
   lede: 'TIHLO helps operations detect fuel loss, asset misuse, commodity leakage, contractor risk and movement exceptions before they become accepted cost.',
   cta_primary: 'Request a consultation',
   cta_secondary: 'What we monitor',
   image: {
-    src: '/images/hero-operations.webp',
-    alt: 'Aerial mining operation rendered as an iris — haul trucks circling the rim of an open pit',
+    src: '/images/hero-operations.png',
+    alt: 'Aerial open-pit operation at golden hour — continuous oversight in a single frame',
   },
+  meta: 'REC § OBS FRAME 001 · INSTRUMENT ACTIVE · ALL CORRIDORS NOMINAL',
 } as const;
 
 export const STATS = [
-  { value: 18, prefix: 'up to ', suffix: '%', label: 'Diesel reclaimed · first 90 days' },
-  { value: 38, suffix: 's', label: 'Median controller response' },
-  { value: 3047, label: 'Loads under monitoring · last 24h' },
+  {
+    value: 18,
+    prefix: 'up to ',
+    suffix: '%',
+    label: 'Diesel reclaimed',
+    caveat: 'OBSERVED · COAL CORRIDOR PILOT · 90 DAYS',
+  },
+  {
+    value: 38,
+    suffix: 's',
+    label: 'Median controller response',
+    caveat: 'ROLLING 30-DAY · ALL ENGAGEMENTS',
+  },
+  {
+    value: 3047,
+    label: 'Loads under monitoring',
+    caveat: 'LIVE · LAST 24H · ALL CORRIDORS',
+  },
 ] as const;
 
 export const UTIL_BAR = {
@@ -118,6 +134,103 @@ export const INTERSTITIAL = {
     src: 'https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?auto=format&fit=crop&w=2400&q=85',
     alt: 'Open pit mine at dusk',
   },
+} as const;
+
+export const WHAT_WE_MONITOR = {
+  eyebrow: '§ What we monitor',
+  headline: 'Five things we watch.',
+  lede:
+    'TIHLO is sector-agnostic. Mines, factories, depots, and municipal fleets all share the same five pressure points — and the same need for an independent record of what happened.',
+  categories: [
+    {
+      label: 'Fuel & energy',
+      body:
+        'Refuelling fraud, baseline consumption variance, and idle/blackout patterns — across haul fleets, generators, factory plant, and municipal depots.',
+      contexts: 'Mines · Factories · Municipal depots',
+    },
+    {
+      label: 'Asset utilisation',
+      body:
+        'Off-site activity, after-hours operation, and harsh-event detection per machine. The asset records what the operator reports.',
+      contexts: 'Yellow plant · Production lines · Specialist vehicles',
+    },
+    {
+      label: 'Movement & routing',
+      body:
+        'Geofenced route enforcement, stop authorisation, and signal integrity monitored continuously from gate to gate.',
+      contexts: 'Bulk transport · Last-mile fleets · Service vehicles',
+    },
+    {
+      label: 'Contractor accountability',
+      body:
+        'Performance ranked per asset, not per conversation. Sanctions follow the truck, the machine, or the crew — surviving personnel changes on both sides.',
+      contexts: 'Hauliers · Plant contractors · Outsourced services',
+    },
+  ],
+} as const;
+
+export const HOW_IT_WORKS = {
+  eyebrow: '§ How TIHLO works',
+  headline: 'Three movements, one record.',
+  lede:
+    'Every engagement runs the same compact pattern. A six-stage methodology runs underneath, but at the operational level there are three movements — each ending in a named, signed record.',
+  steps: [
+    {
+      index: '01',
+      name: 'Verify',
+      body:
+        'Assets, operators, and feeds are validated before clearance. Three points must align — fleet record, telematics, and authorisation — before anything moves.',
+    },
+    {
+      index: '02',
+      name: 'Monitor',
+      body:
+        'Live oversight across the operation. Variance is classified against learned baselines, not just flagged. Controllers intervene immediately, not at month-end.',
+    },
+    {
+      index: '03',
+      name: 'Resolve',
+      body:
+        'Every exception is adjudicated by a named controller. Sanctions land on the asset. The evidence pack is issued at month-end — audit-grade and dispute-defensible.',
+    },
+  ],
+  cta: { label: 'Read the full six-stage methodology', href: '/how-we-operate' },
+} as const;
+
+export const WHY_TIHLO = {
+  eyebrow: '§ Why TIHLO',
+  headline: 'Four reasons engagements stand up.',
+  lede:
+    'These are non-negotiable. Each one is the precondition for evidence that survives an audit, an insurance claim, or a forensic counsel review.',
+  pillars: [
+    {
+      title: 'Independent — by design',
+      body:
+        'TIHLO is not a subsidiary of a logistics provider, a reseller of telematics hardware, or a spin-off of a fleet management platform. We have no commercial relationship with any system we monitor.',
+    },
+    {
+      title: 'Evidence-grade output',
+      body:
+        'Every record is timestamped, GPS-attributed, and controller-signed. Month-end packs are structured to be admissible before auditors, insurers, and legal counsel — not internal dashboards.',
+    },
+    {
+      title: 'Human-adjudicated',
+      body:
+        'Alerts without a named decision are noise. Every exception TIHLO raises is reviewed and resolved by a controller — with their name attached to the outcome and a written rationale.',
+    },
+    {
+      title: 'Audit-defensible',
+      body:
+        'Sanctions land on the asset, not the conversation. Decisions survive personnel changes on both sides. The chain of custody on every record is intact from event to evidence pack.',
+    },
+  ],
+} as const;
+
+export const BY_THE_NUMBERS = {
+  eyebrow: '§ By the numbers',
+  headline: 'Operational signals.',
+  lede:
+    'Each figure carries the conditions under which it was observed. We publish the caveats so the numbers can be challenged.',
 } as const;
 
 export const SECTORS = [

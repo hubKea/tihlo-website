@@ -56,16 +56,6 @@
     overflow-x: hidden;
   }
 
-  /* Custom reticle cursor — applied when ReticleCursor mounts (desktop only) */
-  html.cursor-none,
-  html.cursor-none body {
-    cursor: none;
-  }
-  html.cursor-none a,
-  html.cursor-none button,
-  html.cursor-none [role='button'] {
-    cursor: none;
-  }
 
   a {
     color: inherit;

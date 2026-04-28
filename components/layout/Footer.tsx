@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import TihloLogo from '@/components/ui/TihloLogo';
-import { BRAND, NAV_LINKS } from '@/lib/constants';
+import { BRAND } from '@/lib/constants';
 
 const OPERATIONS = [
   { label: 'How we operate', href: '/how-we-operate' },
@@ -25,24 +25,23 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[var(--rule)] bg-[var(--paper-2)]">
+    <footer className="border-t border-white/10 bg-[var(--ink)] text-white/65">
       <div className="mx-auto max-w-site px-6 py-16 lg:px-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand column */}
           <div>
-            <div className="flex items-center gap-2.5 mb-5">
-              <TihloLogo size={24} />
-              <span className="font-display text-[13px] font-semibold tracking-[0.22em] text-[var(--ink)]">
+            <div className="mb-5 flex items-center gap-2.5">
+              <TihloLogo size={28} light />
+              <span className="font-display text-[13px] font-semibold tracking-[0.22em] text-[var(--paper)]">
                 TIHLO
               </span>
             </div>
-            <p className="text-sm leading-relaxed text-[var(--muted)] max-w-xs">
-              The active monitoring layer for mining fleets, yellow plant and weighbridges across South Africa.
+            <p className="max-w-xs text-sm leading-relaxed text-white/55">
+              The active monitoring layer for South African operations — mining, plant, fleet,
+              and weighbridge.
             </p>
-            <p className="mt-4 mono-id text-[var(--dim)] italic">
-              {BRAND.slogan}
-            </p>
-            <div className="mt-6 mono-id text-[var(--dim)] space-y-1">
+            <p className="mono-id mt-4 italic text-white/40">{BRAND.slogan}</p>
+            <div className="mono-id mt-6 space-y-1 text-white/40">
               <p>{BRAND.address}</p>
               <p>Tel: {BRAND.phone}</p>
               <p>{BRAND.email}</p>
@@ -51,11 +50,14 @@ export default function Footer() {
 
           {/* Operations */}
           <div>
-            <p className="mono-label text-[var(--muted)] mb-5">Operations</p>
+            <p className="mono-label mb-5 text-white/45">Operations</p>
             <ul className="space-y-3">
               {OPERATIONS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-[var(--muted)] hover:text-[var(--ink)] transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/65 transition-colors hover:text-[var(--paper)]"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -65,11 +67,14 @@ export default function Footer() {
 
           {/* Firm */}
           <div>
-            <p className="mono-label text-[var(--muted)] mb-5">Firm</p>
+            <p className="mono-label mb-5 text-white/45">Firm</p>
             <ul className="space-y-3">
               {FIRM_LINKS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-[var(--muted)] hover:text-[var(--ink)] transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/65 transition-colors hover:text-[var(--paper)]"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -79,11 +84,14 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <p className="mono-label text-[var(--muted)] mb-5">Legal</p>
+            <p className="mono-label mb-5 text-white/45">Legal</p>
             <ul className="space-y-3">
               {LEGAL_LINKS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-[var(--muted)] hover:text-[var(--ink)] transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/65 transition-colors hover:text-[var(--paper)]"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -93,13 +101,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-[var(--rule)] pt-8 sm:flex-row sm:items-center">
-          <p className="mono-id text-[var(--dim)]">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
+          <p className="mono-id text-white/35">
             © {year} TIHLO. Independent. South Africa.
           </p>
-          <p className="mono-id text-[var(--dim)]">
-            All corridors monitored. All records signed.
-          </p>
+          <p className="mono-id text-white/35">All corridors monitored. All records signed.</p>
         </div>
       </div>
     </footer>

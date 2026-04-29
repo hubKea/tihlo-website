@@ -40,14 +40,15 @@ export default function HowItWorks() {
               <FadeUp key={step.index} delay={i * 0.1}>
                 <div className="relative">
                   {/* Node marker */}
-                  <div className="mb-8 flex items-center gap-4">
-                    <span className="relative z-10 flex h-7 w-7 items-center justify-center bg-[var(--paper-2)]">
+                  <div className="mb-8 flex items-baseline gap-4">
+                    <span className="relative z-10 inline-flex h-7 w-7 shrink-0 items-center justify-center self-center bg-[var(--paper-2)]">
                       <span className="block h-2 w-2 bg-[var(--red)]" />
                       <span className="absolute inset-0 border border-[var(--ink)]" />
                     </span>
-                    <span className="mono-label text-[var(--muted)]">
-                      Movement {step.index}
+                    <span className="font-mono text-[clamp(34px,3.2vw,44px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
+                      {step.index}
                     </span>
+                    <span className="mono-label text-[var(--muted)]">Movement</span>
                   </div>
 
                   {/* Illustration */}

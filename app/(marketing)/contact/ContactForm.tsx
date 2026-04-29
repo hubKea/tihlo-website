@@ -58,7 +58,7 @@ function TextInput({ error, ...props }: React.InputHTMLAttributes<HTMLInputEleme
   return (
     <input
       {...props}
-      className={`w-full border-b bg-transparent px-0 py-2.5 font-display text-[15px] text-[var(--ink)] placeholder:text-[var(--dim)] outline-none transition-colors focus:border-[var(--red)] ${
+      className={`w-full border bg-[var(--paper-2)] px-4 py-3 font-display text-[15px] text-[var(--ink)] placeholder:text-[var(--dim)] outline-none transition-all focus:border-[var(--red)] focus:bg-[var(--paper)] ${
         error ? 'border-[var(--red)]' : 'border-[var(--rule-2)]'
       }`}
     />
@@ -69,7 +69,7 @@ function SelectInput({ error, children, ...props }: React.SelectHTMLAttributes<H
   return (
     <select
       {...props}
-      className={`w-full border-b bg-transparent py-2.5 font-display text-[15px] text-[var(--ink)] outline-none transition-colors focus:border-[var(--red)] ${
+      className={`w-full border bg-[var(--paper-2)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all focus:border-[var(--red)] focus:bg-[var(--paper)] ${
         error ? 'border-[var(--red)]' : 'border-[var(--rule-2)]'
       }`}
     >
@@ -235,16 +235,34 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border border-[var(--ink)] p-8 lg:p-12">
-        <div className="mb-6 space-y-1 font-mono text-sm text-[var(--ink)]">
-          <p className="text-[var(--green)] text-xs tracking-[0.22em]">TRANSMISSION RECEIVED</p>
-          <p className="tracking-[0.16em] text-xs text-[var(--muted)]">TICKET: {ticketId}</p>
-          <p className="tracking-[0.16em] text-xs text-[var(--muted)]">RESPONSE TARGET: 1 BUSINESS DAY</p>
-          <p className="tracking-[0.16em] text-xs text-[var(--muted)]">CONTROLLER: ASSIGNED</p>
-        </div>
-        <p className="text-[17px] leading-[1.65] text-[var(--muted)]">
-          Your briefing request has been received. A TIHLO representative will contact you within
-          one business day using your preferred contact method.
+      <div className="border border-[var(--ink)] bg-[var(--paper-2)] p-10 lg:p-12">
+        <p className="mono-label mb-6 flex items-center gap-3 text-[var(--red)]">
+          <span className="block h-px w-8 bg-[var(--red)]" />
+          § Transmission received
+        </p>
+        <p className="font-mono text-[clamp(28px,3vw,40px)] font-medium leading-none tabular-nums text-[var(--ink)]">
+          TICKET: <span className="text-[var(--red)]">{ticketId}</span>
+        </p>
+        <ul className="mt-8 space-y-2 border-t border-[var(--rule)] pt-6 font-mono text-xs tracking-[0.16em] text-[var(--muted)]">
+          <li className="flex items-center justify-between gap-4">
+            <span>RESPONSE TARGET</span>
+            <span className="text-[var(--ink)]">1 BUSINESS DAY</span>
+          </li>
+          <li className="flex items-center justify-between gap-4">
+            <span>CONTROLLER</span>
+            <span className="text-[var(--ink)]">ASSIGNED</span>
+          </li>
+          <li className="flex items-center justify-between gap-4">
+            <span>INSTRUMENT</span>
+            <span className="flex items-center gap-2 text-[var(--ink)]">
+              <span className="block h-1.5 w-1.5 rounded-full bg-[var(--green)] pulse-dot-green" />
+              ACTIVE
+            </span>
+          </li>
+        </ul>
+        <p className="mt-8 text-[16px] leading-[1.65] text-[var(--muted)]">
+          A TIHLO representative will contact you within one business day using your preferred
+          contact method.
         </p>
       </div>
     );
@@ -257,15 +275,26 @@ export default function ContactForm() {
         {[1, 2, 3].map((s) => (
           <div
             key={s}
-            className={`flex-1 py-3 text-center mono-id transition-colors ${
+            className={`flex flex-1 items-center justify-center gap-3 py-4 transition-colors ${
               s === step
-                ? 'bg-[var(--ink)] text-[var(--paper)]'
+                ? 'bg-[var(--ink)]'
                 : s < step
-                ? 'bg-[var(--paper-2)] text-[var(--ink)]'
-                : 'text-[var(--dim)]'
+                ? 'bg-[var(--paper-2)]'
+                : 'bg-[var(--paper)]'
             }`}
           >
-            {String(s).padStart(2, '0')}
+            <span
+              className={`font-mono text-[20px] font-medium leading-none tabular-nums ${
+                s === step
+                  ? 'text-[var(--red)]'
+                  : s < step
+                  ? 'text-[var(--ink)]'
+                  : 'text-[var(--dim)]'
+              }`}
+            >
+              {String(s).padStart(2, '0')}
+            </span>
+            {s < step && <span className="block h-px w-6 bg-[var(--red)]" />}
           </div>
         ))}
       </div>

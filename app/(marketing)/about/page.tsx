@@ -69,28 +69,49 @@ function MapZA() {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-[var(--ink)] px-6 pb-20 pt-36 lg:px-12 lg:pt-48">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1565793979540-72c7a00b5f57?auto=format&fit=crop&w=2400&q=85"
-            alt="South African mining landscape"
-            fill
-            quality={85}
-            className="object-cover opacity-25"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-[var(--ink)]/75" />
-        </div>
-        <div className="relative mx-auto max-w-site">
-          <FadeUp>
-            <Eyebrow className="mb-6 text-white/50">§ The firm</Eyebrow>
-            <h1 className="mb-8 font-display text-[clamp(52px,8vw,108px)] font-medium leading-[0.9] tracking-[-0.05em] text-[var(--paper)]">
-              {ABOUT.headline}
-            </h1>
-            <p className="max-w-2xl text-[18px] leading-[1.65] text-white/65">
-              {ABOUT.lede}
-            </p>
+      {/* Hero — split: copy left, half-bleed documentary photo right */}
+      <section className="bg-[var(--paper)] px-6 pb-16 pt-36 lg:px-12 lg:pt-44">
+        <div className="mx-auto max-w-site">
+          <FadeUp className="grid grid-cols-12 gap-x-8 gap-y-10 lg:items-end">
+            <div className="col-span-12 lg:col-span-7">
+              <Eyebrow className="mb-6">§ The firm</Eyebrow>
+              <h1 className="font-display text-[clamp(48px,7.5vw,108px)] font-medium leading-[0.92] tracking-[-0.05em] text-[var(--ink)]">
+                We are
+                <br />
+                TIHLO<span className="text-[var(--red)]">.</span>
+              </h1>
+              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--dim)]">
+                {ABOUT.lede}
+              </p>
+              <div className="mt-10 flex items-baseline gap-5 border-l border-[var(--red)] pl-6">
+                <span className="font-display text-[clamp(72px,8vw,108px)] font-medium leading-none tracking-[-0.05em] text-[var(--red)] tabular-nums">
+                  3
+                </span>
+                <div className="pb-3">
+                  <p className="mono-label text-[var(--ink)]">Active provinces</p>
+                  <p className="mono-id mt-1 text-[var(--dim)]">MPU · LIM · NCP</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-12 lg:col-span-5">
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1565793979540-72c7a00b5f57?auto=format&fit=crop&w=1600&q=85"
+                  alt="South African mining landscape"
+                  fill
+                  quality={85}
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-0 bg-[var(--ink)]/15" />
+                {/* Registration corner marks */}
+                <span className="absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--paper)]/70" />
+                <span className="absolute right-3 top-3 h-3 w-3 border-r border-t border-[var(--paper)]/70" />
+                <span className="absolute bottom-3 left-3 h-3 w-3 border-b border-l border-[var(--paper)]/70" />
+                <span className="absolute bottom-3 right-3 h-3 w-3 border-b border-r border-[var(--paper)]/70" />
+                <span className="mono-id absolute bottom-4 left-6 text-white/80">FIELD · MPUMALANGA</span>
+              </div>
+            </div>
           </FadeUp>
         </div>
       </section>
@@ -127,12 +148,16 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-px bg-[var(--rule)] border border-[var(--rule)] lg:grid-cols-2">
             {ABOUT.principles.map((p, i) => (
               <FadeUp key={i} delay={i * 0.07}>
-                <div className="bg-[var(--paper-2)] px-8 py-10">
-                  <p className="mono-id mb-5 text-[var(--red)]">§ 0{i + 1}</p>
-                  <h3 className="mb-4 font-display text-xl font-medium leading-[1.2] tracking-[-0.02em] text-[var(--ink)]">
-                    {p.statement}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-[var(--muted)]">{p.body}</p>
+                <div className="flex h-full gap-5 bg-[var(--paper-2)] px-8 py-10">
+                  <span className="font-mono text-[clamp(34px,3.4vw,44px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
+                    0{i + 1}
+                  </span>
+                  <div className="flex-1">
+                    <h3 className="mb-4 font-display text-xl font-medium leading-[1.2] tracking-[-0.02em] text-[var(--ink)]">
+                      {p.statement}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[var(--muted)]">{p.body}</p>
+                  </div>
                 </div>
               </FadeUp>
             ))}

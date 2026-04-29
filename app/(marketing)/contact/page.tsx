@@ -38,13 +38,17 @@ export default function ContactPage() {
                   {CONTACT.tiers.map((tier, i) => (
                     <div
                       key={tier.index}
-                      className={`px-7 py-7 ${i < CONTACT.tiers.length - 1 ? 'border-b border-[var(--rule)]' : ''}`}
+                      className={`flex gap-6 px-7 py-7 ${i < CONTACT.tiers.length - 1 ? 'border-b border-[var(--rule)]' : ''}`}
                     >
-                      <p className="mono-id mb-2 text-[var(--red)]">{tier.index}</p>
-                      <h3 className="mb-2 font-display text-lg font-medium tracking-[-0.015em] text-[var(--ink)]">
-                        {tier.name}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-[var(--muted)]">{tier.body}</p>
+                      <span className="font-mono text-[clamp(34px,3.6vw,44px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
+                        0{i + 1}
+                      </span>
+                      <div className="flex-1">
+                        <h3 className="mb-2 font-display text-[20px] font-medium tracking-[-0.015em] text-[var(--ink)]">
+                          {tier.name}
+                        </h3>
+                        <p className="text-sm leading-relaxed text-[var(--muted)]">{tier.body}</p>
+                      </div>
                     </div>
                   ))}
                 </div>

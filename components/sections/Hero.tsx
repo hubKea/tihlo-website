@@ -8,7 +8,7 @@ import MaskReveal from '@/components/motion/MaskReveal';
 import MagneticButton from '@/components/motion/MagneticButton';
 import ScrambleText from '@/components/motion/ScrambleText';
 import LineIllustration from '@/components/drawings/LineIllustration';
-import { HERO } from '@/lib/constants';
+import { HERO, STATS } from '@/lib/constants';
 import { ease, durations } from '@/lib/motion';
 
 export default function Hero() {
@@ -96,15 +96,43 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.5 }}
-            className="mb-9 max-w-[620px] text-[18px] leading-[1.6] text-white/80"
+            className="mb-8 max-w-[620px] text-[18px] leading-[1.6] text-white/80"
           >
             {HERO.lede}
           </motion.p>
 
+          {/* Inline stats strip — paper-on-dark, red dividers */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.65 }}
+            transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.6 }}
+            className="mb-9 flex max-w-[620px] flex-wrap items-stretch border-y border-white/15 py-5"
+          >
+            {STATS.map((stat, i) => {
+              const hasPrefix = 'prefix' in stat && stat.prefix;
+              const hasSuffix = 'suffix' in stat && stat.suffix;
+              return (
+                <div
+                  key={i}
+                  className={`flex-1 px-4 first:pl-0 last:pr-0 ${i > 0 ? 'border-l border-[var(--red)]/55' : ''}`}
+                >
+                  <div className="tabular-nums font-display text-[clamp(22px,2.6vw,30px)] font-medium leading-none tracking-[-0.03em] text-[var(--paper)]">
+                    {hasPrefix && (
+                      <span className="text-[0.5em] text-white/55">{stat.prefix}</span>
+                    )}
+                    {stat.value.toLocaleString()}
+                    {hasSuffix && stat.suffix}
+                  </div>
+                  <p className="mono-id mt-2 text-white/55">{stat.label}</p>
+                </div>
+              );
+            })}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.7 }}
             className="flex flex-wrap items-center gap-3"
           >
             <MagneticButton>

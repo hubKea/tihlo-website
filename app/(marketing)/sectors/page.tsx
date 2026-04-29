@@ -51,19 +51,33 @@ const SECTOR_DETAILS = [
 export default function SectorsPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-[var(--paper)] px-6 pb-16 pt-36 lg:px-12 lg:pt-48">
+      {/* Hero — masthead with sector count + preview strip */}
+      <section className="bg-[var(--paper)] px-6 pb-16 pt-36 lg:px-12 lg:pt-44">
         <div className="mx-auto max-w-site">
-          <FadeUp>
-            <Eyebrow className="mb-6">§ Sectors</Eyebrow>
-            <h1 className="mb-6 font-display text-[clamp(52px,8vw,108px)] font-medium leading-[0.92] tracking-[-0.05em] text-[var(--ink)]">
-              Where we<br />
-              <em className="not-italic text-[var(--red)]">operate.</em>
-            </h1>
-            <p className="max-w-xl text-[18px] leading-[1.65] text-[var(--muted)]">
-              Six commodity sectors across three primary provinces. Same methodology.
-              Same evidence standard. Same accountability.
-            </p>
+          <FadeUp className="grid grid-cols-12 gap-x-8 gap-y-8 lg:items-end">
+            <div className="col-span-12 lg:col-span-7">
+              <Eyebrow className="mb-6">§ Sectors</Eyebrow>
+              <h1 className="font-display text-[clamp(48px,7.5vw,108px)] font-medium leading-[0.92] tracking-[-0.05em] text-[var(--ink)]">
+                Where we
+                <br />
+                operate<span className="text-[var(--red)]">.</span>
+              </h1>
+              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--dim)]">
+                Six commodity sectors across three primary provinces. Same methodology, same
+                evidence standard, same accountability — regardless of what you ship.
+              </p>
+            </div>
+            <div className="col-span-12 lg:col-span-5">
+              <div className="flex items-baseline justify-end gap-6 border-l border-[var(--red)] pl-8">
+                <span className="font-display text-[clamp(140px,20vw,280px)] font-medium leading-[0.85] tracking-[-0.06em] text-[var(--red)] tabular-nums">
+                  6
+                </span>
+                <div className="pb-4">
+                  <p className="mono-label text-[var(--ink)]">Sectors covered</p>
+                  <p className="mono-id mt-2 text-[var(--dim)]">SAME METHODOLOGY · ALL CORRIDORS</p>
+                </div>
+              </div>
+            </div>
           </FadeUp>
         </div>
       </section>
@@ -76,10 +90,14 @@ export default function SectorsPage() {
               <FadeUp key={sector.label} delay={i * 0.05}>
                 <div className={`grid grid-cols-1 gap-0 lg:grid-cols-[280px_1fr] ${i < SECTOR_DETAILS.length - 1 ? 'border-b border-[var(--rule)]' : ''}`}>
                   {/* Index column */}
-                  <div className="border-b border-[var(--rule)] px-8 py-8 lg:border-b-0 lg:border-r">
-                    <p className="mono-id mb-2 text-[var(--red)]">§ {String(i + 1).padStart(2, '0')}</p>
-                    <h2 className="font-display text-3xl font-medium tracking-[-0.025em] text-[var(--ink)]">{sector.label}</h2>
-                    <p className="mono-id mt-2 text-[var(--dim)]">{sector.province}</p>
+                  <div className="flex items-baseline gap-5 border-b border-[var(--rule)] px-8 py-8 lg:border-b-0 lg:border-r">
+                    <span className="font-mono text-[clamp(40px,4vw,56px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h2 className="font-display text-2xl font-medium tracking-[-0.025em] text-[var(--ink)]">{sector.label}</h2>
+                      <p className="mono-id mt-2 text-[var(--dim)]">{sector.province}</p>
+                    </div>
                   </div>
 
                   {/* Detail column */}

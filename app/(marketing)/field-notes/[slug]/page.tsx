@@ -114,6 +114,35 @@ export default function FieldNotePage({ params }: Props) {
       {/* Article body */}
       <article className="mx-auto max-w-[72ch] px-6 py-16 lg:px-0 lg:py-20">
         <MDXRemote source={note.content} components={mdxComponents} />
+
+        {/* Published-document tail */}
+        <div className="mt-16">
+          <span className="block h-[2px] w-full bg-[var(--red)]" />
+          <div className="mt-8 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
+            <div className="space-y-4">
+              <div>
+                <p className="mono-label mb-2 text-[var(--muted)]">Filed under</p>
+                <div className="flex flex-wrap gap-2">
+                  {['Active monitoring', 'Field operations', 'Evidence-grade'].map((t) => (
+                    <span
+                      key={t}
+                      className="mono-id border border-[var(--rule-2)] px-3 py-1.5 text-[var(--ink)]"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mono-label mb-2 text-[var(--muted)]">Written by</p>
+                <p className="mono-id text-[var(--ink)]">
+                  TIHLO FIELD OPERATIONS · MPUMALANGA
+                </p>
+              </div>
+            </div>
+            <p className="mono-id text-right text-[var(--red)]">§ END</p>
+          </div>
+        </div>
       </article>
 
       {/* Navigation */}

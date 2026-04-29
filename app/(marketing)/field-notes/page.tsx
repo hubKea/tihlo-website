@@ -15,18 +15,27 @@ export default function FieldNotesPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-[var(--paper)] px-6 pb-16 pt-36 lg:px-12 lg:pt-48">
+      {/* Hero — editorial masthead */}
+      <section className="border-b border-[var(--ink)] bg-[var(--paper)] px-6 pb-10 pt-32 lg:px-12 lg:pt-40">
         <div className="mx-auto max-w-site">
           <FadeUp>
-            <Eyebrow className="mb-6">§ Field Notes</Eyebrow>
-            <h1 className="mb-6 font-display text-[clamp(52px,8vw,108px)] font-medium leading-[0.92] tracking-[-0.05em] text-[var(--ink)]">
-              From the<br />
-              <em className="not-italic text-[var(--red)]">corridors.</em>
+            <p className="mono-label mb-8 flex items-center gap-3 text-[var(--red)]">
+              <span className="block h-px w-10 bg-[var(--red)]" />
+              § A TIHLO publication
+            </p>
+            <h1 className="font-display font-medium leading-[0.82] tracking-[-0.06em] text-[var(--ink)]" style={{ fontSize: 'clamp(72px, 16vw, 280px)' }}>
+              FIELD NOTES<span className="text-[var(--red)]">.</span>
             </h1>
-            <p className="max-w-xl text-[18px] leading-[1.65] text-[var(--muted)]">
-              Operational intelligence from active monitoring across South African mining
-              logistics. No product news. No opinion pieces. What the data shows.
+          </FadeUp>
+        </div>
+        <div className="mx-auto mt-10 max-w-site border-t border-[var(--ink)] pt-6">
+          <FadeUp delay={0.1} className="flex flex-wrap items-baseline justify-between gap-6">
+            <p className="mono-id text-[var(--ink)]">
+              VOLUME 01 · {new Date().getFullYear()} · {notes.length.toString().padStart(2, '0')} ENTRIES
+            </p>
+            <p className="max-w-xl text-[16px] leading-[1.6] text-[var(--dim)]">
+              Operational intelligence from active monitoring across South African logistics
+              corridors. No product news. No opinion pieces. What the data shows.
             </p>
           </FadeUp>
         </div>

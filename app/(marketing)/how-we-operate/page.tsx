@@ -23,7 +23,9 @@ function StageBlock({ stage, index }: { stage: (typeof HOW_WE_OPERATE.stages)[nu
         {/* Stage header */}
         <FadeUp className={isEven ? '' : 'lg:order-last'}>
           <div className="sticky top-28">
-            <Eyebrow className="mb-4">{stage.index}</Eyebrow>
+            <span className="mb-4 block font-mono text-[clamp(40px,4.4vw,64px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
+              0{index + 1}
+            </span>
             <h2 className="font-display text-[clamp(40px,5.6vw,68px)] font-medium leading-[0.96] tracking-[-0.04em] text-[var(--ink)]">
               {stage.name}
             </h2>
@@ -61,23 +63,38 @@ export default function HowWeOperatePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[var(--paper)] px-6 pb-16 pt-36 lg:px-12 lg:pt-44">
+      <section className="bg-[var(--paper)] px-6 pb-20 pt-36 lg:px-12 lg:pt-44">
         <div className="mx-auto max-w-site">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-            <FadeUp>
+          <FadeUp className="mb-12 grid grid-cols-12 gap-x-8 gap-y-8 lg:items-end">
+            <div className="col-span-12 lg:col-span-7">
               <Eyebrow className="mb-6">{HOW_WE_OPERATE.eyebrow}</Eyebrow>
-              <h1 className="mb-6 font-display text-[clamp(52px,8vw,96px)] font-medium leading-[0.92] tracking-[-0.05em] text-[var(--ink)]">
-                {HOW_WE_OPERATE.headline}
+              <h1 className="font-display text-[clamp(48px,7.5vw,96px)] font-medium leading-[0.92] tracking-[-0.05em] text-[var(--ink)]">
+                How we
+                <br />
+                operate<span className="text-[var(--red)]">.</span>
               </h1>
-              <p className="text-[17px] leading-[1.65] text-[var(--muted)]">{HOW_WE_OPERATE.lede}</p>
-            </FadeUp>
-
-            <FadeUp delay={0.15}>
-              <div className="py-8">
-                <AssuranceLoopV2 stagesSelector="[data-stage]" />
+              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--dim)]">
+                {HOW_WE_OPERATE.lede}
+              </p>
+            </div>
+            <div className="col-span-12 lg:col-span-5">
+              <div className="flex items-baseline justify-end gap-6 border-l border-[var(--red)] pl-8">
+                <span className="font-display text-[clamp(140px,20vw,280px)] font-medium leading-[0.85] tracking-[-0.06em] text-[var(--red)] tabular-nums">
+                  6
+                </span>
+                <div className="pb-4">
+                  <p className="mono-label text-[var(--ink)]">Stages, every load</p>
+                  <p className="mono-id mt-2 text-[var(--dim)]">SAME PROCEDURE · ANY CORRIDOR</p>
+                </div>
               </div>
-            </FadeUp>
-          </div>
+            </div>
+          </FadeUp>
+
+          <FadeUp delay={0.2}>
+            <div className="border-t border-[var(--rule)] pt-12">
+              <AssuranceLoopV2 stagesSelector="[data-stage]" />
+            </div>
+          </FadeUp>
         </div>
       </section>
 

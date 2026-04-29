@@ -29,9 +29,9 @@ export default function WhatWeMonitor() {
         <ul className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
           {WHAT_WE_MONITOR.categories.map((cat, i) => (
             <FadeUp key={cat.label} delay={i * 0.07}>
-              <li className="group grid grid-cols-12 items-center gap-x-6 py-10 transition-colors hover:bg-[var(--paper-2)] lg:py-14">
-                <span className="col-span-2 mono-id text-[var(--dim)] lg:col-span-1">
-                  § 0{i + 1}
+              <li className="group grid grid-cols-12 items-baseline gap-x-6 py-10 transition-colors hover:bg-[var(--paper-2)] lg:py-14">
+                <span className="col-span-2 font-mono text-[clamp(36px,4vw,56px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums lg:col-span-1">
+                  0{i + 1}
                 </span>
 
                 <div className="col-span-10 lg:col-span-4">

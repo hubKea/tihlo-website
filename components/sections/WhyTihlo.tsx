@@ -19,12 +19,16 @@ export default function WhyTihlo() {
         <div className="grid grid-cols-1 gap-px border border-[var(--rule)] bg-[var(--rule)] md:grid-cols-2">
           {WHY_TIHLO.pillars.map((pillar, i) => (
             <FadeUp key={pillar.title} delay={i * 0.06}>
-              <div className="h-full bg-[var(--paper)] px-8 py-10">
-                <p className="mono-id mb-5 text-[var(--red)]">§ 0{i + 1}</p>
-                <h3 className="mb-4 font-display text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
-                  {pillar.title}
-                </h3>
-                <p className="text-[15px] leading-[1.65] text-[var(--muted)]">{pillar.body}</p>
+              <div className="flex h-full gap-6 bg-[var(--paper)] px-8 py-10">
+                <span className="font-mono text-[clamp(36px,3.6vw,48px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
+                  0{i + 1}
+                </span>
+                <div className="flex-1">
+                  <h3 className="mb-4 font-display text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-[15px] leading-[1.65] text-[var(--muted)]">{pillar.body}</p>
+                </div>
               </div>
             </FadeUp>
           ))}

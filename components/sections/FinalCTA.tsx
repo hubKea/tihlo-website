@@ -1,47 +1,41 @@
+import Eyebrow from '@/components/ui/Eyebrow';
 import FadeUp from '@/components/motion/FadeUp';
 import Button from '@/components/ui/Button';
 import { FINAL_CTA } from '@/lib/constants';
 
 export default function FinalCTA() {
   return (
-    <section className="bg-[var(--ink)] px-6 py-24 lg:px-12 lg:py-32">
-      <div className="mx-auto max-w-site">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-end">
+    <section className="border-t border-[var(--faint)] bg-[var(--white-2)] py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-20">
           <FadeUp>
-            <p className="mono-label mb-6 flex items-center gap-3 text-white/50">
-              <span className="block h-px w-6 bg-[var(--red)]" />
-              {FINAL_CTA.eyebrow}
-            </p>
-            <h2 className="font-display text-[clamp(40px,5.6vw,72px)] font-medium leading-[0.96] tracking-[-0.04em] text-[var(--paper)]">
-              {FINAL_CTA.headline[0]}
+            <Eyebrow>The eye that never misses</Eyebrow>
+            <h2 className="mt-6 font-display text-[clamp(40px,5.6vw,80px)] font-medium leading-[0.94] tracking-[-0.04em] text-[var(--ink)]">
+              The eye that
               <br />
-              <em className="not-italic text-[var(--red)]">{FINAL_CTA.headline[1]}</em>
+              never misses
+              <span className="text-[var(--red)]">.</span>
             </h2>
           </FadeUp>
 
           <FadeUp delay={0.12}>
-            <p className="mb-8 text-[17px] leading-[1.65] text-white/65">{FINAL_CTA.body}</p>
-            <div className="flex flex-wrap gap-3">
-              <Button variant="white" href="/contact">
+            <p className="max-w-[52ch] text-[16px] leading-[1.62] text-[var(--muted)]">
+              {FINAL_CTA.body}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button variant="primary" size="lg" href="/contact">
                 {FINAL_CTA.cta_primary}
               </Button>
               <Button
                 variant="ghost"
+                size="lg"
                 href="/field-notes"
-                className="border-white/20 text-white hover:border-white"
+                arrow={false}
               >
                 {FINAL_CTA.cta_secondary}
               </Button>
             </div>
           </FadeUp>
-        </div>
-
-        {/* Decorative separator */}
-        <div className="mt-16 border-t border-white/10 pt-8">
-          <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
-            <p className="mono-id text-white/30">TIHLO · Independent · Pretoria, South Africa</p>
-            <p className="mono-id text-white/30">The eye that never misses.</p>
-          </div>
         </div>
       </div>
     </section>

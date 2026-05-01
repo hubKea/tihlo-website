@@ -35,7 +35,7 @@ export default function LineIllustration({
   annotated = true,
 }: Props) {
   const accentColor = accent === 'red' ? 'var(--red)' : 'currentColor';
-  const dim = 'var(--rule-3)';
+  const dim = 'var(--dim)';
 
   const drawings: Record<Variant, React.ReactNode> = {
     'fuel-energy': (

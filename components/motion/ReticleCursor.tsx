@@ -11,7 +11,9 @@ export default function ReticleCursor() {
 
   useEffect(() => {
     const fine = window.matchMedia('(pointer: fine)').matches;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
     if (!fine || reduced) return;
 
     setEnabled(true);
@@ -46,7 +48,9 @@ export default function ReticleCursor() {
     function over(e: MouseEvent) {
       const t = e.target as HTMLElement | null;
       if (!t) return;
-      const interactive = t.closest('a, button, input, textarea, select, [data-cursor="hover"]');
+      const interactive = t.closest(
+        'a, button, input, textarea, select, [data-cursor="hover"]'
+      );
       setHovering(!!interactive);
     }
 
@@ -72,9 +76,10 @@ export default function ReticleCursor() {
         style={{
           width: hovering ? 56 : 28,
           height: hovering ? 56 : 28,
-          border: `1px solid ${hovering ? 'var(--red)' : 'var(--ink)'}`,
+          border: `1px solid ${hovering ? 'var(--ink)' : 'var(--dim)'}`,
           mixBlendMode: 'difference',
-          transition: 'width 0.22s cubic-bezier(0.4,0,0.2,1), height 0.22s cubic-bezier(0.4,0,0.2,1), border-color 0.18s',
+          transition:
+            'width 0.22s cubic-bezier(0.4,0,0.2,1), height 0.22s cubic-bezier(0.4,0,0.2,1), border-color 0.18s',
           willChange: 'transform',
         }}
       >
@@ -82,7 +87,7 @@ export default function ReticleCursor() {
         <span className="absolute left-0 top-1/2 h-px w-1.5 bg-current opacity-70" />
         <span className="absolute right-0 top-1/2 h-px w-1.5 bg-current opacity-70" />
         <span className="absolute left-1/2 top-0 h-1.5 w-px bg-current opacity-70" />
-        <span className="absolute left-1/2 bottom-0 h-1.5 w-px bg-current opacity-70" />
+        <span className="absolute bottom-0 left-1/2 h-1.5 w-px bg-current opacity-70" />
       </div>
       <div
         ref={dotRef}
@@ -90,7 +95,7 @@ export default function ReticleCursor() {
         style={{
           width: 4,
           height: 4,
-          background: hovering ? 'var(--red)' : 'var(--ink)',
+          background: hovering ? 'var(--ink)' : 'var(--dim)',
           mixBlendMode: 'difference',
           willChange: 'transform',
         }}
@@ -99,7 +104,7 @@ export default function ReticleCursor() {
         ref={labelRef}
         className="mono-id pointer-events-none fixed left-0 top-0 z-[100] tracking-[0.16em]"
         style={{
-          color: 'var(--paper)',
+          color: 'var(--white)',
           mixBlendMode: 'difference',
           fontSize: 9,
           willChange: 'transform',

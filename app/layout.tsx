@@ -6,8 +6,10 @@ import './globals.css';
 import Nav from '@/components/layout/Nav';
 import UtilBar from '@/components/layout/UtilBar';
 import Footer from '@/components/layout/Footer';
+import PageTransitionScan from '@/components/motion/PageTransitionScan';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://tihlo.co.za'),
   title: {
     default: 'TIHLO — The eye that never misses',
     template: '%s — TIHLO',
@@ -20,23 +22,37 @@ export const metadata: Metadata = {
     title: 'TIHLO — The eye that never misses',
     description:
       'Active monitoring and verification for mining commodity movement across South Africa.',
+    images: [
+      {
+        url: '/images/tihlo_footer_logo.png',
+        width: 680,
+        height: 520,
+        alt: 'TIHLO',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['/images/tihlo_footer_logo.png'],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F4F1EA',
+  themeColor: '#FFFFFF',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
         <UtilBar />
         <Nav />
-        <main>{children}</main>
+        <PageTransitionScan />
+        <main className="w-full max-w-full overflow-x-hidden">{children}</main>
         <Footer />
         <Analytics />
       </body>

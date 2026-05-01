@@ -1,35 +1,42 @@
-import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
+import FadeUp from '@/components/motion/FadeUp';
 import { WHY_TIHLO } from '@/lib/constants';
 
 export default function WhyTihlo() {
   return (
-    <section className="bg-[var(--paper)] px-6 py-24 lg:px-12 lg:py-32">
-      <div className="mx-auto max-w-site">
-        <FadeUp className="mb-14 grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-16">
-          <div>
-            <Eyebrow className="mb-5">{WHY_TIHLO.eyebrow}</Eyebrow>
-            <h2 className="font-display text-[clamp(40px,5.6vw,72px)] font-medium leading-[0.96] tracking-[-0.04em] text-[var(--ink)]">
+    <section className="border-t border-[var(--faint)] bg-[var(--white-2)] py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-end lg:gap-14">
+          <FadeUp>
+            <Eyebrow>Why TIHLO</Eyebrow>
+            <h2 className="mt-6 max-w-[20ch] font-display text-[clamp(36px,4.5vw,60px)] font-medium leading-[1.0] tracking-[-0.035em] text-[var(--ink)]">
               {WHY_TIHLO.headline}
             </h2>
-          </div>
-          <p className="text-[17px] leading-[1.65] text-[var(--muted)]">{WHY_TIHLO.lede}</p>
-        </FadeUp>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <p className="text-[15.5px] leading-[1.62] text-[var(--muted)]">
+              {WHY_TIHLO.lede}
+            </p>
+          </FadeUp>
+        </div>
 
-        <div className="grid grid-cols-1 gap-px border border-[var(--rule)] bg-[var(--rule)] md:grid-cols-2">
+        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden border border-[var(--faint)] bg-[var(--faint)] md:grid-cols-2 lg:mt-20">
           {WHY_TIHLO.pillars.map((pillar, i) => (
-            <FadeUp key={pillar.title} delay={i * 0.06}>
-              <div className="flex h-full gap-6 bg-[var(--paper)] px-8 py-10">
-                <span className="font-mono text-[clamp(36px,3.6vw,48px)] font-medium leading-none tracking-[-0.02em] text-[var(--red)] tabular-nums">
-                  0{i + 1}
-                </span>
-                <div className="flex-1">
-                  <h3 className="mb-4 font-display text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-[15px] leading-[1.65] text-[var(--muted)]">{pillar.body}</p>
+            <FadeUp key={pillar.title} delay={i * 0.05}>
+              <article className="flex h-full flex-col bg-[var(--white)] p-7 lg:p-9">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="font-mono text-[16px] font-medium tabular-nums leading-none text-[var(--ink)]">
+                    0{i + 1}
+                  </span>
+                  <span className="block h-px flex-1 bg-[var(--faint)]" />
                 </div>
-              </div>
+                <h3 className="font-display text-[20px] font-medium leading-[1.18] tracking-[-0.015em] text-[var(--ink)] lg:text-[22px]">
+                  {pillar.title}
+                </h3>
+                <p className="mt-3 max-w-[58ch] text-[14.5px] leading-[1.62] text-[var(--muted)]">
+                  {pillar.body}
+                </p>
+              </article>
             </FadeUp>
           ))}
         </div>

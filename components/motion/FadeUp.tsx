@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { fadeUp, inViewOptions } from '@/lib/motion';
 
@@ -9,11 +9,27 @@ interface FadeUpProps {
   delay?: number;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
+  reveal?: boolean;
 }
 
-export default function FadeUp({ children, delay = 0, className = '', as: Tag = 'div' }: FadeUpProps) {
+export default function FadeUp({
+  children,
+  delay = 0,
+  className = '',
+  as: Tag = 'div',
+  reveal = true,
+}: FadeUpProps) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref as React.RefObject<HTMLElement>, { once: true, ...inViewOptions });
+  const reduceMotion = useReducedMotion();
+  const inView = useInView(ref as React.RefObject<HTMLElement>, {
+    once: true,
+    ...inViewOptions,
+  });
+  const revealClass = reveal ? `reveal ${inView ? 'is-visible' : ''}` : '';
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
@@ -22,7 +38,7 @@ export default function FadeUp({ children, delay = 0, className = '', as: Tag = 
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
       custom={delay}
-      className={className}
+      className={`${revealClass} ${className}`}
     >
       {children}
     </motion.div>

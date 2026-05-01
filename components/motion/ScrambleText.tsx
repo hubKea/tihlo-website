@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const GLYPHS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789·§';
+const GLYPHS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789·';
 
 interface Props {
   value: string;

@@ -100,8 +100,8 @@ export default function AssuranceLoopV2({
         aria-hidden
       >
         {/* Outer guide ring */}
-        <circle cx={cx} cy={cy} r={r + 14} fill="none" stroke="var(--rule)" strokeWidth="0.5" strokeDasharray="2 4" />
-        <circle cx={cx} cy={cy} r={r - 14} fill="none" stroke="var(--rule)" strokeWidth="0.5" strokeDasharray="2 4" />
+        <circle cx={cx} cy={cy} r={r + 14} fill="none" stroke="var(--faint)" strokeWidth="0.5" strokeDasharray="2 4" />
+        <circle cx={cx} cy={cy} r={r - 14} fill="none" stroke="var(--faint)" strokeWidth="0.5" strokeDasharray="2 4" />
 
         {/* Inactive arcs (background) */}
         {STAGES.map((_, i) => {
@@ -116,7 +116,7 @@ export default function AssuranceLoopV2({
               key={`bg-${i}`}
               d={`M${x1} ${y1} A${r} ${r} 0 0 1 ${x2} ${y2}`}
               fill="none"
-              stroke="var(--rule-2)"
+              stroke="var(--faint)"
               strokeWidth="1"
             />
           );
@@ -159,7 +159,7 @@ export default function AssuranceLoopV2({
                 cx={x}
                 cy={y}
                 r={isActive ? 6 : 4}
-                fill={isActive ? 'var(--red)' : isReached ? 'var(--ink)' : 'var(--rule-3)'}
+                fill={isActive ? 'var(--red)' : isReached ? 'var(--ink)' : 'var(--dim)'}
                 style={{ transition: 'r 0.4s cubic-bezier(0.16,1,0.3,1), fill 0.3s' }}
               />
               {isActive && (
@@ -187,14 +187,14 @@ export default function AssuranceLoopV2({
                 letterSpacing="0.14em"
                 style={{ transition: 'fill 0.3s' }}
               >
-                {`§0${i + 1} ${label.toUpperCase()}`}
+                {`0${i + 1} ${label.toUpperCase()}`}
               </text>
             </g>
           );
         })}
 
         {/* Centre marks */}
-        <circle cx={cx} cy={cy} r="22" fill="none" stroke="var(--rule-2)" strokeWidth="0.5" />
+        <circle cx={cx} cy={cy} r="22" fill="none" stroke="var(--faint)" strokeWidth="0.5" />
         <circle cx={cx} cy={cy} r="3" fill="var(--red)" />
         <text
           x={cx}

@@ -1,4 +1,4 @@
-import FadeUp from '@/components/motion/FadeUp';
+﻿import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
 
 const ASSETS = [
@@ -115,12 +115,12 @@ const ASSETS = [
 
 export default function SectorStrip() {
   return (
-    <section className="bg-[var(--paper)] px-6 py-20 lg:px-12 lg:py-28">
+    <section className="bg-[var(--white)] px-6 py-20 lg:px-12 lg:py-28">
       <div className="mx-auto max-w-site">
         <FadeUp className="mb-14 lg:flex lg:items-end lg:justify-between lg:gap-12">
           <div>
-            <Eyebrow className="mb-5">§ Asset classes</Eyebrow>
-            <h2 className="font-display text-[clamp(36px,4.6vw,58px)] font-medium leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
+            <Eyebrow className="mb-5">Asset classes</Eyebrow>
+            <h2 className="font-display text-[clamp(36px,4.6vw,58px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
               What we monitor.
             </h2>
           </div>
@@ -130,17 +130,17 @@ export default function SectorStrip() {
           </p>
         </FadeUp>
 
-        <div className="grid grid-cols-2 gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px border border-[var(--faint)] bg-[var(--faint)] lg:grid-cols-4">
           {ASSETS.map((asset, i) => (
             <FadeUp key={asset.label} delay={i * 0.06}>
-              <div className="group relative h-full bg-[var(--paper)] px-7 py-9 transition-colors hover:bg-[var(--paper-2)]">
+              <div className="group relative h-full bg-[var(--white)] px-7 py-9 transition-colors hover:bg-[var(--white-2)]">
                 <span className="mono-id absolute right-4 top-4 text-[var(--dim)]">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div className="h-20 w-full text-[var(--ink)]/55 transition-colors duration-300 group-hover:text-[var(--red)]">
                   {asset.drawing}
                 </div>
-                <h3 className="mt-7 font-display text-lg font-medium tracking-[-0.015em] text-[var(--ink)]">
+                <h3 className="mt-7 font-display text-lg font-semibold tracking-[-0.015em] text-[var(--ink)]">
                   {asset.label}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">

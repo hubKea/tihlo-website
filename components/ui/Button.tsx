@@ -8,38 +8,45 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   arrow?: boolean;
   as?: 'button' | 'a';
   href?: string;
-  size?: 'sm' | 'md';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', arrow = true, children, className = '', size = 'md', as: Tag = 'button', href, ...props }, ref) => {
+  (
+    {
+      variant = 'primary',
+      arrow = true,
+      children,
+      className = '',
+      size = 'md',
+      as: Tag = 'button',
+      href,
+      ...props
+    },
+    ref
+  ) => {
     const base =
-      'inline-flex items-center gap-2.5 font-display font-medium rounded-none transition-all duration-200 cursor-pointer relative overflow-hidden group select-none';
+      'inline-flex items-center gap-2.5 font-display font-medium rounded-none transition-all duration-200 cursor-pointer relative overflow-hidden group select-none active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]';
 
     const sizes = {
       sm: 'text-[13px] px-5 py-3',
-      md: 'text-[13px] px-6 py-3.5',
+      md: 'text-[13.5px] px-6 py-3.5',
+      lg: 'text-[14px] px-7 py-4',
     };
 
     const variants = {
       primary:
-        'bg-[var(--red)] text-[var(--paper)] hover:bg-[var(--ink)] border border-[var(--red)] hover:border-[var(--ink)]',
+        'bg-[var(--ink)] text-white border border-[var(--ink)] hover:bg-[var(--red-hover)] hover:border-[var(--red-hover)]',
       ghost:
-        'bg-transparent text-[var(--ink)] border border-[var(--rule-2)] hover:text-[var(--red)] hover:border-[var(--red)]',
+        'bg-transparent text-[var(--ink)] border border-[var(--dim)] hover:border-[var(--ink)] hover:text-[var(--ink)]',
       white:
-        'bg-[var(--paper)] text-[var(--ink)] border border-[var(--paper)] hover:bg-[var(--red)] hover:text-[var(--paper)] hover:border-[var(--red)]',
+        'bg-white text-[var(--ink)] border border-white hover:bg-[var(--ink)] hover:text-white hover:border-[var(--ink)]',
     };
 
     const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
 
     const inner = (
       <>
-        {variant === 'primary' && (
-          <span
-            className="pointer-events-none absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent"
-            style={{ animation: 'shimmer 4s ease-in-out infinite 1.5s' }}
-          />
-        )}
         <span>{children}</span>
         {arrow && (
           <ArrowRight

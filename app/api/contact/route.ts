@@ -58,20 +58,20 @@ export async function POST(req: NextRequest) {
   <p style="font-size: 11px; color: #666; margin: 0 0 4px;">TICKET: ${d.ticketId}</p>
   <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
 
-  <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">§ CONTACT</p>
+  <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">CONTACT</p>
   <p style="margin: 0 0 4px;"><strong>Name:</strong> ${d.name}</p>
   <p style="margin: 0 0 4px;"><strong>Role:</strong> ${d.role}</p>
   <p style="margin: 0 0 4px;"><strong>Company:</strong> ${d.company}</p>
   <p style="margin: 0 0 4px;"><strong>Email:</strong> ${d.email}</p>
   <p style="margin: 0 0 20px;"><strong>Phone:</strong> ${d.phone}</p>
 
-  <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">§ OPERATION</p>
+  <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">OPERATION</p>
   <p style="margin: 0 0 4px;"><strong>Sectors:</strong> ${d.sectors.join(', ')}</p>
   <p style="margin: 0 0 4px;"><strong>Fleet size:</strong> ${d.fleetSize}</p>
   <p style="margin: 0 0 4px;"><strong>Corridors:</strong> ${d.corridors}</p>
   <p style="margin: 0 0 20px;"><strong>Provinces:</strong> ${d.provinces.join(', ')}</p>
 
-  <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">§ ENQUIRY</p>
+  <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">ENQUIRY</p>
   <p style="margin: 0 0 4px;"><strong>Engagement type:</strong> ${d.engagementType}</p>
   <p style="margin: 0 0 4px;"><strong>Contact preference:</strong> ${d.contactPreference}</p>
   ${d.situation ? `<p style="margin: 0 0 4px;"><strong>Situation:</strong> ${d.situation}</p>` : ''}

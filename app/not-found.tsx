@@ -1,12 +1,18 @@
 import Link from 'next/link';
-import TihloLogo from '@/components/ui/TihloLogo';
+import Image from 'next/image';
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--paper)] px-6 text-center">
-      <TihloLogo size={48} className="mb-8 opacity-30" />
-      <p className="mono-id mb-4 text-[var(--red)]">§ 404</p>
-      <h1 className="mb-4 font-display text-5xl font-medium tracking-[-0.04em] text-[var(--ink)] lg:text-7xl">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--white)] px-6 text-center">
+      <Image
+        src="/images/tihlo_logo.png"
+        alt="TIHLO"
+        width={325}
+        height={84}
+        className="mb-10 h-auto w-36 opacity-70"
+      />
+      <p className="mono-id mb-4 text-[var(--ink)]">404</p>
+      <h1 className="mb-4 font-display text-5xl font-semibold tracking-[-0.04em] text-[var(--ink)] lg:text-7xl">
         Not found.
       </h1>
       <p className="mb-8 text-[17px] text-[var(--muted)]">
@@ -14,7 +20,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="mono-label text-[var(--muted)] underline-offset-4 hover:text-[var(--ink)] hover:underline transition-colors"
+        className="mono-label text-[var(--muted)] underline-offset-4 transition-colors hover:text-[var(--ink)] hover:underline"
       >
         Return to base
       </Link>

@@ -11,8 +11,10 @@ type Act = (typeof ACTS)[number];
 
 function ActBlock({ act, isLast }: { act: Act; isLast: boolean }) {
   return (
-    <div className={`py-20 lg:py-28 ${isLast ? '' : 'border-b border-[var(--rule)]'}`}>
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
+    <div
+      className={`py-20 lg:py-28 ${isLast ? '' : 'border-b border-[var(--faint)]'}`}
+    >
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         {/* Image */}
         <div className={`relative ${act.flip ? 'lg:order-last' : ''}`}>
           <FadeUp delay={0} className="relative aspect-[4/5] overflow-hidden">
@@ -25,10 +27,17 @@ function ActBlock({ act, isLast }: { act: Act; isLast: boolean }) {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-[var(--ink)]/10" />
+            <div className="bg-[var(--ink)]/10 absolute inset-0" />
             <RegMarks size={16} color="rgba(244,241,234,0.4)" />
-            <MonoStamp label="ON RECORD" status="green" pulse className="absolute bottom-4 left-4" />
-            <div className="absolute right-4 top-4 mono-id text-white/40">{act.index}</div>
+            <MonoStamp
+              label="ON RECORD"
+              status="green"
+              pulse
+              className="absolute bottom-4 left-4"
+            />
+            <div className="mono-id text-white/40 absolute right-4 top-4">
+              {act.index}
+            </div>
           </FadeUp>
         </div>
 
@@ -38,14 +47,16 @@ function ActBlock({ act, isLast }: { act: Act; isLast: boolean }) {
             <Eyebrow className="mb-5">
               {act.index} — {act.label}
             </Eyebrow>
-            <h2 className="mb-7 font-display text-[clamp(36px,4.6vw,58px)] font-medium leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
+            <h2 className="mb-7 font-display text-[clamp(36px,4.6vw,58px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
               {act.headline.map((line, i) => (
                 <span key={i}>
                   {line.split(act.accentWord).map((part, j, arr) => (
                     <span key={j}>
                       {part}
                       {j < arr.length - 1 && (
-                        <em className="not-italic text-[var(--red)]">{act.accentWord}</em>
+                        <em className="not-italic text-[var(--ink)]">
+                          {act.accentWord}
+                        </em>
                       )}
                     </span>
                   ))}
@@ -60,13 +71,15 @@ function ActBlock({ act, isLast }: { act: Act; isLast: boolean }) {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 border-t border-[var(--rule)] pt-7">
+            <div className="grid grid-cols-2 gap-4 border-t border-[var(--faint)] pt-7">
               {act.stats.map((stat, i) => (
                 <div key={i}>
-                  <div className="tabular-nums font-display text-4xl font-medium tracking-[-0.03em] text-[var(--ink)]">
+                  <div className="font-display text-4xl font-semibold tabular-nums tracking-[-0.03em] text-[var(--ink)]">
                     <NumberRoll value={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="mono-id mt-1.5 text-[var(--muted)]">{stat.label}</p>
+                  <p className="mono-id mt-1.5 text-[var(--muted)]">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -79,7 +92,7 @@ function ActBlock({ act, isLast }: { act: Act; isLast: boolean }) {
 
 export default function ActScene() {
   return (
-    <section className="bg-[var(--paper-2)] px-6 lg:px-12">
+    <section className="bg-[var(--white-2)] px-6 lg:px-12">
       <div className="mx-auto max-w-site">
         {ACTS.map((act, i) => (
           <ActBlock key={act.index} act={act} isLast={i === ACTS.length - 1} />

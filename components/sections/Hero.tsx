@@ -1,175 +1,90 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
-import MaskReveal from '@/components/motion/MaskReveal';
-import MagneticButton from '@/components/motion/MagneticButton';
-import ScrambleText from '@/components/motion/ScrambleText';
-import LineIllustration from '@/components/drawings/LineIllustration';
-import { HERO, STATS } from '@/lib/constants';
-import { ease, durations } from '@/lib/motion';
+import Eyebrow from '@/components/ui/Eyebrow';
+import Stat from '@/components/ui/Stat';
+import RegMarks from '@/components/ui/RegMarks';
+import MaskHeading from '@/components/motion/MaskHeading';
+import { HERO } from '@/lib/constants';
 
 export default function Hero() {
-  const imgRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>();
-
-  // Lightweight rAF parallax for the still composition
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
-    const img = imgRef.current;
-    if (!img) return;
-
-    function onScroll() {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        if (!img) return;
-        img.style.transform = `translate3d(0, ${window.scrollY * 0.2}px, 0)`;
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
   return (
-    <section className="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden pt-28 lg:pt-32">
-      {/* Background — abstract eye composition */}
-      <div className="absolute inset-0 -z-10">
-        <div ref={imgRef} className="absolute -inset-[6%] will-change-transform">
-          <Image
-            src={HERO.image.src}
-            alt={HERO.image.alt}
-            fill
-            priority
-            quality={90}
-            className="object-cover object-right"
-            sizes="100vw"
-          />
-        </div>
+    <section className="relative isolate bg-[var(--white)]">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[55%_45%] lg:gap-16">
+          {/* Left column */}
+          <div className="order-2 flex flex-col justify-center pb-10 pt-6 lg:order-1 lg:py-40">
+            <Eyebrow animate={false}>Active monitoring · 24 / 7</Eyebrow>
 
-        {/* Left-fade dark overlay for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/72 via-black/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent" />
+            <h1 className="mt-8 font-display text-[clamp(48px,6.5vw,96px)] font-medium leading-[0.92] tracking-[-0.045em] text-[var(--ink)]">
+              <MaskHeading delay={0.1} immediate>
+                The eye that
+              </MaskHeading>
+              <MaskHeading delay={0.25} immediate>
+                <span>
+                  never misses<span className="text-[var(--red)]">.</span>
+                </span>
+              </MaskHeading>
+            </h1>
 
-        {/* Iris-instrument line ornament — establishes the line-visual system */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute right-[-6%] top-1/2 hidden aspect-square w-[58vmin] -translate-y-1/2 text-white/22 lg:block"
-        >
-          <LineIllustration variant="iris-instrument" className="h-full w-full" annotated />
-        </div>
-      </div>
+            <p className="mt-8 max-w-[48ch] text-[17px] leading-[1.6] text-[var(--muted)]">
+              {HERO.lede}
+            </p>
 
-      {/* Content */}
-      <div className="relative mx-auto w-full max-w-site px-6 pb-16 lg:px-12 lg:pb-20">
-        <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: durations.short, ease: ease.soft }}
-            className="mono-label mb-6 flex items-center gap-3 text-white/65"
-          >
-            <span className="block h-px w-6 bg-[var(--red)]" />
-            {HERO.eyebrow}
-          </motion.div>
-
-          <div className="mb-8 overflow-hidden">
-            <MaskReveal delay={0.1}>
-              <h1 className="font-display text-[clamp(48px,7.5vw,108px)] font-medium leading-[0.92] tracking-[-0.045em] text-[var(--paper)]">
-                {HERO.headline[0]}
-              </h1>
-            </MaskReveal>
-            <MaskReveal delay={0.22}>
-              <h1 className="font-display text-[clamp(48px,7.5vw,108px)] font-medium leading-[0.92] tracking-[-0.045em] text-[var(--paper)]">
-                never misses<em className="not-italic text-[var(--red)]">.</em>
-              </h1>
-            </MaskReveal>
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.5 }}
-            className="mb-8 max-w-[620px] text-[18px] leading-[1.6] text-white/80"
-          >
-            {HERO.lede}
-          </motion.p>
-
-          {/* Inline stats strip — paper-on-dark, red dividers */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.6 }}
-            className="mb-9 flex max-w-[620px] flex-wrap items-stretch border-y border-white/15 py-5"
-          >
-            {STATS.map((stat, i) => {
-              const hasPrefix = 'prefix' in stat && stat.prefix;
-              const hasSuffix = 'suffix' in stat && stat.suffix;
-              return (
-                <div
-                  key={i}
-                  className={`flex-1 px-4 first:pl-0 last:pr-0 ${i > 0 ? 'border-l border-[var(--red)]/55' : ''}`}
-                >
-                  <div className="tabular-nums font-display text-[clamp(22px,2.6vw,30px)] font-medium leading-none tracking-[-0.03em] text-[var(--paper)]">
-                    {hasPrefix && (
-                      <span className="text-[0.5em] text-white/55">{stat.prefix}</span>
-                    )}
-                    {stat.value.toLocaleString()}
-                    {hasSuffix && stat.suffix}
-                  </div>
-                  <p className="mono-id mt-2 text-white/55">{stat.label}</p>
-                </div>
-              );
-            })}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: durations.long, ease: ease.cinematic, delay: 0.7 }}
-            className="flex flex-wrap items-center gap-3"
-          >
-            <MagneticButton>
-              <Button variant="white" href="/contact">
-                {HERO.cta_primary}
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Button variant="primary" size="lg" href="/contact">
+                Request a briefing
               </Button>
-            </MagneticButton>
-            <MagneticButton strength={0.18}>
               <Button
                 variant="ghost"
-                href="/sectors"
-                className="border-white/30 text-white hover:border-white"
+                size="lg"
+                href="/how-we-operate"
+                arrow={false}
               >
-                {HERO.cta_secondary}
+                How we operate
               </Button>
-            </MagneticButton>
-          </motion.div>
-        </div>
+            </div>
 
-        {/* Bottom meta — neutral instrumentation, no sector specifics */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: durations.long, ease: ease.cinematic, delay: 1.0 }}
-          className="mt-14 flex items-end justify-between border-t border-white/15 pt-6"
-        >
-          <ScrambleText
-            as="div"
-            className="mono-id text-white/45"
-            value={HERO.meta}
-            duration={900}
-          />
-          <div className="flex flex-col items-center gap-2 text-white/45">
-            <span className="mono-id">SCROLL</span>
-            <span className="block h-8 w-px animate-scroll-cue bg-white/40" />
+            <div className="mt-14 flex flex-wrap gap-x-12 gap-y-8 border-t border-[var(--faint)] pt-8">
+              <Stat label="Diesel reclaimed" value="up to 18%" />
+              <Stat label="Controller response" value="38s" />
+              <Stat label="Loads monitored · 24h" value="3,047" />
+            </div>
           </div>
-        </motion.div>
+
+          {/* Right column — single contained photograph */}
+          <div className="relative order-1 pt-24 lg:order-2 lg:flex lg:items-center lg:justify-end lg:py-24">
+            <div className="relative mx-auto aspect-[16/10] w-full max-w-[720px] overflow-hidden lg:aspect-[3/4] lg:max-w-[520px]">
+              <RegMarks color="var(--dim)" size={14} />
+
+              <Image
+                src={HERO.image.src}
+                alt={HERO.image.alt}
+                fill
+                priority
+                quality={90}
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
+
+              {/* Bottom caption strip */}
+              <div className="bg-[var(--ink)]/85 absolute bottom-0 left-0 right-0 px-5 py-3.5 backdrop-blur-sm">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-white/72 font-mono text-[9.5px] font-medium uppercase tracking-[0.18em]">
+                    Active corridor · Mpumalanga
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="block h-1.5 w-1.5 rounded-full bg-[var(--green)]" />
+                    <span className="font-mono text-[9px] font-medium uppercase tracking-[0.18em] text-[var(--green)]">
+                      On-record
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

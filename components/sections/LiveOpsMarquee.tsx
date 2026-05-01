@@ -70,7 +70,7 @@ export default function LiveOpsMarquee() {
   return (
     <section
       aria-label="Live operations feed"
-      className="relative overflow-hidden border-y border-[var(--rule-2)] bg-[var(--ink)] py-3"
+      className="relative overflow-hidden border-y border-[var(--faint)] bg-[var(--ink)] py-3"
     >
       {/* Edge fades */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[var(--ink)] to-transparent" />
@@ -90,7 +90,7 @@ export default function LiveOpsMarquee() {
               key={`${item.id}-${i}`}
               className="mono-id flex shrink-0 items-center gap-3 text-white/70"
             >
-              <span className="text-white/40">§</span>
+              <span className="text-white/40"></span>
               <span className="tabular-nums text-white/80">TRK-{item.province}-{item.id}</span>
               <span className="text-white/30">·</span>
               <span className="text-white/55">{item.sector}</span>

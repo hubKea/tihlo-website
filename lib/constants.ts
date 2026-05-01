@@ -12,7 +12,7 @@ export const BRAND = {
 } as const;
 
 export const HERO = {
-  eyebrow: 'Active monitoring · 24 / 7 · across South African operations',
+  eyebrow: 'Operational visibility',
   headline: ['The eye that', 'never misses.'],
   accentWord: '.',
   lede: 'TIHLO helps operations detect fuel loss, asset misuse, commodity leakage, contractor risk and movement exceptions before they become accepted cost.',
@@ -36,12 +36,12 @@ export const STATS = [
   {
     value: 38,
     suffix: 's',
-    label: 'Median controller response',
+    label: 'Controller response',
     caveat: 'ROLLING 30-DAY · ALL ENGAGEMENTS',
   },
   {
     value: 3047,
-    label: 'Loads under monitoring',
+    label: 'Loads monitored',
     caveat: 'LIVE · LAST 24H · ALL CORRIDORS',
   },
 ] as const;
@@ -217,7 +217,7 @@ export const WHY_TIHLO = {
 } as const;
 
 export const BY_THE_NUMBERS = {
-  eyebrow: 'By the numbers',
+  eyebrow: 'Operational signals',
   headline: 'Operational signals.',
   lede: 'Each figure carries the conditions under which it was observed. We publish the caveats so the numbers can be challenged.',
 } as const;

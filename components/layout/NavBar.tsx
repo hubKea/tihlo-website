@@ -98,7 +98,7 @@ export default function NavBar() {
 
         <button
           type="button"
-          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ink)] transition-colors hover:bg-[var(--white-3)] lg:hidden"
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--faint)] bg-[var(--white)] text-[var(--ink)] transition-colors hover:bg-[var(--white-3)] lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={open}

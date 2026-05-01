@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { forwardRef } from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'ghost' | 'white';
+  variant?: 'primary' | 'ghost' | 'secondary' | 'white';
   arrow?: boolean;
   as?: 'button' | 'a';
   href?: string;
@@ -26,7 +26,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const base =
-      'inline-flex items-center gap-2.5 font-display font-medium rounded-none transition-all duration-200 cursor-pointer relative overflow-hidden group select-none active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]';
+      'inline-flex items-center gap-2.5 rounded-xl font-display font-medium transition-all duration-200 cursor-pointer relative overflow-hidden group select-none active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]';
 
     const sizes = {
       sm: 'text-[13px] px-5 py-3',
@@ -38,7 +38,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       primary:
         'bg-[var(--ink)] text-white border border-[var(--ink)] hover:bg-[var(--red-hover)] hover:border-[var(--red-hover)]',
       ghost:
-        'bg-transparent text-[var(--ink)] border border-[var(--dim)] hover:border-[var(--ink)] hover:text-[var(--ink)]',
+        'bg-transparent text-[var(--ink)] border border-[var(--dim)] hover:border-[var(--dim)] hover:text-[var(--red-hover)]',
+      secondary:
+        'bg-transparent text-[var(--ink)] border border-[var(--dim)] hover:border-[var(--dim)] hover:text-[var(--red-hover)]',
       white:
         'bg-white text-[var(--ink)] border border-white hover:bg-[var(--ink)] hover:text-white hover:border-[var(--ink)]',
     };

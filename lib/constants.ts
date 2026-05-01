@@ -59,11 +59,11 @@ export const UTIL_BAR = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: 'Approach', href: '/how-we-operate' },
-  { label: 'Services', href: '/services' },
-  { label: 'Sectors', href: '/sectors' },
-  { label: 'Field Notes', href: '/field-notes' },
-  { label: 'Firm', href: '/about' },
+  { label: 'Home', href: '/' },
+  { label: 'What We Monitor', href: '/#what-we-monitor' },
+  { label: 'How It Works', href: '/#how-it-works' },
+  { label: 'Why TIHLO', href: '/#why-tihlo' },
+  { label: 'Contact', href: '/contact' },
 ] as const;
 
 export const ACTS = [

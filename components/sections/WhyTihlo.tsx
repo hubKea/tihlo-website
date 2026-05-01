@@ -4,7 +4,10 @@ import { WHY_TIHLO } from '@/lib/constants';
 
 export default function WhyTihlo() {
   return (
-    <section className="border-t border-[var(--faint)] bg-[var(--white-2)] py-24 lg:py-32">
+    <section
+      id="why-tihlo"
+      className="scroll-mt-20 border-t border-[var(--faint)] bg-[var(--white-2)] py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-end lg:gap-14">
           <FadeUp>

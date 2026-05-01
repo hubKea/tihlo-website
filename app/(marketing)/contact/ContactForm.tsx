@@ -140,7 +140,7 @@ function ChipSelector({
             key={opt}
             type="button"
             onClick={() => onToggle(opt)}
-            className={`mono-id border px-3 py-1.5 transition-all ${
+            className={`mono-id rounded-xl border px-3 py-1.5 transition-all ${
               selected.includes(opt)
                 ? 'border-[var(--dim)] bg-[var(--ink)] text-[var(--white)]'
                 : 'border-[var(--faint)] text-[var(--muted)] hover:border-[var(--dim)] hover:text-[var(--ink)]'
@@ -176,7 +176,7 @@ function RadioGroup({
         {options.map((opt) => (
           <label key={opt} className="flex cursor-pointer items-center gap-3">
             <span
-              className={`flex h-4 w-4 shrink-0 items-center justify-center border transition-colors ${
+              className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors ${
                 value === opt
                   ? 'border-[var(--dim)] bg-[var(--ink)]'
                   : 'border-[var(--faint)]'
@@ -451,7 +451,7 @@ export default function ContactForm() {
                     onClick={() =>
                       setFormData((prev) => ({ ...prev, fleetSize: s }))
                     }
-                    className={`mono-id border px-3 py-1.5 transition-all ${
+                    className={`mono-id rounded-xl border px-3 py-1.5 transition-all ${
                       formData.fleetSize === s
                         ? 'border-[var(--dim)] bg-[var(--ink)] text-[var(--white)]'
                         : 'border-[var(--faint)] text-[var(--muted)] hover:border-[var(--dim)] hover:text-[var(--ink)]'
@@ -472,7 +472,7 @@ export default function ContactForm() {
                     onClick={() =>
                       setFormData((prev) => ({ ...prev, corridors: c }))
                     }
-                    className={`mono-id border px-3 py-1.5 transition-all ${
+                    className={`mono-id rounded-xl border px-3 py-1.5 transition-all ${
                       formData.corridors === c
                         ? 'border-[var(--dim)] bg-[var(--ink)] text-[var(--white)]'
                         : 'border-[var(--faint)] text-[var(--muted)] hover:border-[var(--dim)] hover:text-[var(--ink)]'
@@ -573,7 +573,7 @@ export default function ContactForm() {
               <button
                 onClick={handleStep3}
                 disabled={submitting}
-                className="inline-flex flex-1 items-center justify-center gap-2 border border-[var(--dim)] bg-[var(--ink)] px-6 py-3.5 font-display text-[13px] font-semibold text-[var(--white)] transition-all duration-200 hover:border-[var(--ink)] hover:bg-[var(--ink)] active:scale-[0.98] disabled:opacity-50"
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--ink)] bg-[var(--ink)] px-6 py-3.5 font-display text-[13px] font-semibold text-[var(--white)] transition-all duration-200 hover:border-[var(--red-hover)] hover:bg-[var(--red-hover)] active:scale-[0.98] disabled:opacity-50"
               >
                 {submitting ? 'Sending...' : 'Send to TIHLO'}
               </button>

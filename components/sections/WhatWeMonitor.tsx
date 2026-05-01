@@ -4,7 +4,10 @@ import { WHAT_WE_MONITOR } from '@/lib/constants';
 
 export default function WhatWeMonitor() {
   return (
-    <section className="border-t border-[var(--faint)] bg-[var(--white-2)] py-24 lg:py-32">
+    <section
+      id="what-we-monitor"
+      className="scroll-mt-20 border-t border-[var(--faint)] bg-[var(--white-2)] py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <FadeUp>
           <Eyebrow>What we monitor</Eyebrow>

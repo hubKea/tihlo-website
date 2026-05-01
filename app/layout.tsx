@@ -3,8 +3,7 @@ import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
-import Nav from '@/components/layout/Nav';
-import UtilBar from '@/components/layout/UtilBar';
+import NavBar from '@/components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 import PageTransitionScan from '@/components/motion/PageTransitionScan';
 
@@ -49,10 +48,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
-        <UtilBar />
-        <Nav />
+        <NavBar />
         <PageTransitionScan />
-        <main className="w-full max-w-full overflow-x-hidden">{children}</main>
+        <main className="w-full max-w-full overflow-x-hidden pt-16">
+          {children}
+        </main>
         <Footer />
         <Analytics />
       </body>

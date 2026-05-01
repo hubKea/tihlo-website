@@ -98,7 +98,7 @@ export default function ControlRoomStack() {
       <div className="relative z-10 mx-auto grid max-w-site grid-cols-1 gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
           <p className="mono-label text-white/45 mb-7 flex items-center gap-3">
-            <span className="block h-px w-10 bg-[var(--ink)]" />
+            <span className="block h-px w-10 bg-white/30" />
             Control room record
           </p>
           <h2 className="max-w-5xl font-display text-[clamp(42px,6vw,86px)] font-semibold leading-[0.92] tracking-[-0.05em]">

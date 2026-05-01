@@ -1,15 +1,27 @@
 import type { Metadata } from 'next';
+import { Mountain, Truck, ShieldCheck } from 'lucide-react';
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Button from '@/components/ui/Button';
 import MaskHeading from '@/components/motion/MaskHeading';
-import { SECTORS } from '@/lib/constants';
+import LineSystem from '@/components/motion/LineSystem';
+import MagneticButton from '@/components/motion/MagneticButton';
+import OrbitalEcosystem from '@/components/sections/OrbitalEcosystem';
 
 export const metadata: Metadata = {
   title: 'Sectors',
   description:
     'TIHLO operates across coal, chrome, manganese, iron ore, copper and agri-bulk sectors across South Africa.',
 };
+
+const SATELLITES = [
+  { id: 'coal', label: 'Coal', icon: <Mountain size={20} strokeWidth={1.5} />, orbit: 1 as const, angle: 30 },
+  { id: 'chrome', label: 'Chrome', icon: <Mountain size={20} strokeWidth={1.5} />, orbit: 2 as const, angle: 150 },
+  { id: 'manganese', label: 'Manganese', icon: <Mountain size={20} strokeWidth={1.5} />, orbit: 3 as const, angle: 270 },
+  { id: 'iron-ore', label: 'Iron Ore', icon: <Mountain size={20} strokeWidth={1.5} />, orbit: 2 as const, angle: 330 },
+  { id: 'copper', label: 'Copper', icon: <Mountain size={20} strokeWidth={1.5} />, orbit: 1 as const, angle: 210 },
+  { id: 'agri-bulk', label: 'Agri-bulk', icon: <Truck size={20} strokeWidth={1.5} />, orbit: 3 as const, angle: 90 },
+];
 
 const SECTOR_DETAILS = [
   {
@@ -90,9 +102,10 @@ export default function SectorsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 pt-24 lg:px-12 lg:py-32">
+      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 pt-32 lg:px-12 lg:pb-28 lg:pt-40">
+        <LineSystem tone="light" density="quiet" anchor="right" />
         <div className="relative z-10 mx-auto max-w-site">
-          <FadeUp className="grid grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-20">
+          <FadeUp className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-end lg:gap-20">
             <div>
               <Eyebrow>Sectors</Eyebrow>
               <h1 className="mt-8 font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.94] tracking-[-0.045em] text-[var(--ink)]">
@@ -107,67 +120,112 @@ export default function SectorsPage() {
                 regardless of what you ship.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-px border border-[var(--faint)] bg-[var(--faint)] sm:grid-cols-2">
-              {['Mining', 'Factories', 'Logistics', 'Municipal'].map((item) => (
-                <div key={item} className="bg-[var(--white)] p-6">
-                  <p className="font-display text-xl font-medium tracking-[-0.02em] text-[var(--ink)]">
-                    {item}
-                  </p>
-                  <p className="mono-id mt-3 text-[var(--dim)]">
-                    Active monitoring scope
-                  </p>
-                </div>
-              ))}
+
+            {/* Right-side index — quiet sector list */}
+            <div className="border-t border-[var(--faint)] pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              <p className="mono-label mb-5 text-[var(--dim)]">Sector index</p>
+              <ul className="divide-y divide-[var(--faint)]">
+                {SECTOR_DETAILS.map((s, i) => (
+                  <li
+                    key={s.label}
+                    className="flex items-center justify-between gap-4 py-3"
+                  >
+                    <span className="flex items-baseline gap-3">
+                      <span className="font-mono text-[11px] tabular-nums text-[var(--dim)]">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="font-display text-[15px] font-medium text-[var(--ink)]">
+                        {s.label}
+                      </span>
+                    </span>
+                    <span className="mono-id text-[var(--dim)]">{s.province}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* Sector grid */}
-      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 lg:px-12 lg:pb-28">
+      {/* Orbital Ecosystem — Light mode */}
+      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white-2)] px-6 py-20 lg:py-32">
+        <LineSystem tone="light" density="quiet" />
         <div className="relative z-10 mx-auto max-w-site">
+          <FadeUp className="mb-12 text-center">
+            <Eyebrow className="justify-center mb-4">Monitoring coverage</Eyebrow>
+            <h2 className="font-display text-[clamp(28px,3vw,40px)] font-medium leading-[1.08] tracking-[-0.025em] text-[var(--ink)]">
+              <MaskHeading>One methodology. Six sectors.</MaskHeading>
+            </h2>
+          </FadeUp>
+          <OrbitalEcosystem
+            coreLabel="TIHLO CORE"
+            coreIcon={<ShieldCheck size={28} className="text-[var(--ink)]" strokeWidth={1.5} />}
+            satellites={SATELLITES}
+          />
+        </div>
+      </section>
+
+      {/* Sector grid — Spotlight rows */}
+      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white)] px-6 pb-20 lg:px-12 lg:pb-28">
+        <LineSystem tone="light" density="quiet" anchor="left" />
+        <div className="relative z-10 mx-auto max-w-site">
+          <FadeUp className="mb-12 pt-16 lg:pt-20">
+            <Eyebrow className="mb-5">Sector detail</Eyebrow>
+            <h2 className="font-display text-[clamp(30px,3.2vw,44px)] font-medium leading-[1.08] tracking-[-0.025em] text-[var(--ink)]">
+              <MaskHeading>What we monitor, per sector.</MaskHeading>
+            </h2>
+          </FadeUp>
+
           <div className="space-y-0 border border-[var(--faint)]">
             {SECTOR_DETAILS.map((sector, i) => (
               <FadeUp key={sector.label} delay={i * 0.05}>
                 <div
-                  className={`grid grid-cols-1 gap-0 border-l-2 border-transparent transition-colors hover:border-[var(--dim)] hover:bg-[var(--white-3)] lg:grid-cols-[280px_1fr] ${i < SECTOR_DETAILS.length - 1 ? 'border-b border-[var(--faint)]' : ''}`}
+                  className={`spotlight-row group grid grid-cols-1 gap-0 border-l-2 border-transparent lg:grid-cols-[280px_1fr] ${i < SECTOR_DETAILS.length - 1 ? 'border-b border-[var(--faint)]' : ''}`}
                 >
                   {/* Index column */}
-                  <div className="flex items-baseline gap-5 border-b border-[var(--faint)] px-8 py-8 lg:border-b-0 lg:border-r">
-                    <span className="font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] text-[var(--ink)]">
+                  <div className="relative flex items-baseline gap-5 border-b border-[var(--faint)] px-8 py-8 lg:border-b-0 lg:border-r">
+                    {/* Watermark on hover */}
+                    <span
+                      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[80px] font-bold tabular-nums leading-none tracking-[-0.04em] text-[var(--ink)] opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04] lg:text-[100px]"
+                      aria-hidden
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+
+                    <span className="font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] text-[var(--ink)] transition-colors duration-400 group-[.spotlight-row:hover]:text-[var(--white)]">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>
-                      <h2 className="font-display text-2xl font-semibold tracking-[-0.025em] text-[var(--ink)]">
+                      <h2 className="font-display text-2xl font-semibold tracking-[-0.025em] text-[var(--ink)] transition-colors duration-400 group-[.spotlight-row:hover]:text-[var(--white)]">
                         {sector.label}
                       </h2>
-                      <p className="mono-id mt-2 text-[var(--dim)]">
+                      <p className="mono-id mt-2 text-[var(--dim)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/40">
                         {sector.province}
                       </p>
                     </div>
                   </div>
 
                   {/* Detail column */}
-                  <div className="grid grid-cols-1 gap-0 lg:grid-cols-2">
-                    <div className="border-b border-[var(--faint)] px-8 py-8 lg:border-b-0 lg:border-r">
-                      <p className="mono-label mb-4 text-[var(--muted)]">
+                  <div className="grid grid-cols-1 gap-0 xl:grid-cols-2">
+                    <div className="border-b border-[var(--faint)] px-8 py-8 xl:border-b-0 xl:border-r">
+                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/40">
                         Challenge
                       </p>
-                      <p className="text-sm leading-relaxed text-[var(--muted)]">
+                      <p className="text-sm leading-relaxed text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/60">
                         {sector.challenge}
                       </p>
                     </div>
                     <div className="px-8 py-8">
-                      <p className="mono-label mb-4 text-[var(--muted)]">
+                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/40">
                         Monitoring scope
                       </p>
                       <ul className="space-y-2">
                         {sector.monitoring.map((m) => (
                           <li
                             key={m}
-                            className="flex items-start gap-2.5 text-sm text-[var(--muted)]"
+                            className="flex items-start gap-2.5 text-sm text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/60"
                           >
-                            <span className="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-[var(--ink)]" />
+                            <span className="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-[var(--ink)] transition-colors duration-400 group-[.spotlight-row:hover]:bg-[var(--red)]" />
                             {m}
                           </li>
                         ))}
@@ -181,24 +239,26 @@ export default function SectorsPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative isolate overflow-hidden bg-[var(--ink)] px-6 py-20 lg:px-12 lg:py-28">
+      {/* CTA — Light mode */}
+      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white-2)] px-6 py-20 lg:px-12 lg:py-28">
+        <LineSystem tone="light" density="quiet" anchor="right" />
         <div className="relative z-10 mx-auto max-w-site">
           <FadeUp className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
-            <h2 className="font-display text-[clamp(36px,4.6vw,56px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--white)]">
-              Your sector.
-              <br />
-              <em className="not-italic text-[var(--ink)]">Our methodology.</em>
+            <h2 className="font-display text-[clamp(40px,5vw,64px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
+              <MaskHeading>Your sector.</MaskHeading>
+              <MaskHeading delay={0.12}>
+                <em className="not-italic text-[var(--dim)]">Our methodology.</em>
+              </MaskHeading>
             </h2>
             <div>
-              <p className="text-white/65 mb-7 text-[17px] leading-[1.65]">
+              <p className="text-[var(--muted)] mb-7 text-[17px] leading-[1.65]">
                 Every engagement begins with a scoped briefing. We assess your
                 specific sector context, identify the highest-risk control gaps,
                 and confirm whether TIHLO is the right fit.
               </p>
-              <Button variant="white" href="/contact">
-                Request a briefing
-              </Button>
+              <MagneticButton>
+                <Button href="/contact">Request a briefing</Button>
+              </MagneticButton>
             </div>
           </FadeUp>
         </div>

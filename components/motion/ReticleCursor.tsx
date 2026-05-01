@@ -17,7 +17,6 @@ export default function ReticleCursor() {
     if (!fine || reduced) return;
 
     setEnabled(true);
-    document.documentElement.classList.add('cursor-none');
 
     const ring = ringRef.current!;
     const dot = dotRef.current!;
@@ -62,7 +61,6 @@ export default function ReticleCursor() {
       window.removeEventListener('pointermove', move);
       window.removeEventListener('mouseover', over);
       cancelAnimationFrame(raf);
-      document.documentElement.classList.remove('cursor-none');
     };
   }, []);
 

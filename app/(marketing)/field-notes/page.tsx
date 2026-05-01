@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
 import MaskHeading from '@/components/motion/MaskHeading';
+import LineSystem from '@/components/motion/LineSystem';
 import { getAllFieldNotes } from '@/lib/field-notes';
 
 export const metadata: Metadata = {
@@ -18,7 +19,8 @@ export default function FieldNotesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-[var(--faint)] bg-[var(--white)] px-6 pb-20 pt-24 lg:px-12 lg:py-32">
+      <section className="relative isolate overflow-hidden border-b border-[var(--faint)] bg-[var(--white)] px-6 pb-20 pt-32 lg:px-12 lg:pb-28 lg:pt-40">
+        <LineSystem tone="light" density="standard" anchor="right" />
         <div className="relative z-10 mx-auto max-w-site">
           <FadeUp className="max-w-3xl">
             <Eyebrow>A TIHLO publication</Eyebrow>
@@ -39,15 +41,17 @@ export default function FieldNotesPage() {
       </section>
 
       {/* Notes grid */}
-      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-24 lg:px-12 lg:pb-32">
+      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-24 pt-20 lg:px-12 lg:pb-32 lg:pt-28">
         <div className="relative z-10 mx-auto max-w-site">
-          <div className="grid grid-cols-1 gap-px border border-[var(--faint)] bg-[var(--faint)] lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-px border border-[var(--faint)] bg-[var(--faint)] md:grid-cols-2 lg:grid-cols-3">
             {notes.map((note, i) => (
               <FadeUp key={note.slug} delay={i * 0.06}>
                 <Link
                   href={`/field-notes/${note.slug}`}
-                  className="group block border-l-2 border-transparent bg-[var(--white)] px-8 py-10 transition-colors hover:border-[var(--dim)] hover:bg-[var(--white-2)]"
+                  className="group relative flex h-full flex-col overflow-hidden bg-[var(--white)] px-8 py-10 transition-colors hover:bg-[var(--white-2)]"
                 >
+                  {/* Animated top rule on hover */}
+                  <span className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-[var(--ink)] transition-transform duration-500 group-hover:scale-x-100" />
                   <div className="mb-8 flex items-center justify-between">
                     <span className="mono-id text-[var(--ink)]">
                       {note.index}
@@ -56,12 +60,9 @@ export default function FieldNotesPage() {
                       <span className="mono-id text-[var(--dim)]">
                         {note.readingTime}
                       </span>
-                      <span className="mono-id text-[var(--dim)]">
-                        {note.date}
-                      </span>
                     </div>
                   </div>
-                  <h2 className="mb-3 font-display text-2xl font-semibold leading-[1.15] tracking-[-0.025em] text-[var(--ink)]">
+                  <h2 className="mb-3 font-display text-[22px] font-semibold leading-[1.18] tracking-[-0.025em] text-[var(--ink)]">
                     {note.title}
                   </h2>
                   <p className="mono-label mb-3 text-[var(--muted)]">
@@ -70,13 +71,18 @@ export default function FieldNotesPage() {
                   <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">
                     {note.excerpt}
                   </p>
-                  <div className="mono-label flex items-center gap-2 text-[var(--muted)] transition-colors group-hover:text-[var(--ink)]">
-                    Read note
-                    <ArrowRight
-                      size={12}
-                      strokeWidth={1.5}
-                      className="transition-transform duration-200 group-hover:translate-x-0.5"
-                    />
+                  <div className="mt-auto flex items-center justify-between border-t border-[var(--faint)] pt-5">
+                    <span className="mono-id text-[var(--dim)]">
+                      {note.date}
+                    </span>
+                    <span className="mono-label flex items-center gap-2 text-[var(--muted)] transition-colors group-hover:text-[var(--ink)]">
+                      Read note
+                      <ArrowRight
+                        size={12}
+                        strokeWidth={1.5}
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
+                      />
+                    </span>
                   </div>
                 </Link>
               </FadeUp>

@@ -55,7 +55,7 @@ export default function HeroTerrain() {
     const height = mount.clientHeight;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x0e1014, 8, 28);
+    scene.fog = new THREE.Fog(0xffffff, 8, 28);
 
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
     camera.position.set(0, 6, 14);
@@ -89,16 +89,16 @@ export default function HeroTerrain() {
     geom.computeVertexNormals();
 
     const wireMat = new THREE.LineBasicMaterial({
-      color: 0xf4f1ea,
+      color: 0x0e1014,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.32,
     });
     const wire = new THREE.LineSegments(new THREE.WireframeGeometry(geom), wireMat);
 
     const fillMat = new THREE.MeshBasicMaterial({
-      color: 0x0e1014,
+      color: 0xf8f8f8,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.35,
       side: THREE.DoubleSide,
     });
     const fill = new THREE.Mesh(geom, fillMat);
@@ -209,7 +209,7 @@ export default function HeroTerrain() {
       ref={mountRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 z-[5]"
-      style={{ mixBlendMode: 'screen', opacity: 0.55 }}
+      style={{ mixBlendMode: 'multiply', opacity: 0.7 }}
     />
   );
 }

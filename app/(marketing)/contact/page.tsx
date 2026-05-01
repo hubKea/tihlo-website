@@ -3,13 +3,15 @@
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
 import MaskHeading from '@/components/motion/MaskHeading';
+import LineSystem from '@/components/motion/LineSystem';
 import { CONTACT, BRAND } from '@/lib/constants';
 import ContactForm from './ContactForm';
 
 export default function ContactPage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 pt-24 lg:px-12 lg:py-32">
+      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 pt-32 lg:px-12 lg:pb-28 lg:pt-40">
+        <LineSystem tone="light" density="quiet" anchor="left" />
         <div className="relative z-10 mx-auto max-w-site">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
             {/* Left column */}

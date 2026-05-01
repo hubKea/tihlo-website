@@ -16,7 +16,7 @@ const step1Schema = z.object({
     .string()
     .min(9, 'Enter a valid phone number')
     .regex(/^[\d\s\+\-\(\)]+$/, 'Invalid phone format'),
-  honeypot: z.string().max(0), // spam trap
+  honeypot: z.string().max(0).optional(), // spam trap
 });
 
 const step2Schema = z.object({
@@ -77,12 +77,12 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mono-id mb-2 block text-[var(--ink)]">
+      <label className="mono-id mb-2 block text-[var(--muted)]">
         {label.toUpperCase()}
       </label>
       {children}
       {error && (
-        <p className="mono-id mt-1.5 text-[var(--ink)]">
+        <p className="mono-id mt-2 text-[var(--red)]">
           {error.toUpperCase()}
         </p>
       )}
@@ -97,8 +97,8 @@ function TextInput({
   return (
     <input
       {...props}
-      className={`w-full border bg-[var(--white-2)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all placeholder:text-[var(--dim)] focus:border-[var(--ink)] focus:bg-[var(--white)] ${
-        error ? 'border-[var(--dim)]' : 'border-[var(--faint)]'
+      className={`w-full border bg-[var(--white)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all placeholder:text-[var(--dim)] focus:border-[var(--ink)] ${
+        error ? 'border-[var(--red)]' : 'border-[var(--faint)] hover:border-[var(--dim)]'
       }`}
     />
   );
@@ -112,8 +112,8 @@ function SelectInput({
   return (
     <select
       {...props}
-      className={`w-full border bg-[var(--white-2)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all focus:border-[var(--ink)] focus:bg-[var(--white)] ${
-        error ? 'border-[var(--dim)]' : 'border-[var(--faint)]'
+      className={`w-full border bg-[var(--white)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all focus:border-[var(--ink)] ${
+        error ? 'border-[var(--red)]' : 'border-[var(--faint)] hover:border-[var(--dim)]'
       }`}
     >
       {children}
@@ -151,7 +151,7 @@ function ChipSelector({
         ))}
       </div>
       {error && (
-        <p className="mono-id mt-2 text-[var(--ink)]">{error.toUpperCase()}</p>
+        <p className="mono-id mt-2 text-[var(--red)]">{error.toUpperCase()}</p>
       )}
     </div>
   );
@@ -194,7 +194,7 @@ function RadioGroup({
         ))}
       </div>
       {error && (
-        <p className="mono-id mt-2 text-[var(--ink)]">{error.toUpperCase()}</p>
+        <p className="mono-id mt-2 text-[var(--red)]">{error.toUpperCase()}</p>
       )}
     </div>
   );
@@ -292,13 +292,14 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="border border-[var(--ink)] bg-[var(--white-2)] p-10 lg:p-12">
+      <div className="border border-[var(--ink)] bg-[var(--white)] p-10 lg:p-12">
         <p className="mono-label mb-6 flex items-center gap-3 text-[var(--ink)]">
           <span className="block h-px w-8 bg-[var(--ink)]" />
           Transmission received
         </p>
-        <p className="font-mono text-[clamp(28px,3vw,40px)] font-semibold tabular-nums leading-none text-[var(--ink)]">
-          TICKET: <span className="text-[var(--ink)]">{ticketId}</span>
+        <p className="mono-id mb-2 text-[var(--dim)]">TICKET</p>
+        <p className="font-mono text-[clamp(28px,3vw,40px)] font-semibold tabular-nums leading-none tracking-[-0.02em] text-[var(--ink)]">
+          {ticketId}
         </p>
         <ul className="mt-8 space-y-2 border-t border-[var(--faint)] pt-6 font-mono text-xs tracking-[0.16em] text-[var(--muted)]">
           <li className="flex items-center justify-between gap-4">
@@ -538,7 +539,7 @@ export default function ContactForm() {
                 maxLength={500}
                 rows={4}
                 placeholder="Brief description of your current situation..."
-                className="w-full resize-none border border-[var(--faint)] bg-[var(--white-2)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all placeholder:text-[var(--dim)] focus:border-[var(--ink)] focus:bg-[var(--white)]"
+                className="w-full resize-none border border-[var(--faint)] bg-[var(--white)] px-4 py-3 font-display text-[15px] text-[var(--ink)] outline-none transition-all placeholder:text-[var(--dim)] hover:border-[var(--dim)] focus:border-[var(--ink)]"
               />
               <p className="mono-id mt-1 text-right text-[var(--dim)]">
                 {(formData.situation ?? '').length}/500
@@ -558,7 +559,7 @@ export default function ContactForm() {
             </Field>
 
             {error && (
-              <p className="mono-id text-[var(--ink)]">{error.toUpperCase()}</p>
+              <p className="mono-id text-[var(--red)]">{error.toUpperCase()}</p>
             )}
 
             <div className="flex gap-3 pt-2">
@@ -570,13 +571,14 @@ export default function ContactForm() {
               >
                 Back
               </Button>
-              <button
+              <Button
                 onClick={handleStep3}
                 disabled={submitting}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--ink)] bg-[var(--ink)] px-6 py-3.5 font-display text-[13px] font-semibold text-[var(--white)] transition-all duration-200 hover:border-[var(--red-hover)] hover:bg-[var(--red-hover)] active:scale-[0.98] disabled:opacity-50"
+                className="flex-1 justify-center"
+                arrow={!submitting}
               >
                 {submitting ? 'Sending...' : 'Send to TIHLO'}
-              </button>
+              </Button>
             </div>
           </div>
         )}

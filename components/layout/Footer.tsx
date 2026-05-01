@@ -25,14 +25,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-[var(--faint)] bg-[var(--white-2)]">
       <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-12 lg:py-28">
-        {/* Closing slogan — the only red moment */}
-        <div className="mb-20 border-b border-[var(--faint)] pb-16 lg:mb-24 lg:pb-20">
-          <p className="font-display text-[clamp(48px,8vw,128px)] font-medium leading-[0.92] tracking-[-0.04em] text-[var(--ink)]">
-            The eye that
-            <br />
-            never misses<span className="text-[var(--red)]">.</span>
-          </p>
-        </div>
+
 
         {/* Columns */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -43,7 +43,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-[var(--white)]/90 fixed left-0 right-0 top-0 z-50 border-b border-[var(--faint)] backdrop-blur-xl">
+    <header className="absolute left-0 right-0 top-0 z-50">
       <nav
         className="mx-auto flex h-16 max-w-[1400px] items-center gap-8 px-6 lg:px-12"
         aria-label="Primary navigation"

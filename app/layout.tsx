@@ -6,6 +6,7 @@ import './globals.css';
 import NavBar from '@/components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 import PageTransitionScan from '@/components/motion/PageTransitionScan';
+import ReticleCursor from '@/components/motion/ReticleCursor';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tihlo.co.za'),
@@ -50,12 +51,14 @@ export default function RootLayout({
       <body>
         <NavBar />
         <PageTransitionScan />
-        <main className="w-full max-w-full overflow-x-hidden pt-16">
+        <main className="w-full max-w-full overflow-x-hidden">
           {children}
         </main>
         <Footer />
+        <ReticleCursor />
         <Analytics />
       </body>
     </html>
   );
 }
+

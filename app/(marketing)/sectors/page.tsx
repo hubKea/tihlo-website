@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { Fragment } from 'react';
 import { Mountain, Truck, ShieldCheck } from 'lucide-react';
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
@@ -7,6 +8,7 @@ import Button from '@/components/ui/Button';
 import MaskHeading from '@/components/motion/MaskHeading';
 import LineSystem from '@/components/motion/LineSystem';
 import MagneticButton from '@/components/motion/MagneticButton';
+import DarkGlowSection from '@/components/sections/DarkGlowSection';
 import OrbitalEcosystem from '@/components/sections/OrbitalEcosystem';
 
 export const metadata: Metadata = {
@@ -105,6 +107,8 @@ const SECTOR_DETAILS = [
   },
 ];
 
+const isDark = (i: number) => i % 2 === 1;
+
 export default function SectorsPage() {
   return (
     <>
@@ -154,74 +158,120 @@ export default function SectorsPage() {
         </div>
       </section>
 
-      {/* Orbital Ecosystem — Light mode */}
-      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white-2)] px-6 py-20 lg:py-32">
-        <LineSystem tone="light" density="quiet" />
+      {/* Orbital Ecosystem — Dark mode */}
+      <DarkGlowSection
+        glowPosition="center"
+        glowIntensity={0.07}
+        className="border-t border-white/10 px-6 py-28 lg:px-12 lg:py-36"
+      >
+        <LineSystem tone="dark" density="quiet" />
         <div className="relative z-10 mx-auto max-w-site">
           <FadeUp className="mb-12 text-center">
-            <Eyebrow className="justify-center mb-4">Monitoring coverage</Eyebrow>
-            <h2 className="font-display text-[clamp(28px,3vw,40px)] font-medium leading-[1.08] tracking-[-0.025em] text-[var(--ink)]">
+            <Eyebrow className="mb-4 justify-center text-white/40">Monitoring coverage</Eyebrow>
+            <h2 className="font-display text-[clamp(28px,3vw,40px)] font-medium leading-[1.08] tracking-[-0.025em] text-white">
               <MaskHeading>One methodology. Six sectors.</MaskHeading>
             </h2>
           </FadeUp>
           <OrbitalEcosystem
             coreLabel="TIHLO CORE"
             coreIcon={<ShieldCheck size={28} className="text-[var(--ink)]" strokeWidth={1.5} />}
+            className="[&_p]:text-white [&_.mono-id]:text-white/40 [&_span]:border-white/10 [&_span]:bg-white/10 [&_span]:text-white/70"
             satellites={SATELLITES}
           />
         </div>
-      </section>
+      </DarkGlowSection>
 
-      {/* Sector grid — Spotlight rows */}
-      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white)] px-6 pb-20 lg:px-12 lg:pb-28">
+      {/* Sector detail heading */}
+      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white)] px-6 py-16 lg:px-12 lg:py-20">
         <LineSystem tone="light" density="quiet" anchor="left" />
         <div className="relative z-10 mx-auto max-w-site">
-          <FadeUp className="mb-12 pt-16 lg:pt-20">
+          <FadeUp>
             <Eyebrow className="mb-5">Sector detail</Eyebrow>
             <h2 className="font-display text-[clamp(30px,3.2vw,44px)] font-medium leading-[1.08] tracking-[-0.025em] text-[var(--ink)]">
               <MaskHeading>What we monitor, per sector.</MaskHeading>
             </h2>
           </FadeUp>
+        </div>
+      </section>
 
-          <div className="space-y-0 border border-[var(--faint)]">
-            {SECTOR_DETAILS.map((sector, i) => (
-              <FadeUp key={sector.label} delay={i * 0.05}>
-                <div
-                  className={`group relative grid grid-cols-1 gap-0 overflow-hidden border-l-2 border-transparent bg-[var(--white)] transition-all duration-300 hover:bg-[var(--white-2)] lg:grid-cols-[280px_1fr] ${i < SECTOR_DETAILS.length - 1 ? 'border-b border-[var(--faint)]' : ''}`}
-                >
-                  <Image
-                    src={sector.image}
-                    alt=""
-                    fill={true}
-                    loading="lazy"
-                    sizes="(max-width: 1024px) 100vw, 1200px"
-                    className="absolute inset-0 z-0 scale-105 object-cover opacity-0 transition-[opacity,transform] duration-700 group-hover:scale-100 group-hover:opacity-[0.15]"
-                  />
+      {SECTOR_DETAILS.map((sector, i) => {
+        const dark = isDark(i);
+
+        return (
+          <Fragment key={sector.label}>
+            <section
+              className={`relative isolate overflow-hidden border-t px-6 lg:px-12 ${
+                dark
+                  ? 'border-white/10 bg-[var(--ink)]'
+                  : 'border-[var(--faint)] bg-[var(--white)]'
+              }`}
+            >
+              <LineSystem
+                tone={dark ? 'dark' : 'light'}
+                density="quiet"
+                anchor={dark ? 'right' : 'left'}
+              />
+              <div className="relative z-10 mx-auto max-w-site">
+                <FadeUp delay={i * 0.05}>
                   <div
-                    className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    style={{
-                      background:
-                        'linear-gradient(to bottom, transparent, rgba(14, 16, 20, 0.03))',
-                    }}
-                  />
-                  {/* Index column */}
-                  <div className="relative z-10 flex items-baseline gap-5 border-b border-[var(--faint)] px-8 py-8 lg:border-b-0 lg:border-r">
-                    {/* Watermark on hover */}
+                    className={`group relative grid grid-cols-1 gap-0 overflow-hidden border border-l-2 transition-all duration-300 lg:grid-cols-[280px_1fr] ${
+                      dark
+                        ? 'border-white/10 bg-[var(--ink)] hover:bg-[var(--ink-2)]'
+                        : 'border-[var(--faint)] bg-[var(--white)] hover:bg-[var(--white-2)] hover:shadow-[0_8px_32px_var(--shadow-red)]'
+                    }`}
+                  >
+                    <Image
+                      src={sector.image}
+                      alt=""
+                      fill={true}
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 100vw, 1200px"
+                      className="absolute inset-0 z-0 scale-105 object-cover opacity-0 transition-[opacity,transform] duration-700 group-hover:scale-100 group-hover:opacity-[0.15]"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        background: dark
+                          ? 'linear-gradient(to bottom, transparent, rgba(14, 16, 20, 0.28))'
+                          : 'linear-gradient(to bottom, transparent, rgba(14, 16, 20, 0.03))',
+                      }}
+                    />
+                    {/* Index column */}
+                    <div
+                      className={`relative z-10 flex items-baseline gap-5 border-b px-8 py-8 lg:border-b-0 lg:border-r ${
+                        dark ? 'border-white/10' : 'border-[var(--faint)]'
+                      }`}
+                    >
+                      {/* Watermark on hover */}
+                      <span
+                        className={`pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[80px] font-bold tabular-nums leading-none tracking-[-0.04em] opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04] lg:text-[100px] ${
+                          dark ? 'text-white' : 'text-[var(--ink)]'
+                        }`}
+                        aria-hidden
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+
                     <span
-                      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[80px] font-bold tabular-nums leading-none tracking-[-0.04em] text-[var(--ink)] opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04] lg:text-[100px]"
-                      aria-hidden
+                      className={`font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] transition-colors duration-300 ${
+                        dark ? 'text-white/20' : 'text-[var(--ink)]'
+                      }`}
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-
-                    <span className="font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] text-[var(--ink)] transition-colors duration-300">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
                     <div>
-                      <h2 className="font-display text-2xl font-semibold tracking-[-0.025em] text-[var(--ink)] transition-colors duration-300">
+                      <h2
+                        className={`font-display text-2xl font-semibold tracking-[-0.025em] transition-colors duration-300 ${
+                          dark ? 'text-white' : 'text-[var(--ink)]'
+                        }`}
+                      >
                         {sector.label}
                       </h2>
-                      <p className="mono-id mt-2 text-[var(--dim)] transition-colors duration-300">
+                      <p
+                        className={`mono-id mt-2 transition-colors duration-300 ${
+                          dark ? 'text-white/40' : 'text-[var(--dim)]'
+                        }`}
+                      >
                         {sector.province}
                       </p>
                     </div>
@@ -229,25 +279,49 @@ export default function SectorsPage() {
 
                   {/* Detail column */}
                   <div className="relative z-10 grid grid-cols-1 gap-0 xl:grid-cols-2">
-                    <div className="border-b border-[var(--faint)] px-8 py-8 xl:border-b-0 xl:border-r">
-                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-300">
+                    <div
+                      className={`border-b px-8 py-8 xl:border-b-0 xl:border-r ${
+                        dark ? 'border-white/10' : 'border-[var(--faint)]'
+                      }`}
+                    >
+                      <p
+                        className={`mono-label mb-4 transition-colors duration-300 ${
+                          dark ? 'text-white/40' : 'text-[var(--muted)]'
+                        }`}
+                      >
                         Challenge
                       </p>
-                      <p className="text-sm leading-relaxed text-[var(--muted)] transition-colors duration-300">
+                      <p
+                        className={`text-sm leading-relaxed transition-colors duration-300 ${
+                          dark ? 'text-white/60' : 'text-[var(--muted)]'
+                        }`}
+                      >
                         {sector.challenge}
                       </p>
                     </div>
                     <div className="px-8 py-8">
-                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-300">
+                      <p
+                        className={`mono-label mb-4 transition-colors duration-300 ${
+                          dark ? 'text-white/40' : 'text-[var(--muted)]'
+                        }`}
+                      >
                         Monitoring scope
                       </p>
                       <ul className="space-y-2">
                         {sector.monitoring.map((m) => (
                           <li
                             key={m}
-                            className="flex items-start gap-2.5 text-sm text-[var(--muted)] transition-colors duration-300"
+                            className={`flex items-start gap-2.5 text-sm transition-colors duration-300 ${
+                              dark
+                                ? 'text-white/55 hover:text-white'
+                                : 'text-[var(--muted)] hover:text-[var(--ink)]'
+                            }`}
                           >
-                            <span className="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-[var(--ink)] transition-colors duration-300 group-hover:bg-[var(--red)]" />
+                            <span
+                              className={`mt-1.5 block h-1 w-1 shrink-0 rounded-full transition-colors duration-300 group-hover:bg-[var(--red)] ${
+                                dark ? 'bg-white/35' : 'bg-[var(--ink)]'
+                              }`}
+                            />
                             {m}
                           </li>
                         ))}
@@ -256,10 +330,34 @@ export default function SectorsPage() {
                   </div>
                 </div>
               </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div>
+            </section>
+
+            {i === 2 && (
+              <section className="bg-[var(--red)] px-6 py-16 lg:px-12 lg:py-20">
+                <div className="mx-auto max-w-site">
+                  <FadeUp>
+                    <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
+                      <div>
+                        <span className="font-display text-[48px] font-medium leading-none text-white">6</span>
+                        <p className="mono-id mt-2 text-white/60">Commodities covered</p>
+                      </div>
+                      <div>
+                        <span className="font-display text-[48px] font-medium leading-none text-white">4</span>
+                        <p className="mono-id mt-2 text-white/60">Provinces active</p>
+                      </div>
+                      <div>
+                        <span className="font-display text-[48px] font-medium leading-none text-white">24/7</span>
+                        <p className="mono-id mt-2 text-white/60">Named controller</p>
+                      </div>
+                    </div>
+                  </FadeUp>
+                </div>
+              </section>
+            )}
+          </Fragment>
+        );
+      })}
 
       {/* CTA — Light mode */}
       <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white-2)] px-6 py-20 lg:px-12 lg:py-28">

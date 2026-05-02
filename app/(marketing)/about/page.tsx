@@ -103,7 +103,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div>
-              <div className="relative aspect-[5/4] overflow-hidden border border-[var(--faint)] lg:aspect-[4/5]">
+              <div className="relative aspect-[4/3] overflow-hidden border border-[var(--faint)] lg:aspect-[3/4]">
                 <RegMarks color="var(--dim)" size={14} />
                 <Image
                   src="https://images.unsplash.com/photo-1565793979540-72c7a00b5f57?auto=format&fit=crop&w=1600&q=85"
@@ -115,10 +115,17 @@ export default function AboutPage() {
                 />
                 {/* Scan lines */}
                 <div className="scan-lines absolute inset-0" />
-                {/* Caption bar */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(14,16,20,0.85)] via-[rgba(14,16,20,0.55)] to-transparent px-6 pb-4 pt-12">
-                  <span className="mono-id text-white/80">
-                    FIELD · MPUMALANGA
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-transparent to-transparent opacity-70" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+                  <p className="font-display text-[clamp(20px,2.5vw,32px)] font-medium leading-[1.1] tracking-[-0.02em] text-white">
+                    Independent. Quiet about who we work with.
+                    <br />
+                    <span className="text-white/60">
+                      Loud about what we will not tolerate.
+                    </span>
+                  </p>
+                  <span className="mono-id mt-4 block text-white/40">
+                    FIELD · OPERATIONAL CORRIDOR
                   </span>
                 </div>
               </div>
@@ -171,6 +178,19 @@ export default function AboutPage() {
           </div>
         </div>
       </DarkGlowSection>
+
+      <section className="bg-[var(--red)] px-6 py-16 lg:px-12 lg:py-20">
+        <div className="mx-auto max-w-site text-center">
+          <FadeUp>
+            <p className="font-display text-[clamp(24px,3vw,40px)] font-medium leading-[1.15] tracking-[-0.02em] text-white">
+              We succeed when every tonne mined is a tonne delivered.
+            </p>
+            <p className="mono-id mt-4 text-white/50">
+              TIHLO operating commitment
+            </p>
+          </FadeUp>
+        </div>
+      </section>
 
       {/* Team — hidden until team is finalised */}
       {process.env.NEXT_PUBLIC_SHOW_TEAM === 'true' && (
@@ -269,33 +289,41 @@ export default function AboutPage() {
       {/* Governance */}
       <section className="border-t border-[var(--faint)] bg-[var(--white)] px-6 py-20 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-site">
-          <FadeUp>
-            <div className="border border-[var(--faint)] p-8 lg:p-12">
-              <Eyebrow className="mb-5">Governance</Eyebrow>
-              <h3 className="mb-8 font-display text-2xl font-semibold tracking-[-0.02em] text-[var(--ink)]">
-                {ABOUT.governance.headline}
-              </h3>
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                {[
-                  { label: 'POPIA', body: ABOUT.governance.popia },
-                  {
-                    label: 'Confidentiality',
-                    body: ABOUT.governance.confidentiality,
-                  },
-                  { label: 'Insurance', body: ABOUT.governance.insurance },
-                ].map((g) => (
-                  <div key={g.label}>
-                    <p className="mono-label mb-2 text-[var(--muted)]">
-                      {g.label}
-                    </p>
-                    <p className="text-sm leading-relaxed text-[var(--muted)]">
-                      {g.body}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <FadeUp className="mb-10">
+            <Eyebrow className="mb-5">Governance</Eyebrow>
+            <h3 className="font-display text-2xl font-semibold tracking-[-0.02em] text-[var(--ink)]">
+              {ABOUT.governance.headline}
+            </h3>
           </FadeUp>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {[
+              { label: 'POPIA', body: ABOUT.governance.popia, number: '01' },
+              {
+                label: 'Confidentiality',
+                body: ABOUT.governance.confidentiality,
+                number: '02',
+              },
+              {
+                label: 'Insurance',
+                body: ABOUT.governance.insurance,
+                number: '03',
+              },
+            ].map((g) => (
+              <FadeUp key={g.label} delay={Number(g.number) * 0.06}>
+                <div className="group border border-[var(--faint)] p-8 transition-colors hover:bg-[var(--white-2)]">
+                  <span className="font-mono text-[32px] font-medium tabular-nums leading-none text-[var(--ink)]/10">
+                    {g.number}
+                  </span>
+                  <p className="mono-label mb-3 mt-4 text-[var(--ink)]">
+                    {g.label}
+                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--muted)]">
+                    {g.body}
+                  </p>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </section>
 

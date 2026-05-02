@@ -17,13 +17,19 @@ export default function ContactPage() {
             {/* Left column */}
             <div className="space-y-12">
               <FadeUp>
-                <Eyebrow>Initiate</Eyebrow>
-                <h1 className="mt-8 font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.94] tracking-[-0.045em] text-[var(--ink)]">
-                  <MaskHeading immediate>Initiate.</MaskHeading>
-                </h1>
-                <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--muted)]">
-                  {CONTACT.sub}
-                </p>
+                <div className="bg-[var(--ink)] p-8 lg:p-10">
+                  <p className="mb-6 inline-flex items-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/40">
+                    <span className="block h-px w-5 bg-white/30" />
+                    Initiate
+                  </p>
+                  <h1 className="font-display text-[clamp(40px,5vw,64px)] font-medium leading-[0.94] tracking-[-0.04em] text-white">
+                    <MaskHeading immediate>Initiate<span className="text-[var(--red)]">.</span></MaskHeading>
+                  </h1>
+                  <p className="mt-6 max-w-md text-[15px] leading-[1.65] text-white/65">
+                    {CONTACT.sub}
+                  </p>
+                  <div className="mt-8 h-[2px] w-16 bg-[var(--red)]" />
+                </div>
               </FadeUp>
 
               {/* Engagement tiers */}
@@ -88,7 +94,9 @@ export default function ContactPage() {
 
             {/* Right column — form */}
             <FadeUp delay={0.1}>
-              <ContactForm />
+              <div className="border border-[var(--faint)] bg-[var(--white)] p-6 lg:p-8 lg:sticky lg:top-24">
+                <ContactForm />
+              </div>
             </FadeUp>
           </div>
         </div>

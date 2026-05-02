@@ -25,6 +25,26 @@ const SERVICE_ICONS = [
 
 const SERVICE_GRAPHICS = [FuelGaugeGraphic, RouteGraphic, PlantGraphic];
 
+const SERVICE_STATS = [
+  {
+    value: '18',
+    suffix: '%',
+    label: 'diesel reclaimed · first 90 days',
+  },
+  {
+    value: '38',
+    suffix: 's',
+    label: 'median controller response',
+  },
+  {
+    value: '24',
+    suffix: '/7',
+    label: 'named controller on shift',
+  },
+] as const;
+
+const isDark = (i: number) => i === 1;
+
 export default function ServicesPage() {
   return (
     <>
@@ -83,20 +103,31 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <div
+        className="h-[3px] w-full"
+        style={{
+          background:
+            'linear-gradient(90deg, transparent 0%, var(--ink) 20%, var(--red) 50%, var(--ink) 80%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Service blocks — alternating white / white-2, editorial */}
       {SERVICES.map((service, i) => {
-        const isAlt = i % 2 === 1;
         const Graphic = SERVICE_GRAPHICS[i];
+        const stat = SERVICE_STATS[i];
         return (
           <section
             key={service.index}
             id={`service-${i + 1}`}
-            className={`relative isolate scroll-mt-24 overflow-hidden border-t border-[var(--faint)] px-6 py-20 lg:px-12 lg:py-28 ${
-              isAlt ? 'bg-[var(--white-2)]' : 'bg-[var(--white)]'
+            className={`relative isolate scroll-mt-24 overflow-hidden border-t px-6 py-20 lg:px-12 lg:py-28 ${
+              isDark(i)
+                ? 'border-white/10 bg-[var(--ink)]'
+                : 'border-[var(--faint)] bg-[var(--white)]'
             }`}
           >
             <LineSystem
-              tone="light"
+              tone={isDark(i) ? 'dark' : 'light'}
               density="quiet"
               anchor={i % 2 === 0 ? 'right' : 'left'}
             />
@@ -105,54 +136,143 @@ export default function ServicesPage() {
                 {/* Left — heading + body */}
                 <FadeUp>
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-[clamp(48px,5vw,68px)] font-medium tabular-nums leading-none tracking-[-0.04em] text-[var(--ink)]">
+                    <span
+                      className={`font-mono text-[clamp(48px,5vw,68px)] font-medium tabular-nums leading-none tracking-[-0.04em] ${
+                        isDark(i) ? 'text-white/20' : 'text-[var(--ink)]'
+                      }`}
+                    >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="flex h-11 w-11 items-center justify-center border border-[var(--faint)] text-[var(--ink)]">
+                    <span
+                      className={`flex h-11 w-11 items-center justify-center border ${
+                        isDark(i)
+                          ? 'border-white/15 text-white'
+                          : 'border-[var(--faint)] text-[var(--ink)]'
+                      }`}
+                    >
                       {SERVICE_ICONS[i]}
                     </span>
                   </div>
-                  <p className="mono-id mt-6 text-[var(--dim)]">{service.index}</p>
-                  <h2 className="mt-3 font-display text-[clamp(36px,4.6vw,58px)] font-medium leading-[0.98] tracking-[-0.035em] text-[var(--ink)]">
+                  <p
+                    className={`mono-id mt-6 ${
+                      isDark(i) ? 'text-white/40' : 'text-[var(--dim)]'
+                    }`}
+                  >
+                    {service.index}
+                  </p>
+                  <h2
+                    className={`mt-3 font-display text-[clamp(36px,4.6vw,58px)] font-medium leading-[0.98] tracking-[-0.035em] ${
+                      isDark(i) ? 'text-white' : 'text-[var(--ink)]'
+                    }`}
+                  >
                     <MaskHeading>{service.headline}</MaskHeading>
                   </h2>
-                  <p className="mt-4 mono-label text-[var(--muted)]">
+                  <p
+                    className={`mt-4 mono-label ${
+                      isDark(i) ? 'text-white/50' : 'text-[var(--muted)]'
+                    }`}
+                  >
                     {service.name}
                   </p>
-                  <p className="mt-7 max-w-[52ch] text-[16px] leading-[1.7] text-[var(--muted)]">
+                  <p
+                    className={`mt-7 max-w-[52ch] text-[16px] leading-[1.7] ${
+                      isDark(i) ? 'text-white/65' : 'text-[var(--muted)]'
+                    }`}
+                  >
                     {service.body}
                   </p>
+                  <div className="mt-8">
+                    <span
+                      className="font-display text-[clamp(56px,6vw,80px)] font-medium leading-none tracking-[-0.04em]"
+                      style={{ color: isDark(i) ? 'white' : 'var(--ink)' }}
+                    >
+                      {stat.value}
+                      <span className="text-[0.5em] text-[var(--red)]">
+                        {stat.suffix}
+                      </span>
+                    </span>
+                    <p
+                      className="mono-id mt-2"
+                      style={{
+                        color: isDark(i)
+                          ? 'rgba(255,255,255,0.4)'
+                          : 'var(--dim)',
+                      }}
+                    >
+                      {stat.label}
+                    </p>
+                  </div>
                 </FadeUp>
 
                 {/* Right — line illustration + features */}
                 <FadeUp delay={0.1}>
                   <div className="flex flex-col gap-8">
                     {/* Drawn line illustration */}
-                    <div className="relative aspect-[16/11] w-full border border-[var(--faint)] bg-[var(--white)]">
+                    <div
+                      className={`relative aspect-[16/11] w-full border ${
+                        isDark(i)
+                          ? 'border-white/10 bg-[var(--ink-2)] [--dim:rgba(255,255,255,0.35)] [--ink:rgba(255,255,255,0.78)] [--white:var(--ink-2)]'
+                          : 'border-[var(--faint)] bg-[var(--white)]'
+                      }`}
+                    >
                       <Graphic />
                     </div>
 
                     {/* Features list */}
-                    <div className="border border-[var(--faint)] bg-[var(--white)]">
-                      <p className="mono-label border-b border-[var(--faint)] px-6 py-4 text-[var(--dim)]">
+                    <div
+                      className={`border ${
+                        isDark(i)
+                          ? 'border-white/10 bg-[var(--ink-2)]'
+                          : 'border-[var(--faint)] bg-[var(--white)]'
+                      }`}
+                    >
+                      <p
+                        className={`mono-label border-b px-6 py-4 ${
+                          isDark(i)
+                            ? 'border-white/10 text-white/40'
+                            : 'border-[var(--faint)] text-[var(--dim)]'
+                        }`}
+                      >
                         What this includes
                       </p>
                       <ul>
                         {service.features.map((f, j) => (
                           <li
                             key={j}
-                            className={`group/feat relative flex items-start gap-5 overflow-hidden px-6 py-5 transition-colors hover:bg-[var(--white-2)] ${
+                            className={`group/feat relative flex items-start gap-5 overflow-hidden px-6 py-5 transition-colors ${
+                              isDark(i)
+                                ? 'hover:bg-white/[0.04] hover:text-white'
+                                : 'hover:bg-[var(--white-2)]'
+                            } ${
                               j < service.features.length - 1
-                                ? 'border-b border-[var(--faint)]'
+                                ? isDark(i)
+                                  ? 'border-b border-white/10'
+                                  : 'border-b border-[var(--faint)]'
                                 : ''
                             }`}
                           >
                             {/* Sliding accent on hover */}
-                            <span className="absolute inset-y-0 left-0 block w-px origin-top scale-y-0 bg-[var(--ink)] transition-transform duration-400 group-hover/feat:scale-y-100" />
-                            <span className="mono-id mt-1 shrink-0 text-[var(--dim)] transition-colors group-hover/feat:text-[var(--ink)]">
+                            <span
+                              className={`absolute inset-y-0 left-0 block w-px origin-top scale-y-0 transition-transform duration-400 group-hover/feat:scale-y-100 ${
+                                isDark(i) ? 'bg-white' : 'bg-[var(--ink)]'
+                              }`}
+                            />
+                            <span
+                              className={`mono-id mt-1 shrink-0 transition-colors ${
+                                isDark(i)
+                                  ? 'text-white/40 group-hover/feat:text-white'
+                                  : 'text-[var(--dim)] group-hover/feat:text-[var(--ink)]'
+                              }`}
+                            >
                               {String(j + 1).padStart(2, '0')}
                             </span>
-                            <span className="text-[14.5px] leading-[1.6] text-[var(--muted)] transition-colors group-hover/feat:text-[var(--ink)]">
+                            <span
+                              className={`text-[14.5px] leading-[1.6] transition-colors ${
+                                isDark(i)
+                                  ? 'text-white/60 group-hover/feat:text-white'
+                                  : 'text-[var(--muted)] group-hover/feat:text-[var(--ink)]'
+                              }`}
+                            >
                               {f}
                             </span>
                           </li>

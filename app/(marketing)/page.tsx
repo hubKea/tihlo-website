@@ -5,8 +5,11 @@ import WhatWeMonitor from '@/components/sections/WhatWeMonitor';
 import SectorStrip from '@/components/sections/SectorStrip';
 import HowItWorks from '@/components/sections/HowItWorks';
 import WhyTihlo from '@/components/sections/WhyTihlo';
+import Interstitial from '@/components/sections/Interstitial';
 import ControlRoomStack from '@/components/sections/ControlRoomStack';
 import ByTheNumbers from '@/components/sections/ByTheNumbers';
+import FinalCTA from '@/components/sections/FinalCTA';
+import GradientStrip from '@/components/ui/GradientStrip';
 
 export const metadata: Metadata = {
   title: 'TIHLO — The eye that never misses',
@@ -18,13 +21,17 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <GradientStrip />
       <LiveOpsMarquee />
       <WhatWeMonitor />
       <SectorStrip />
       <HowItWorks />
       <WhyTihlo />
+      <Interstitial />
       <ControlRoomStack />
       <ByTheNumbers />
+      <FinalCTA />
+      <GradientStrip />
     </>
   );
 }

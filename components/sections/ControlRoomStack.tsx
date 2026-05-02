@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import AmbientCursor from '@/components/motion/AmbientCursor';
 
 const WORDS =
   'A TIHLO controller does not watch a dashboard. They build a signed operational record from every signal, stop, route deviation, refuel event, weighbridge gap, and contractor response.';
@@ -95,6 +96,7 @@ export default function ControlRoomStack() {
       ref={rootRef}
       className="relative isolate overflow-hidden bg-[var(--ink)] px-6 py-32 text-[var(--white)] md:py-44 lg:px-12"
     >
+      <AmbientCursor />
       <div className="relative z-10 mx-auto grid max-w-site grid-cols-1 gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
           <p className="mono-label text-white/45 mb-7 flex items-center gap-3">

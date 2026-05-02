@@ -5,15 +5,17 @@ import Eyebrow from '@/components/ui/Eyebrow';
 import MaskHeading from '@/components/motion/MaskHeading';
 import HeroTerrain from '@/components/3d/HeroTerrain';
 import ScrambleText from '@/components/motion/ScrambleText';
+import MeshGradient from '@/components/motion/MeshGradient';
+import TopoContours from '@/components/graphics/TopoContours';
 import { HERO } from '@/lib/constants';
 
 export default function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-[var(--white)]">
+      <MeshGradient />
       {/* 3D terrain background */}
       <HeroTerrain />
-
-
+      <TopoContours opacity={0.6} />
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="flex flex-col items-center pb-24 pt-32 text-center lg:pb-36 lg:pt-44">

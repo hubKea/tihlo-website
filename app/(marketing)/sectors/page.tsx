@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Mountain, Truck, ShieldCheck } from 'lucide-react';
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
@@ -27,6 +28,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Coal',
     province: 'Mpumalanga',
+    image: '/images/side-tippers.jpg',
     challenge:
       "High-value loads and long transport corridors create persistent diversion risk. Moisture variance at weighbridges creates disputes between mines and hauliers. TIHLO's weighbridge integration closes both gaps.",
     monitoring: [
@@ -39,6 +41,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Chrome',
     province: 'Limpopo',
+    image: '/images/side-tippers.jpg',
     challenge:
       'Chrome operations typically involve multiple hauliers on shared corridors with minimal independent verification. Load substitution and short-loading are persistent risks that tracking alone cannot prevent.',
     monitoring: [
@@ -51,6 +54,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Manganese',
     province: 'Northern Cape',
+    image: '/images/side-tippers.jpg',
     challenge:
       'Long-haul Northern Cape corridors involve extended periods where vehicles are beyond easy intervention range. Signal drop-off zones require baseline learning to distinguish equipment failure from deliberate blackout.',
     monitoring: [
@@ -63,6 +67,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Iron Ore',
     province: 'Northern Cape',
+    image: '/images/yellow-plant-machinery.jpg',
     challenge:
       'High-volume yellow plant operations create significant diesel security exposure. ADT and excavator idling in remote pit environments is difficult to validate without AI-assisted baseline monitoring.',
     monitoring: [
@@ -75,6 +80,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Copper',
     province: 'Multi-provincial',
+    image: '/images/hero-operations.png',
     challenge:
       'Cross-provincial copper logistics involves complex multi-haulier chains where verification gaps compound across handover points. Each handover is a potential diversion event without formal verification.',
     monitoring: [
@@ -87,6 +93,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Agri-bulk',
     province: 'Seasonal',
+    image: '/images/weighbridge.jpg',
     challenge:
       "Seasonal peak logistics creates pressure to onboard new hauliers rapidly — often at the expense of verification rigour. TIHLO's onboarding process maintains standards regardless of volume pressure.",
     monitoring: [
@@ -180,10 +187,25 @@ export default function SectorsPage() {
             {SECTOR_DETAILS.map((sector, i) => (
               <FadeUp key={sector.label} delay={i * 0.05}>
                 <div
-                  className={`spotlight-row group grid grid-cols-1 gap-0 border-l-2 border-transparent lg:grid-cols-[280px_1fr] ${i < SECTOR_DETAILS.length - 1 ? 'border-b border-[var(--faint)]' : ''}`}
+                  className={`group relative grid grid-cols-1 gap-0 overflow-hidden border-l-2 border-transparent bg-[var(--white)] transition-all duration-300 hover:bg-[var(--white-2)] lg:grid-cols-[280px_1fr] ${i < SECTOR_DETAILS.length - 1 ? 'border-b border-[var(--faint)]' : ''}`}
                 >
+                  <Image
+                    src={sector.image}
+                    alt=""
+                    fill={true}
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 1200px"
+                    className="absolute inset-0 z-0 scale-105 object-cover opacity-0 transition-[opacity,transform] duration-700 group-hover:scale-100 group-hover:opacity-[0.15]"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    style={{
+                      background:
+                        'linear-gradient(to bottom, transparent, rgba(14, 16, 20, 0.03))',
+                    }}
+                  />
                   {/* Index column */}
-                  <div className="relative flex items-baseline gap-5 border-b border-[var(--faint)] px-8 py-8 lg:border-b-0 lg:border-r">
+                  <div className="relative z-10 flex items-baseline gap-5 border-b border-[var(--faint)] px-8 py-8 lg:border-b-0 lg:border-r">
                     {/* Watermark on hover */}
                     <span
                       className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[80px] font-bold tabular-nums leading-none tracking-[-0.04em] text-[var(--ink)] opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04] lg:text-[100px]"
@@ -192,40 +214,40 @@ export default function SectorsPage() {
                       {String(i + 1).padStart(2, '0')}
                     </span>
 
-                    <span className="font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] text-[var(--ink)] transition-colors duration-400 group-[.spotlight-row:hover]:text-[var(--white)]">
+                    <span className="font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] text-[var(--ink)] transition-colors duration-300">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>
-                      <h2 className="font-display text-2xl font-semibold tracking-[-0.025em] text-[var(--ink)] transition-colors duration-400 group-[.spotlight-row:hover]:text-[var(--white)]">
+                      <h2 className="font-display text-2xl font-semibold tracking-[-0.025em] text-[var(--ink)] transition-colors duration-300">
                         {sector.label}
                       </h2>
-                      <p className="mono-id mt-2 text-[var(--dim)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/40">
+                      <p className="mono-id mt-2 text-[var(--dim)] transition-colors duration-300">
                         {sector.province}
                       </p>
                     </div>
                   </div>
 
                   {/* Detail column */}
-                  <div className="grid grid-cols-1 gap-0 xl:grid-cols-2">
+                  <div className="relative z-10 grid grid-cols-1 gap-0 xl:grid-cols-2">
                     <div className="border-b border-[var(--faint)] px-8 py-8 xl:border-b-0 xl:border-r">
-                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/40">
+                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-300">
                         Challenge
                       </p>
-                      <p className="text-sm leading-relaxed text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/60">
+                      <p className="text-sm leading-relaxed text-[var(--muted)] transition-colors duration-300">
                         {sector.challenge}
                       </p>
                     </div>
                     <div className="px-8 py-8">
-                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/40">
+                      <p className="mono-label mb-4 text-[var(--muted)] transition-colors duration-300">
                         Monitoring scope
                       </p>
                       <ul className="space-y-2">
                         {sector.monitoring.map((m) => (
                           <li
                             key={m}
-                            className="flex items-start gap-2.5 text-sm text-[var(--muted)] transition-colors duration-400 group-[.spotlight-row:hover]:text-white/60"
+                            className="flex items-start gap-2.5 text-sm text-[var(--muted)] transition-colors duration-300"
                           >
-                            <span className="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-[var(--ink)] transition-colors duration-400 group-[.spotlight-row:hover]:bg-[var(--red)]" />
+                            <span className="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-[var(--ink)] transition-colors duration-300 group-hover:bg-[var(--red)]" />
                             {m}
                           </li>
                         ))}

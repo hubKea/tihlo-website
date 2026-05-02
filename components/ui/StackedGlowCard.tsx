@@ -23,25 +23,13 @@ export default function StackedGlowCard({
 
   return (
     <div
-      className={`group/stacked relative inline-flex shrink-0 items-center justify-center rounded-2xl transition-transform duration-500 hover:-translate-y-1 ${className}`}
+      className={`stacked-glow-card group/stacked relative inline-flex shrink-0 items-center justify-center rounded-2xl transition-[box-shadow,transform] duration-500 hover:-translate-y-1 ${className}`}
+      data-variant={variant}
       style={{
         width: size,
         height: size,
         border: isLight ? '1px solid var(--faint)' : '1px solid rgba(255,255,255,0.05)',
         background: isLight ? 'var(--white)' : 'var(--ink-2)',
-        boxShadow: isLight
-          ? `
-            0 1px 2px rgba(14, 16, 20, 0.06),
-            0 4px 12px rgba(180, 35, 24, 0.08),
-            0 12px 24px -6px rgba(180, 35, 24, 0.12),
-            0 24px 48px -12px rgba(180, 35, 24, 0.10)
-          `
-          : `
-            0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-            0 4px 12px rgba(0, 0, 0, 0.5),
-            0 12px 24px -6px rgba(180, 35, 24, 0.15),
-            0 24px 48px -12px rgba(180, 35, 24, 0.25)
-          `,
       }}
     >
       {/* Top glowing edge */}

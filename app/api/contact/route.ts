@@ -2,6 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
 
+function escape(s: string | undefined | null): string {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function escapeArr(arr: string[]): string {
+  return arr.map(escape).join(', ');
+}
+
 const schema = z.object({
   ticketId: z.string(),
   name: z.string().min(2),
@@ -19,6 +33,8 @@ const schema = z.object({
   contactPreference: z.string(),
 });
 
+// TODO: Replace this in-memory Map with Upstash Redis for production.
+// This map resets on every serverless cold start, making the rate limit ineffective on Vercel.
 // Simple in-memory rate limit (resets per serverless instance)
 const submissions = new Map<string, number>();
 
@@ -55,26 +71,26 @@ export async function POST(req: NextRequest) {
   const html = `
 <div style="font-family: monospace; font-size: 13px; color: #0E1014; padding: 32px;">
   <p style="color: #B42318; letter-spacing: 0.2em; font-size: 11px; text-transform: uppercase; margin: 0 0 24px;">TIHLO — BRIEFING REQUEST</p>
-  <p style="font-size: 11px; color: #666; margin: 0 0 4px;">TICKET: ${d.ticketId}</p>
+  <p style="font-size: 11px; color: #666; margin: 0 0 4px;">TICKET: ${escape(d.ticketId)}</p>
   <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
 
   <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">CONTACT</p>
-  <p style="margin: 0 0 4px;"><strong>Name:</strong> ${d.name}</p>
-  <p style="margin: 0 0 4px;"><strong>Role:</strong> ${d.role}</p>
-  <p style="margin: 0 0 4px;"><strong>Company:</strong> ${d.company}</p>
-  <p style="margin: 0 0 4px;"><strong>Email:</strong> ${d.email}</p>
-  <p style="margin: 0 0 20px;"><strong>Phone:</strong> ${d.phone}</p>
+  <p style="margin: 0 0 4px;"><strong>Name:</strong> ${escape(d.name)}</p>
+  <p style="margin: 0 0 4px;"><strong>Role:</strong> ${escape(d.role)}</p>
+  <p style="margin: 0 0 4px;"><strong>Company:</strong> ${escape(d.company)}</p>
+  <p style="margin: 0 0 4px;"><strong>Email:</strong> ${escape(d.email)}</p>
+  <p style="margin: 0 0 20px;"><strong>Phone:</strong> ${escape(d.phone)}</p>
 
   <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">OPERATION</p>
-  <p style="margin: 0 0 4px;"><strong>Sectors:</strong> ${d.sectors.join(', ')}</p>
-  <p style="margin: 0 0 4px;"><strong>Fleet size:</strong> ${d.fleetSize}</p>
-  <p style="margin: 0 0 4px;"><strong>Corridors:</strong> ${d.corridors}</p>
-  <p style="margin: 0 0 20px;"><strong>Provinces:</strong> ${d.provinces.join(', ')}</p>
+  <p style="margin: 0 0 4px;"><strong>Sectors:</strong> ${escapeArr(d.sectors)}</p>
+  <p style="margin: 0 0 4px;"><strong>Fleet size:</strong> ${escape(d.fleetSize)}</p>
+  <p style="margin: 0 0 4px;"><strong>Corridors:</strong> ${escape(d.corridors)}</p>
+  <p style="margin: 0 0 20px;"><strong>Provinces:</strong> ${escapeArr(d.provinces)}</p>
 
   <p style="font-size: 11px; color: #666; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.15em;">ENQUIRY</p>
-  <p style="margin: 0 0 4px;"><strong>Engagement type:</strong> ${d.engagementType}</p>
-  <p style="margin: 0 0 4px;"><strong>Contact preference:</strong> ${d.contactPreference}</p>
-  ${d.situation ? `<p style="margin: 0 0 4px;"><strong>Situation:</strong> ${d.situation}</p>` : ''}
+  <p style="margin: 0 0 4px;"><strong>Engagement type:</strong> ${escape(d.engagementType)}</p>
+  <p style="margin: 0 0 4px;"><strong>Contact preference:</strong> ${escape(d.contactPreference)}</p>
+  ${d.situation ? `<p style="margin: 0 0 4px;"><strong>Situation:</strong> ${escape(d.situation)}</p>` : ''}
 </div>
 `;
 

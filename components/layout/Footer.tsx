@@ -66,6 +66,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Firm column hidden until team is finalised
           <div>
             <p className="mb-5 font-mono text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--dim)]">
               Firm
@@ -83,6 +84,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+          */}
 
           <div>
             <p className="mb-5 font-mono text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--dim)]">

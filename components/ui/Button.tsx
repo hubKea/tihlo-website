@@ -36,13 +36,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        'bg-[var(--ink)] text-white border border-[var(--ink)] hover:bg-[var(--red-hover)] hover:border-[var(--red-hover)]',
+        'bg-[var(--ink)] text-white border border-[var(--ink)] hover:bg-[var(--red-hover)] hover:border-[var(--red-hover)] shadow-[0_2px_12px_var(--shadow-red)] hover:shadow-[0_4px_20px_var(--shadow-red-hover)] transition-all duration-200',
       ghost:
         'bg-transparent text-[var(--ink)] border border-[var(--dim)] hover:border-[var(--dim)] hover:text-[var(--red-hover)]',
       secondary:
         'bg-transparent text-[var(--ink)] border border-[var(--dim)] hover:border-[var(--dim)] hover:text-[var(--red-hover)]',
       white:
-        'bg-white text-[var(--ink)] border border-white hover:bg-[var(--ink)] hover:text-white hover:border-[var(--ink)]',
+        'bg-white text-[var(--ink)] border border-white hover:bg-[var(--ink)] hover:text-white hover:border-[var(--ink)] transition-all duration-200',
     };
 
     const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;

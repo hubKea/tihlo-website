@@ -39,6 +39,7 @@ export default function HowWeOperatePage() {
             <div>
               <div className="relative aspect-[5/4] overflow-hidden border border-[var(--faint)] bg-[var(--white-2)] lg:aspect-[4/5]">
                 <RegMarks color="var(--dim)" size={14} />
+                {/* TODO: Compress hero-operations.png to <500KB (currently 1.77MB) */}
                 <Image
                   src="/images/hero-operations.png"
                   alt="Aerial open-pit operation at golden hour — continuous oversight in a single frame"

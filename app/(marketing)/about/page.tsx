@@ -127,28 +127,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* The firm */}
-      <section className="relative isolate overflow-hidden border-t border-[var(--faint)] bg-[var(--white)] px-6 py-20 lg:px-12 lg:py-28">
-        <LineSystem tone="light" density="quiet" anchor="right" />
-        <div className="relative z-10 mx-auto max-w-site">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start lg:gap-20">
-            <FadeUp>
-              <Eyebrow className="mb-5">Who we are</Eyebrow>
-              <h2 className="font-display text-[clamp(36px,4.6vw,56px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
-                <MaskHeading>Independent.</MaskHeading>
-                <MaskHeading delay={0.12}>Operational.</MaskHeading>
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.12}>
-              <div className="space-y-5 text-[17px] leading-[1.65] text-[var(--muted)]">
-                {ABOUT.firm.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
+      {/* The firm — hidden until team is finalised */}
 
       {/* Operating principles — Dark with glow */}
       <DarkGlowSection
@@ -193,49 +172,52 @@ export default function AboutPage() {
         </div>
       </DarkGlowSection>
 
-      {/* Team */}
-      <section className="bg-[var(--white)] px-6 py-20 lg:px-12 lg:py-28">
-        <div className="mx-auto max-w-site">
-          <FadeUp className="mb-14">
-            <Eyebrow className="mb-5">The team</Eyebrow>
-            <h2 className="font-display text-[clamp(36px,4.6vw,56px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
-              Controllers and analysts.
-            </h2>
-          </FadeUp>
+      {/* Team — hidden until team is finalised */}
+      {process.env.NEXT_PUBLIC_SHOW_TEAM === 'true' && (
+        <section className="bg-[var(--white)] px-6 py-20 lg:px-12 lg:py-28">
+          <div className="mx-auto max-w-site">
+            <FadeUp className="mb-14">
+              <Eyebrow className="mb-5">The team</Eyebrow>
+              <h2 className="font-display text-[clamp(36px,4.6vw,56px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
+                Controllers and analysts.
+              </h2>
+            </FadeUp>
 
-          {/* TODO: Replace with real bios and headshots once photography is completed */}
-          <div className="grid grid-cols-1 gap-px border border-[var(--faint)] bg-[var(--faint)] lg:grid-cols-3">
-            {TEAM.map((member, i) => (
-              <FadeUp key={i} delay={i * 0.08}>
-                <div className="bg-[var(--white)] px-8 py-10">
-                  {/* Placeholder portrait with scan-line aesthetic */}
-                  <div className="scan-lines relative mb-6 flex aspect-square items-center justify-center bg-[var(--white-3)] overflow-hidden group">
-                    {/* Diagonal scanline pattern */}
-                    <div
-                      className="absolute inset-0 opacity-[0.15] transition-opacity duration-500 group-hover:opacity-0"
-                      style={{
-                        backgroundImage: 'repeating-linear-gradient(45deg, var(--ink) 0, var(--ink) 1px, transparent 1px, transparent 12px)',
-                      }}
-                    />
-                    <span className="mono-id relative z-10 text-[var(--dim)]">
-                      PHOTO PENDING
-                    </span>
+            {/* TODO: Replace with real bios and headshots once photography is completed */}
+            <div className="grid grid-cols-1 gap-px border border-[var(--faint)] bg-[var(--faint)] lg:grid-cols-3">
+              {TEAM.map((member, i) => (
+                <FadeUp key={i} delay={i * 0.08}>
+                  <div className="bg-[var(--white)] px-8 py-10">
+                    {/* Placeholder portrait with scan-line aesthetic */}
+                    <div className="scan-lines group relative mb-6 flex aspect-square items-center justify-center overflow-hidden bg-[var(--white-3)]">
+                      {/* Diagonal scanline pattern */}
+                      <div
+                        className="absolute inset-0 opacity-[0.15] transition-opacity duration-500 group-hover:opacity-0"
+                        style={{
+                          backgroundImage:
+                            'repeating-linear-gradient(45deg, var(--ink) 0, var(--ink) 1px, transparent 1px, transparent 12px)',
+                        }}
+                      />
+                      <span className="mono-id relative z-10 text-[var(--dim)]">
+                        PHOTO PENDING
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-semibold text-[var(--ink)]">
+                      {member.name}
+                    </h3>
+                    <p className="mono-id mb-3 mt-1 text-[var(--ink)]">
+                      {member.role}
+                    </p>
+                    <p className="text-sm leading-relaxed text-[var(--muted)]">
+                      {member.bio}
+                    </p>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-[var(--ink)]">
-                    {member.name}
-                  </h3>
-                  <p className="mono-id mb-3 mt-1 text-[var(--ink)]">
-                    {member.role}
-                  </p>
-                  <p className="text-sm leading-relaxed text-[var(--muted)]">
-                    {member.bio}
-                  </p>
-                </div>
-              </FadeUp>
-            ))}
+                </FadeUp>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Map — Dark with pulsing corridors */}
       <DarkGlowSection

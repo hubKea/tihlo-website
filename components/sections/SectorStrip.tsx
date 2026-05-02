@@ -6,12 +6,12 @@ const ASSETS = [
   {
     label: 'Side tipper',
     description: 'Mining transport across long-haul corridors. Load verified at gate, route enforced to offload.',
-    imageSrc: '/images/side tippers.jpg',
+    imageSrc: '/images/side-tippers.jpg',
   },
   {
     label: 'Articulated dump truck',
     description: 'Yellow plant haulage in the pit. Utilisation, idle and harsh-event log per machine.',
-    imageSrc: '/images/yellow plant machinery.jpg',
+    imageSrc: '/images/yellow-plant-machinery.jpg',
   },
   {
     label: 'Excavator',

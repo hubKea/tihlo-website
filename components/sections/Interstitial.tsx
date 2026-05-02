@@ -1,39 +1,44 @@
-import Image from 'next/image';
+'use client';
+
+import AmbientCursor from '@/components/motion/AmbientCursor';
 import FadeUp from '@/components/motion/FadeUp';
-import { INTERSTITIAL } from '@/lib/constants';
 
 export default function Interstitial() {
-  const { quote, accentWord, attribution, image } = INTERSTITIAL;
-  const parts = quote.split(accentWord);
-
   return (
-    <section className="relative overflow-hidden py-32 lg:py-48">
-      {/* Dark image */}
-      <div className="absolute inset-0">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          quality={85}
-          className="object-cover contrast-[1.1] grayscale-[0.3]"
-          sizes="100vw"
-          style={{ opacity: 0.55 }}
-        />
-        <div className="bg-[var(--ink)]/65 absolute inset-0" />
-      </div>
+    <section className="relative overflow-hidden bg-[var(--ink)] px-6 py-32 lg:px-12 lg:py-44">
+      <AmbientCursor />
+      {/* Subtle radial glow */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(180,35,24,0.06) 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
 
-      <div className="relative mx-auto max-w-site px-6 lg:px-12">
-        <FadeUp className="max-w-3xl">
-          <blockquote>
-            <p className="font-display text-[clamp(28px,4.2vw,56px)] font-semibold leading-[1.12] tracking-[-0.035em] text-[var(--white)]">
-              &ldquo;{parts[0]}
-              <em className="not-italic text-[var(--ink)]">{accentWord}</em>
-              {parts[1]}&rdquo;
-            </p>
-            <footer className="mono-id text-white/50 mt-8">
-              {attribution}
-            </footer>
+      <div className="relative z-10 mx-auto max-w-[900px] text-center">
+        <FadeUp>
+          <p className="mb-8 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/40">
+            Operating principle
+          </p>
+        </FadeUp>
+
+        <FadeUp delay={0.15}>
+          <blockquote className="font-display text-[clamp(28px,4.5vw,56px)] font-medium leading-[1.12] tracking-[-0.025em] text-white">
+            Commodity loss is rarely a single event.
+            <br />
+            It is a sequence of{' '}
+            <em className="not-italic text-[var(--red)]">
+              unverified handovers.
+            </em>
           </blockquote>
+        </FadeUp>
+
+        <FadeUp delay={0.3}>
+          <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.22em] text-white/35">
+            TIHLO · Field Notes No. 01
+          </p>
         </FadeUp>
       </div>
     </section>

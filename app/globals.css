@@ -4,9 +4,9 @@
 
 :root {
   /* Backgrounds */
-  --white: #ffffff;
-  --white-2: #f8f8f8;
-  --white-3: #f2f2f2;
+  --white: #fafaf8;
+  --white-2: #f5f4f0;
+  --white-3: #efeeea;
 
   /* Ink */
   --ink: #0e1014;
@@ -23,6 +23,8 @@
   --red: #b42318;
   --red-hover: #911a11;
   --red-tint: rgba(180, 35, 24, 0.08);
+  --shadow-red: rgba(180, 35, 24, 0.08);
+  --shadow-red-hover: rgba(180, 35, 24, 0.16);
 
   /* Status */
   --green: #1a6b3d;
@@ -194,7 +196,27 @@
   .floating-card:hover {
     transform: translate3d(0, -2px, 0);
     border-color: var(--dim);
-    box-shadow: 0 12px 32px -22px rgba(14, 16, 20, 0.18);
+    box-shadow: 0 8px 32px var(--shadow-red);
+  }
+
+  .stacked-glow-card[data-variant='light'] {
+    box-shadow:
+      0 1px 2px rgba(14, 16, 20, 0.06),
+      0 4px 12px rgba(180, 35, 24, 0.08),
+      0 12px 24px -6px rgba(180, 35, 24, 0.12),
+      0 24px 48px -12px rgba(180, 35, 24, 0.1);
+  }
+
+  .stacked-glow-card[data-variant='dark'] {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 4px 12px rgba(0, 0, 0, 0.5),
+      0 12px 24px -6px rgba(180, 35, 24, 0.15),
+      0 24px 48px -12px rgba(180, 35, 24, 0.25);
+  }
+
+  .stacked-glow-card:hover {
+    box-shadow: 0 8px 32px var(--shadow-red);
   }
 
   @media (min-width: 768px) {

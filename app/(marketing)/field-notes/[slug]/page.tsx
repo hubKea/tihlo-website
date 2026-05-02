@@ -67,9 +67,14 @@ const mdxComponents = {
   ),
 };
 
-export default function FieldNotePage({ params }: Props) {
-  const note = getFieldNote(params.slug);
+function getNoteOrNotFound(slug: string) {
+  const note = getFieldNote(slug);
   if (!note) notFound();
+  return note;
+}
+
+export default function FieldNotePage({ params }: Props) {
+  const note = getNoteOrNotFound(params.slug);
 
   const allNotes = getAllFieldNotes();
   const currentIndex = allNotes.findIndex((n) => n.slug === params.slug);
@@ -126,6 +131,7 @@ export default function FieldNotePage({ params }: Props) {
 
       {/* Article body */}
       <article className="relative mx-auto max-w-[72ch] px-6 py-16 lg:px-0 lg:py-20">
+        {/* @ts-ignore Async Server Component — known next-mdx-remote@5 issue */}
         <MDXRemote source={note.content} components={mdxComponents} />
 
         {/* Published-document tail */}

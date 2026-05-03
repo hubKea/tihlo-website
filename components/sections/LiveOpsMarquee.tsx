@@ -38,7 +38,7 @@ function buildItems(seedSeconds: number): Item[] {
     const m = Math.floor((total % 3600) / 60);
     const s = total % 60;
     items.push({
-      id: `${(3947 + i * 13) % 9999}`,
+      id: `THI${String(3 + i * 2).padStart(3, '0')}`,
       province,
       sector,
       state,
@@ -79,7 +79,7 @@ export default function LiveOpsMarquee() {
       {/* Status pip */}
       <div className="pointer-events-none absolute left-4 top-1/2 z-20 flex -translate-y-1/2 items-center gap-2">
         <span className="block h-1.5 w-1.5 rounded-full bg-[var(--green)] pulse-dot-green" />
-        <span className="mono-id text-white/60">LIVE OPS</span>
+        <span className="mono-id text-white/75">LIVE OPS</span>
       </div>
 
       <div className="flex w-max animate-marquee gap-10 pl-44">
@@ -88,12 +88,12 @@ export default function LiveOpsMarquee() {
           return (
             <div
               key={`${item.id}-${i}`}
-              className="mono-id flex shrink-0 items-center gap-3 text-white/70"
+              className="mono-id flex shrink-0 items-center gap-3 text-white/75"
             >
               <span className="text-white/40"></span>
-              <span className="tabular-nums text-white/80">TRK-{item.province}-{item.id}</span>
+              <span className="tabular-nums text-white/90">{item.id}</span>
               <span className="text-white/30">·</span>
-              <span className="text-white/55">{item.sector}</span>
+              <span className="text-white/70">{item.sector}</span>
               <span className="text-white/30">·</span>
               <span
                 className={`flex items-center gap-1.5 ${
@@ -108,7 +108,7 @@ export default function LiveOpsMarquee() {
                 {item.state}
               </span>
               <span className="text-white/30">·</span>
-              <span className="tabular-nums text-white/45">{item.ts}</span>
+              <span className="tabular-nums text-white/60">{item.ts}</span>
             </div>
           );
         })}

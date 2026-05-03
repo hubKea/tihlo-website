@@ -8,17 +8,17 @@ const WORDS =
 
 const STACK = [
   {
-    code: 'TRK-MPU-4182',
+    code: 'THI003',
     title: 'Route exception opened',
     body: 'A side-tipper stopped outside the authorised corridor. Controller notes, GPS trace, and call outcome were attached to the record.',
   },
   {
-    code: 'DIE-LIM-2047',
+    code: 'THI017',
     title: 'Fuel variance escalated',
     body: 'Consumption drift crossed the learned baseline. The event was compared with shift context before escalation.',
   },
   {
-    code: 'WBR-NCP-9175',
+    code: 'THI028',
     title: 'Handshake reconciled',
     body: 'Dispatch, weighbridge, and offload records aligned. The load closed with a signed evidence trail.',
   },
@@ -99,7 +99,7 @@ export default function ControlRoomStack() {
       <AmbientCursor />
       <div className="relative z-10 mx-auto grid max-w-site grid-cols-1 gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
-          <p className="mono-label text-white/45 mb-7 flex items-center gap-3">
+          <p className="mono-label mb-7 flex items-center gap-3 text-white/65">
             <span className="block h-px w-10 bg-white/30" />
             Control room record
           </p>
@@ -125,12 +125,12 @@ export default function ControlRoomStack() {
               style={{ marginLeft: `${index * 28}px` }}
             >
               <div className="mb-16 flex items-center justify-between gap-6">
-                <p className="mono-id text-white/45">{item.code}</p>
+                <p className="mono-id text-white/60">{item.code}</p>
               </div>
               <h3 className="font-display text-[clamp(28px,3vw,44px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--white)]">
                 {item.title}
               </h3>
-              <p className="text-white/58 mt-5 max-w-md text-[15px] leading-[1.7]">
+              <p className="mt-5 max-w-md text-[15px] leading-[1.7] text-white/72">
                 {item.body}
               </p>
             </article>

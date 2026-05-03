@@ -24,21 +24,21 @@ export const metadata: Metadata = {
       'Active monitoring and verification for mining commodity movement across South Africa.',
     images: [
       {
-        url: '/images/tihlo_footer_logo.png',
-        width: 680,
-        height: 520,
-        alt: 'TIHLO',
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'TIHLO — The eye that never misses',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/images/tihlo_footer_logo.png'],
+    images: ['/opengraph-image'],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFFFFF',
+  themeColor: '#0e1014',
 };
 
 export default function RootLayout({
@@ -47,7 +47,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
       <body>
         <NavBar />
         <PageTransitionScan />
@@ -61,4 +65,3 @@ export default function RootLayout({
     </html>
   );
 }
-

@@ -10,7 +10,7 @@ import Eyebrow from '@/components/ui/Eyebrow';
 import Button from '@/components/ui/Button';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const note = getFieldNote(params.slug);
+  const { slug } = await params;
+  const note = getFieldNote(slug);
   if (!note) return {};
   return {
     title: note.title,
@@ -73,11 +74,12 @@ function getNoteOrNotFound(slug: string) {
   return note;
 }
 
-export default function FieldNotePage({ params }: Props) {
-  const note = getNoteOrNotFound(params.slug);
+export default async function FieldNotePage({ params }: Props) {
+  const { slug } = await params;
+  const note = getNoteOrNotFound(slug);
 
   const allNotes = getAllFieldNotes();
-  const currentIndex = allNotes.findIndex((n) => n.slug === params.slug);
+  const currentIndex = allNotes.findIndex((n) => n.slug === slug);
   const prev = allNotes[currentIndex + 1] ?? null;
   const next = allNotes[currentIndex - 1] ?? null;
 

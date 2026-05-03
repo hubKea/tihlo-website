@@ -15,11 +15,12 @@ const FIRM_LINKS = [
   { label: 'Request a briefing', href: '/contact' },
 ];
 
-const LEGAL_LINKS = [
-  { label: 'Privacy Policy', href: '/legal/privacy' },
-  { label: 'Terms of Service', href: '/legal/terms' },
-  { label: 'POPIA', href: '/legal/popia' },
-];
+// Legal pages removed until content is finalised — re-add once /legal/* routes exist
+// const LEGAL_LINKS = [
+//   { label: 'Privacy Policy', href: '/legal/privacy' },
+//   { label: 'Terms of Service', href: '/legal/terms' },
+//   { label: 'POPIA', href: '/legal/popia' },
+// ];
 
 export default function Footer() {
   return (
@@ -90,25 +91,17 @@ export default function Footer() {
             <p className="mb-5 font-mono text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--dim)]">
               Legal
             </p>
-            <ul className="space-y-3">
-              {LEGAL_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-[14px] text-[var(--muted)] transition-colors hover:text-[var(--red)]"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-3 text-[14px] text-[var(--muted)]">
+              <p>POPIA contact: legal@tihlo.co.za</p>
+              <p>All engagements conducted under NDA.</p>
+            </div>
           </div>
         </div>
 
         {/* Copyright bar */}
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-[var(--faint)] pt-6 sm:flex-row sm:items-center">
           <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.18em] text-[var(--dim)]">
-            © TIHLO · A Thinkers Afrika company
+            © {new Date().getFullYear()} TIHLO · A Thinkers Afrika company
           </span>
           <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.18em] text-[var(--dim)]">
             Pretoria · South Africa

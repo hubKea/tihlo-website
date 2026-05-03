@@ -31,16 +31,16 @@ export default function FieldNotesPage() {
         />
         <div className="relative z-10 mx-auto max-w-site">
           <FadeUp className="max-w-3xl">
-            <Eyebrow className="text-white/40">A TIHLO publication</Eyebrow>
+            <Eyebrow className="text-white/65">A TIHLO publication</Eyebrow>
             <h1 className="mt-8 font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.94] tracking-[-0.045em] text-white">
               <MaskHeading immediate>Field Notes.</MaskHeading>
             </h1>
-            <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-white/60">
+            <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-white/72">
               Operational intelligence from active monitoring across South
               African logistics corridors. No product news. No opinion pieces.
               What the data shows.
             </p>
-            <p className="mono-id mt-8 border-t border-white/10 pt-5 text-white/30">
+            <p className="mono-id mt-8 border-t border-white/15 pt-5 text-white/55">
               VOLUME 01 · {new Date().getFullYear()} ·{' '}
               {notes.length.toString().padStart(2, '0')} ENTRIES
             </p>

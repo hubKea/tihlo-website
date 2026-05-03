@@ -60,7 +60,7 @@ function StageSection({
             </div>
             <p
               className={`mono-id mt-4 ${
-                dark ? 'text-white/40' : 'text-[var(--dim)]'
+                dark ? 'text-white/62' : 'text-[var(--dim)]'
               }`}
             >
               {stage.index}
@@ -74,7 +74,7 @@ function StageSection({
             </h3>
             <p
               className={`mt-3 max-w-[26ch] text-[14px] leading-[1.5] ${
-                dark ? 'text-white/65' : 'text-[var(--muted)]'
+                dark ? 'text-white/74' : 'text-[var(--muted)]'
               }`}
             >
               {stage.tagline}
@@ -101,7 +101,7 @@ function StageSection({
           >
             <div
               className={`space-y-4 text-[15px] leading-[1.7] ${
-                dark ? 'text-white/65' : 'text-[var(--muted)]'
+                dark ? 'text-white/74' : 'text-[var(--muted)]'
               }`}
             >
               {stage.body.map((p, i) => (
@@ -116,7 +116,7 @@ function StageSection({
             >
               <p
                 className={`mono-label mb-3 ${
-                  dark ? 'text-white/40' : 'text-[var(--dim)]'
+                  dark ? 'text-white/65' : 'text-[var(--dim)]'
                 }`}
               >
                 What we look for
@@ -126,7 +126,7 @@ function StageSection({
                   <motion.li
                     key={a}
                     className={`flex items-start gap-2.5 text-[13px] leading-[1.55] ${
-                      dark ? 'text-white/60' : 'text-[var(--muted)]'
+                      dark ? 'text-white/72' : 'text-[var(--muted)]'
                     }`}
                     initial={{ opacity: 0, x: reduced ? 0 : -8 }}
                     animate={
@@ -140,11 +140,7 @@ function StageSection({
                       ease: [0.16, 1, 0.3, 1],
                     }}
                   >
-                    <span
-                      className={`mt-[7px] block h-[3px] w-[3px] shrink-0 rounded-full ${
-                        dark ? 'bg-white' : 'bg-[var(--ink)]'
-                      }`}
-                    />
+                    <span className="mt-[7px] block h-[3px] w-[3px] shrink-0 rounded-full bg-[var(--red)]" />
                     {a}
                   </motion.li>
                 ))}
@@ -169,7 +165,7 @@ export default function StagesTimeline() {
                 <FadeUp>
                   <p className="font-display text-[clamp(22px,3vw,36px)] font-medium leading-[1.15] tracking-[-0.02em] text-white">
                     Everything before this point is prevention.<br/>
-                    <span className="text-white/70">Everything after is response.</span>
+                    <span className="text-white/82">Everything after is response.</span>
                   </p>
                 </FadeUp>
               </div>

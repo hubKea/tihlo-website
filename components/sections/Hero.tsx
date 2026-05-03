@@ -7,6 +7,7 @@ import HeroTerrain from '@/components/3d/HeroTerrain';
 import ScrambleText from '@/components/motion/ScrambleText';
 import MeshGradient from '@/components/motion/MeshGradient';
 import TopoContours from '@/components/graphics/TopoContours';
+import MagneticButton from '@/components/motion/MagneticButton';
 import { HERO } from '@/lib/constants';
 
 export default function Hero() {
@@ -39,13 +40,15 @@ export default function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <Button
-              variant="primary"
-              size="lg"
-              href="/contact"
-            >
-              Request a briefing
-            </Button>
+            <MagneticButton>
+              <Button
+                variant="primary"
+                size="lg"
+                href="/contact"
+              >
+                Request a briefing
+              </Button>
+            </MagneticButton>
             <Button
               variant="ghost"
               size="lg"

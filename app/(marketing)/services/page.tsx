@@ -155,7 +155,7 @@ export default function ServicesPage() {
                   </div>
                   <p
                     className={`mono-id mt-6 ${
-                      isDark(i) ? 'text-white/40' : 'text-[var(--dim)]'
+                      isDark(i) ? 'text-white/60' : 'text-[var(--dim)]'
                     }`}
                   >
                     {service.index}
@@ -169,14 +169,14 @@ export default function ServicesPage() {
                   </h2>
                   <p
                     className={`mt-4 mono-label ${
-                      isDark(i) ? 'text-white/50' : 'text-[var(--muted)]'
+                      isDark(i) ? 'text-white/70' : 'text-[var(--muted)]'
                     }`}
                   >
                     {service.name}
                   </p>
                   <p
                     className={`mt-7 max-w-[52ch] text-[16px] leading-[1.7] ${
-                      isDark(i) ? 'text-white/65' : 'text-[var(--muted)]'
+                      isDark(i) ? 'text-white/74' : 'text-[var(--muted)]'
                     }`}
                   >
                     {service.body}
@@ -195,7 +195,7 @@ export default function ServicesPage() {
                       className="mono-id mt-2"
                       style={{
                         color: isDark(i)
-                          ? 'rgba(255,255,255,0.4)'
+                          ? 'rgba(255,255,255,0.68)'
                           : 'var(--dim)',
                       }}
                     >
@@ -229,7 +229,7 @@ export default function ServicesPage() {
                       <p
                         className={`mono-label border-b px-6 py-4 ${
                           isDark(i)
-                            ? 'border-white/10 text-white/40'
+                            ? 'border-white/10 text-white/65'
                             : 'border-[var(--faint)] text-[var(--dim)]'
                         }`}
                       >
@@ -260,7 +260,7 @@ export default function ServicesPage() {
                             <span
                               className={`mono-id mt-1 shrink-0 transition-colors ${
                                 isDark(i)
-                                  ? 'text-white/40 group-hover/feat:text-white'
+                                  ? 'text-white/65 group-hover/feat:text-white'
                                   : 'text-[var(--dim)] group-hover/feat:text-[var(--ink)]'
                               }`}
                             >
@@ -269,7 +269,7 @@ export default function ServicesPage() {
                             <span
                               className={`text-[14.5px] leading-[1.6] transition-colors ${
                                 isDark(i)
-                                  ? 'text-white/60 group-hover/feat:text-white'
+                                  ? 'text-white/72 group-hover/feat:text-white'
                                   : 'text-[var(--muted)] group-hover/feat:text-[var(--ink)]'
                               }`}
                             >

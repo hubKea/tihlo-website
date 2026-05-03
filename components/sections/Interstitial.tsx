@@ -19,7 +19,7 @@ export default function Interstitial() {
 
       <div className="relative z-10 mx-auto max-w-[900px] text-center">
         <FadeUp>
-          <p className="mb-8 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/40">
+          <p className="mb-8 font-mono text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/65">
             Operating principle
           </p>
         </FadeUp>
@@ -36,7 +36,7 @@ export default function Interstitial() {
         </FadeUp>
 
         <FadeUp delay={0.3}>
-          <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.22em] text-white/35">
+          <p className="mt-10 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
             TIHLO · Field Notes No. 01
           </p>
         </FadeUp>

@@ -4,9 +4,7 @@ import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Button from '@/components/ui/Button';
 import MaskHeading from '@/components/motion/MaskHeading';
-import RegMarks from '@/components/ui/RegMarks';
 import DarkGlowSection from '@/components/sections/DarkGlowSection';
-import LineSystem from '@/components/motion/LineSystem';
 import MagneticButton from '@/components/motion/MagneticButton';
 import { ABOUT } from '@/lib/constants';
 
@@ -86,51 +84,121 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 pt-32 lg:px-12 lg:pb-28 lg:pt-40">
-        <LineSystem tone="light" density="quiet" anchor="left" />
-        <div className="relative z-10 mx-auto max-w-site">
-          <FadeUp className="grid grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-20">
-            <div>
-              <Eyebrow>The firm</Eyebrow>
-              <h1 className="mt-8 font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.94] tracking-[-0.045em] text-[var(--ink)]">
-                <MaskHeading immediate>We are</MaskHeading>
-                <MaskHeading delay={0.12} immediate>
-                  TIHLO<span className="text-[var(--red)]">.</span>
+      <section className="relative isolate overflow-hidden bg-[var(--ink)]">
+        {/* Background photograph — full bleed */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-operations.jpg"
+            alt="Active mining corridor — South African operations"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+
+          {/* Dark gradient overlay to ensure text legibility */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(14,16,20,0.55) 0%, rgba(14,16,20,0.65) 60%, rgba(14,16,20,0.92) 100%)',
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Subtle vignette from sides */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, rgba(14,16,20,0.4) 100%)',
+            }}
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* Subtle grain/texture overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, white 0.5px, transparent 0.5px)',
+            backgroundSize: '24px 24px',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto flex min-h-[88vh] w-full max-w-site flex-col justify-end px-6 pb-20 pt-40 lg:px-12 lg:pb-28 lg:pt-48">
+          <div className="grid w-full min-w-0 grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-20">
+            {/* Left column — copy */}
+            <div className="min-w-0 w-[calc(100vw-3rem)] sm:w-auto">
+              <Eyebrow className="mb-6 ![color:rgba(250,250,248,0.68)]">
+                Approach
+              </Eyebrow>
+
+              <h1 className="font-display text-[clamp(48px,7.5vw,112px)] font-medium leading-[0.92] tracking-[-0.045em] text-white">
+                <MaskHeading delay={0.1} immediate>
+                  {ABOUT.headline_1}
+                </MaskHeading>
+                <MaskHeading delay={0.25} immediate>
+                  {ABOUT.headline_2}
                 </MaskHeading>
               </h1>
-              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--muted)]">
+
+              <p className="mt-8 max-w-[34ch] text-[17px] leading-[1.65] text-[rgba(250,250,248,0.75)] sm:max-w-[52ch]">
                 {ABOUT.lede}
               </p>
-            </div>
-            <div>
-              <div className="relative aspect-[4/3] overflow-hidden border border-[var(--faint)] lg:aspect-[3/4]">
-                <RegMarks color="var(--dim)" size={14} />
-                <Image
-                  src="https://images.unsplash.com/photo-1565793979540-72c7a00b5f57?auto=format&fit=crop&w=1600&q=85"
-                  alt="South African mining landscape"
-                  fill
-                  quality={85}
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                />
-                {/* Scan lines */}
-                <div className="scan-lines absolute inset-0" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-transparent to-transparent opacity-70" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
-                  <p className="font-display text-[clamp(20px,2.5vw,32px)] font-medium leading-[1.1] tracking-[-0.02em] text-white">
-                    Independent. Quiet about who we work with.
-                    <br />
-                    <span className="text-white/60">
-                      Loud about what we will not tolerate.
-                    </span>
-                  </p>
-                  <span className="mono-id mt-4 block text-white/40">
-                    FIELD · OPERATIONAL CORRIDOR
-                  </span>
-                </div>
+
+              <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                <MagneticButton>
+                  <Button
+                    variant="white"
+                    size="lg"
+                    href="/contact"
+                  >
+                    Request a briefing
+                  </Button>
+                </MagneticButton>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  href="/how-we-operate"
+                  className="border-[rgba(250,250,248,0.3)] text-white hover:border-white hover:bg-[rgba(250,250,248,0.1)] hover:text-white"
+                  arrow={false}
+                >
+                  How we operate
+                </Button>
               </div>
             </div>
-          </FadeUp>
+
+            {/* Right column — caption block */}
+            <aside className="min-w-0 w-[calc(100vw-3rem)] max-w-full border-l border-[rgba(250,250,248,0.15)] pl-8 sm:w-auto">
+              <p className="mono-id text-[rgba(250,250,248,0.62)]">
+                Field — operational corridor
+              </p>
+              <p className="mt-4 max-w-[24ch] font-display text-[20px] font-medium leading-[1.18] tracking-[-0.02em] text-[rgba(250,250,248,0.85)] sm:max-w-none sm:text-[clamp(20px,2.2vw,28px)]">
+                Independent. Quiet about who we work with. Loud about what we
+                will not tolerate.
+              </p>
+              <div className="mt-6 flex items-center gap-3">
+                <span className="block h-1.5 w-1.5 rounded-full bg-[var(--red)]" />
+                <span className="mono-id text-[rgba(250,250,248,0.62)]">
+                  TIHLO operating posture
+                </span>
+              </div>
+            </aside>
+          </div>
+
+          {/* Bottom edge — registration mark + scroll cue */}
+          <div className="mt-20 flex items-end justify-between border-t border-[rgba(250,250,248,0.1)] pt-6">
+            <span className="mono-id text-[rgba(250,250,248,0.55)]">
+              REC OBS · ZA · 2026
+            </span>
+            <span className="mono-id text-[rgba(250,250,248,0.55)]">
+              Scroll to continue
+            </span>
+          </div>
         </div>
       </section>
 
@@ -144,7 +212,7 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-site">
           <FadeUp className="mb-14">
-            <Eyebrow className="mb-5 text-white/40">How we work</Eyebrow>
+            <Eyebrow className="mb-5 text-white/65">How we work</Eyebrow>
             <h2 className="font-display text-[clamp(36px,4.6vw,56px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--white)]">
               Operating principles.
             </h2>
@@ -168,7 +236,7 @@ export default function AboutPage() {
                     <h3 className="mb-4 font-display text-xl font-semibold leading-[1.2] tracking-[-0.02em] text-[var(--white)]">
                       {p.statement}
                     </h3>
-                    <p className="text-sm leading-relaxed text-white/55">
+                    <p className="text-sm leading-relaxed text-white/70">
                       {p.body}
                     </p>
                   </div>
@@ -179,13 +247,13 @@ export default function AboutPage() {
         </div>
       </DarkGlowSection>
 
-      <section className="bg-[var(--red)] px-6 py-16 lg:px-12 lg:py-20">
+      <section className="bg-[var(--red)] border-y border-white/15 px-6 py-16 lg:px-12 lg:py-20">
         <div className="mx-auto max-w-site text-center">
           <FadeUp>
             <p className="font-display text-[clamp(24px,3vw,40px)] font-medium leading-[1.15] tracking-[-0.02em] text-white">
               We succeed when every tonne mined is a tonne delivered.
             </p>
-            <p className="mono-id mt-4 text-white/50">
+              <p className="mono-id mt-4 text-white/70">
               TIHLO operating commitment
             </p>
           </FadeUp>
@@ -248,11 +316,11 @@ export default function AboutPage() {
         <div className="mx-auto max-w-site">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
             <FadeUp>
-              <Eyebrow className="mb-5 text-white/40">Coverage</Eyebrow>
+              <Eyebrow className="mb-5 text-white/65">Coverage</Eyebrow>
               <h2 className="mb-5 font-display text-[clamp(36px,4.6vw,56px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--white)]">
                 {ABOUT.map.headline}
               </h2>
-              <p className="text-[17px] leading-[1.65] text-white/60">
+              <p className="text-[17px] leading-[1.65] text-white/72">
                 {ABOUT.map.body}
               </p>
 
@@ -260,19 +328,19 @@ export default function AboutPage() {
                 <div className="flex items-center gap-3">
                   <span className="pulse-dot block h-1.5 w-1.5 rounded-full bg-[var(--red)]" />
                   <span className="mono-label text-white/80">Mpumalanga</span>
-                  <span className="mono-id text-white/40">— Live corridor</span>
+                  <span className="mono-id text-white/60">— Live corridor</span>
                 </div>
                 {['Limpopo', 'Northern Cape'].map((prov) => (
                   <div key={prov} className="flex items-center gap-3">
                     <span className="block h-1.5 w-1.5 rounded-full bg-white/60" />
                     <span className="mono-label text-white/80">{prov}</span>
-                    <span className="mono-id text-white/40">— Active corridor</span>
+                    <span className="mono-id text-white/60">— Active corridor</span>
                   </div>
                 ))}
                 <div className="flex items-center gap-3">
                   <span className="block h-1.5 w-1.5 rounded-full bg-white/40" />
                   <span className="mono-label text-white/80">Pretoria</span>
-                  <span className="mono-id text-white/40">— Headquarters &amp; control room</span>
+                  <span className="mono-id text-white/60">— Headquarters &amp; control room</span>
                 </div>
               </div>
             </FadeUp>

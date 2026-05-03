@@ -16,35 +16,132 @@ function escapeArr(arr: string[]): string {
   return arr.map(escape).join(', ');
 }
 
+const ROLES = ['GM / COO', 'CFO', 'Procurement', 'Risk', 'Other'] as const;
+const SECTORS = [
+  'Coal',
+  'Chrome',
+  'Manganese',
+  'Iron Ore',
+  'Copper',
+  'Aggregates',
+  'Fuel',
+  'Agri-bulk',
+  'Other',
+] as const;
+const PROVINCES = [
+  'Mpumalanga',
+  'Limpopo',
+  'Northern Cape',
+  'Gauteng',
+  'North West',
+  'Other',
+] as const;
+const FLEET_SIZES = ['<10', '10–50', '50–200', '200+'] as const;
+const CORRIDORS = ['1', '2–5', '6–15', '15+'] as const;
+const ENGAGEMENT_TYPES = [
+  '30-minute briefing',
+  'Risk assessment',
+  'Pilot corridor',
+  'Just exploring',
+] as const;
+const CONTACT_PREFS = ['Email', 'Phone', 'Either'] as const;
+
+const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
+const CONTROL_CHAR_PATTERN = /[\u0000-\u001F\u007F]/;
+
+const safeText = (max: number, min = 1) =>
+  z
+    .string()
+    .trim()
+    .min(min)
+    .max(max)
+    .refine((value) => !CONTROL_CHAR_PATTERN.test(value), {
+      message: 'Invalid characters',
+    });
+
 const schema = z.object({
-  ticketId: z.string(),
-  name: z.string().min(2),
-  role: z.string(),
-  company: z.string(),
-  email: z.string().email(),
-  phone: z.string(),
-  honeypot: z.string().max(0),
-  sectors: z.array(z.string()),
-  fleetSize: z.string(),
-  corridors: z.string(),
-  provinces: z.array(z.string()),
-  engagementType: z.string(),
-  situation: z.string().optional(),
-  contactPreference: z.string(),
+  ticketId: z.string().regex(/^TIH-[A-Z0-9]{6}$/),
+  name: safeText(120, 2),
+  role: z.enum(ROLES),
+  company: safeText(160, 2),
+  email: z.string().trim().email().max(254),
+  phone: z
+    .string()
+    .trim()
+    .min(9)
+    .max(32)
+    .regex(/^[\d\s+\-()]+$/),
+  honeypot: z.string().max(0).optional().default(''),
+  sectors: z.array(z.enum(SECTORS)).min(1).max(SECTORS.length),
+  fleetSize: z.enum(FLEET_SIZES),
+  corridors: z.enum(CORRIDORS),
+  provinces: z.array(z.enum(PROVINCES)).min(1).max(PROVINCES.length),
+  engagementType: z.enum(ENGAGEMENT_TYPES),
+  situation: z.string().trim().max(500).optional().default(''),
+  contactPreference: z.enum(CONTACT_PREFS),
 });
 
-// TODO: Replace this in-memory Map with Upstash Redis for production.
-// This map resets on every serverless cold start, making the rate limit ineffective on Vercel.
-// Simple in-memory rate limit (resets per serverless instance)
-const submissions = new Map<string, number>();
+const localSubmissions = new Map<string, number>();
+
+function getClientIp(req: NextRequest) {
+  return (
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    req.headers.get('x-real-ip') ||
+    'unknown'
+  );
+}
+
+async function takeRateLimitSlot(ip: string) {
+  const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (redisUrl && redisToken) {
+    const res = await fetch(redisUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${redisToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([
+        'SET',
+        `contact:submission:${ip}`,
+        String(Date.now()),
+        'PX',
+        String(RATE_LIMIT_WINDOW_MS),
+        'NX',
+      ]),
+    });
+
+    if (!res.ok) {
+      throw new Error('Rate limit store unavailable');
+    }
+
+    const data = (await res.json()) as { result?: 'OK' | null };
+    return data.result === 'OK';
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Production rate limit store is not configured');
+  }
+
+  const now = Date.now();
+  const last = localSubmissions.get(ip) ?? 0;
+  if (now - last < RATE_LIMIT_WINDOW_MS) return false;
+
+  localSubmissions.set(ip, now);
+  return true;
+}
 
 export async function POST(req: NextRequest) {
-  // Rate limiting — 1 per IP per 5 minutes
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
-  const now = Date.now();
-  const last = submissions.get(ip) ?? 0;
-  if (now - last < 5 * 60 * 1000) {
-    return NextResponse.json({ error: 'Rate limited' }, { status: 429 });
+  const ip = getClientIp(req);
+  try {
+    const allowed = await takeRateLimitSlot(ip);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limited' }, { status: 429 });
+    }
+  } catch (err) {
+    console.error('Rate limit error:', err);
+    return NextResponse.json({ error: 'Service unavailable' }, { status: 503 });
   }
 
   let body: unknown;
@@ -67,6 +164,11 @@ export async function POST(req: NextRequest) {
   }
 
   const toEmail = process.env.CONTACT_EMAIL ?? 'info@tihlo.co.za';
+  const resendApiKey = process.env.RESEND_API_KEY;
+
+  if (!resendApiKey) {
+    return NextResponse.json({ error: 'Email service not configured' }, { status: 503 });
+  }
 
   const html = `
 <div style="font-family: monospace; font-size: 13px; color: #0E1014; padding: 32px;">
@@ -95,9 +197,7 @@ export async function POST(req: NextRequest) {
 `;
 
   try {
-    submissions.set(ip, now);
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(resendApiKey);
     await resend.emails.send({
       from: 'TIHLO <no-reply@tihlo.co.za>',
       to: [toEmail],

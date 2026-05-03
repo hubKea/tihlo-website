@@ -111,7 +111,7 @@ export default function TihloSeal() {
           <circle cx="32" cy="32" r="3" fill="var(--red)" />
         </svg>
         <p
-          className="mt-5 font-mono text-[9.5px] font-medium uppercase tracking-[0.22em] text-[var(--dim)]"
+          className="mt-5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.22em] text-[var(--red)]"
           suppressHydrationWarning
         >
           VERIFIED · TIHLO · {time || '--:--:--'} SAST

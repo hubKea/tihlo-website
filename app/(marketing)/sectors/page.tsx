@@ -82,7 +82,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Copper',
     province: 'Multi-provincial',
-    image: '/images/hero-operations.png',
+    image: '/images/hero-operations.jpg',
     challenge:
       'Cross-provincial copper logistics involves complex multi-haulier chains where verification gaps compound across handover points. Each handover is a potential diversion event without formal verification.',
     monitoring: [
@@ -167,15 +167,15 @@ export default function SectorsPage() {
         <LineSystem tone="dark" density="quiet" />
         <div className="relative z-10 mx-auto max-w-site">
           <FadeUp className="mb-12 text-center">
-            <Eyebrow className="mb-4 justify-center text-white/40">Monitoring coverage</Eyebrow>
+            <Eyebrow className="mb-4 justify-center text-white/65">Monitoring coverage</Eyebrow>
             <h2 className="font-display text-[clamp(28px,3vw,40px)] font-medium leading-[1.08] tracking-[-0.025em] text-white">
               <MaskHeading>One methodology. Six sectors.</MaskHeading>
             </h2>
           </FadeUp>
           <OrbitalEcosystem
             coreLabel="TIHLO CORE"
-            coreIcon={<ShieldCheck size={28} className="text-[var(--ink)]" strokeWidth={1.5} />}
-            className="[&_p]:text-white [&_.mono-id]:text-white/40 [&_span]:border-white/10 [&_span]:bg-white/10 [&_span]:text-white/70"
+            coreIcon={<ShieldCheck size={28} className="text-white/80" strokeWidth={1.5} />}
+            variant="dark"
             satellites={SATELLITES}
           />
         </div>
@@ -269,7 +269,7 @@ export default function SectorsPage() {
                       </h2>
                       <p
                         className={`mono-id mt-2 transition-colors duration-300 ${
-                          dark ? 'text-white/40' : 'text-[var(--dim)]'
+                          dark ? 'text-white/62' : 'text-[var(--dim)]'
                         }`}
                       >
                         {sector.province}
@@ -286,14 +286,14 @@ export default function SectorsPage() {
                     >
                       <p
                         className={`mono-label mb-4 transition-colors duration-300 ${
-                          dark ? 'text-white/40' : 'text-[var(--muted)]'
+                          dark ? 'text-white/68' : 'text-[var(--muted)]'
                         }`}
                       >
                         Challenge
                       </p>
                       <p
                         className={`text-sm leading-relaxed transition-colors duration-300 ${
-                          dark ? 'text-white/60' : 'text-[var(--muted)]'
+                          dark ? 'text-white/72' : 'text-[var(--muted)]'
                         }`}
                       >
                         {sector.challenge}
@@ -302,7 +302,7 @@ export default function SectorsPage() {
                     <div className="px-8 py-8">
                       <p
                         className={`mono-label mb-4 transition-colors duration-300 ${
-                          dark ? 'text-white/40' : 'text-[var(--muted)]'
+                          dark ? 'text-white/68' : 'text-[var(--muted)]'
                         }`}
                       >
                         Monitoring scope
@@ -313,15 +313,11 @@ export default function SectorsPage() {
                             key={m}
                             className={`flex items-start gap-2.5 text-sm transition-colors duration-300 ${
                               dark
-                                ? 'text-white/55 hover:text-white'
+                                ? 'text-white/70 hover:text-white'
                                 : 'text-[var(--muted)] hover:text-[var(--ink)]'
                             }`}
                           >
-                            <span
-                              className={`mt-1.5 block h-1 w-1 shrink-0 rounded-full transition-colors duration-300 group-hover:bg-[var(--red)] ${
-                                dark ? 'bg-white/35' : 'bg-[var(--ink)]'
-                              }`}
-                            />
+                            <span className="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-[var(--red)] transition-colors duration-300" />
                             {m}
                           </li>
                         ))}
@@ -334,7 +330,7 @@ export default function SectorsPage() {
             </section>
 
             {i === 2 && (
-              <section className="bg-[var(--red)] px-6 py-16 lg:px-12 lg:py-20">
+              <section className="bg-[var(--red)] border-y border-white/15 px-6 py-16 lg:px-12 lg:py-20">
                 <div className="mx-auto max-w-site">
                   <FadeUp>
                     <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">

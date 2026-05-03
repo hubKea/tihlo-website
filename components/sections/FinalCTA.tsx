@@ -6,7 +6,13 @@ import FadeUp from '@/components/motion/FadeUp';
 
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-[var(--red)] px-6 py-28 lg:px-12 lg:py-40">
+    <section className="relative overflow-hidden bg-[var(--red)] px-6 pb-28 pt-36 lg:px-12 lg:pb-40 lg:pt-44">
+      {/* Top fade — wash from previous (white) section into red */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--white)] to-transparent"
+        aria-hidden="true"
+      />
+
       {/* Subtle texture overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -20,8 +26,8 @@ export default function FinalCTA() {
 
       <div className="relative z-10 mx-auto max-w-[800px] text-center">
         <FadeUp>
-          <p className="mb-6 inline-flex items-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/60">
-            <span className="block h-px w-5 bg-white/40" />
+          <p className="mb-6 inline-flex items-center gap-3 font-mono text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/82">
+            <span className="block h-px w-5 bg-white/70" />
             The eye that never misses
           </p>
         </FadeUp>
@@ -32,7 +38,7 @@ export default function FinalCTA() {
         </h2>
 
         <FadeUp delay={0.3}>
-          <p className="mx-auto mt-8 max-w-[48ch] text-[17px] leading-[1.65] text-white/75">
+          <p className="mx-auto mt-8 max-w-[48ch] text-[17px] leading-[1.65] text-white/86">
             Engagements begin with a 30-minute briefing. We hear your current
             process, identify the highest-risk control gaps, and tell you
             whether TIHLO is the right partner for your operation.

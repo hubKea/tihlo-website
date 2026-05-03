@@ -18,8 +18,7 @@ export const HERO = {
   cta_primary: 'Request a consultation',
   cta_secondary: 'What we monitor',
   image: {
-    // TODO: Compress hero-operations.png to <500KB (currently 1.77MB)
-    src: '/images/hero-operations.png',
+    src: '/images/hero-operations.jpg',
     alt: 'Aerial open-pit operation at golden hour — continuous oversight in a single frame',
   },
   meta: 'REC OBS FRAME 001 · INSTRUMENT ACTIVE · ALL CORRIDORS NOMINAL',
@@ -66,65 +65,7 @@ export const NAV_LINKS = [
   // { label: 'Firm', href: '/about' }, // Hidden until team is finalised
 ] as const;
 
-export const ACTS = [
-  {
-    index: '01',
-    label: 'Fuel & Diesel Security',
-    headline: ['Diesel theft is not', 'a transport problem.'],
-    accentWord: 'not',
-    body: [
-      "Fuel variance is the single most common source of unrecorded commodity loss in mining logistics. TIHLO's monitoring layer tracks consumption per machine, per shift, per operator — comparing actuals against learned baselines. Anomalies are flagged in real time, not discovered in month-end reports.",
-      'Controllers intervene immediately. The alert has a name attached to it, and so does the response. When a fuel spike is a theft pattern, the evidence is already logged before the next shift begins.',
-    ],
-    stats: [
-      { value: 18, suffix: '%', label: 'Typical diesel reclaimed' },
-      { value: 38, suffix: 's', label: 'Median response to fuel alert' },
-    ],
-    image: {
-      src: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=1600&q=85',
-      alt: 'Mining equipment fuel system',
-    },
-    flip: false,
-  },
-  {
-    index: '02',
-    label: 'Asset Oversight',
-    headline: ['The machine records', 'what the operator reports.'],
-    accentWord: 'records',
-    body: [
-      'Excavators, ADTs, and dozers generate continuous telemetry — but raw telematics is not intelligence. TIHLO processes that data against operational context: site conditions, shift patterns, weather events, contractor commitments. The output is an objective record of what each asset actually did.',
-      'Idling analysis, utilisation rates, on-site versus off-site time, harsh operating events — each is logged, attributed, and included in the monthly evidence pack. Contractors are held accountable to the data, not to a conversation.',
-    ],
-    stats: [
-      { value: 100, suffix: '%', label: 'Asset utilisation visibility' },
-      { value: 24, suffix: '/7', label: 'Continuous machine monitoring' },
-    ],
-    image: {
-      src: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=85',
-      alt: 'Excavator on mining site',
-    },
-    flip: true,
-  },
-  {
-    index: '03',
-    label: 'Contractor Accountability',
-    headline: ['Accountability needs', 'evidence, not opinion.'],
-    accentWord: 'evidence,',
-    body: [
-      'When a contractor underperforms, the default dispute is a conversation. TIHLO replaces that conversation with an evidence pack — timestamped, GPS-attributed, controller-signed. Every load, every deviation, every anomaly is logged and tied to a specific asset and haulier.',
-      'Performance rankings are produced at month-end. Top performers are identifiable. Outliers are documented. Sanctions are applied per truck, not per conversation — creating accountability that survives personnel changes on both sides.',
-    ],
-    stats: [
-      { value: 7, suffix: '-day', label: 'Auto-suspension on deviation' },
-      { value: 100, suffix: '%', label: 'Audit-grade evidence coverage' },
-    ],
-    image: {
-      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=85',
-      alt: 'Haul truck on mine road',
-    },
-    flip: false,
-  },
-] as const;
+
 
 export const INTERSTITIAL = {
   quote:
@@ -132,7 +73,7 @@ export const INTERSTITIAL = {
   accentWord: 'unverified',
   attribution: 'TIHLO · Field Notes No. 04',
   image: {
-    src: 'https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?auto=format&fit=crop&w=2400&q=85',
+    src: '/images/manungu_coillier.jpg',
     alt: 'Open pit mine at dusk',
   },
 } as const;
@@ -258,7 +199,7 @@ export const SECTORS = [
   {
     label: 'Copper',
     description: 'Cross-provincial logistics monitoring and deviation control.',
-    image: '/images/hero-operations.png',
+    image: '/images/hero-operations.jpg',
   },
   {
     label: 'Agri-bulk',
@@ -404,6 +345,8 @@ export const HOW_WE_OPERATE = {
 
 export const ABOUT = {
   headline: 'We are TIHLO.',
+  headline_1: 'We are',
+  headline_2: 'TIHLO.',
   lede: 'An independent specialist firm operating active monitoring and verification for mining commodity movement across South Africa. We are quiet about who we work with. We are loud about what we will not tolerate on a corridor.',
   firm: [
     'TIHLO is independent — by design, not by description. We are not a subsidiary of a logistics provider, a reseller of telematics hardware, or a spin-off of a fleet management platform. We have no commercial relationship with any system we monitor. That is the precondition for the work.',

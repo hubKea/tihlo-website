@@ -23,6 +23,7 @@ export default async function Image() {
       >
         <div
           style={{
+            display: 'flex',
             fontSize: 24,
             letterSpacing: '0.2em',
             color: 'rgba(255,255,255,0.5)',
@@ -33,6 +34,7 @@ export default async function Image() {
         </div>
         <div
           style={{
+            display: 'flex',
             fontSize: 72,
             fontWeight: 500,
             lineHeight: 1,
@@ -43,6 +45,7 @@ export default async function Image() {
         </div>
         <div
           style={{
+            display: 'flex',
             fontSize: 72,
             fontWeight: 500,
             lineHeight: 1,
@@ -53,6 +56,7 @@ export default async function Image() {
         </div>
         <div
           style={{
+            display: 'flex',
             fontSize: 20,
             color: 'rgba(255,255,255,0.55)',
             marginTop: 32,

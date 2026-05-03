@@ -20,6 +20,10 @@ const START_ANGLE = 135;
 const SWEEP_ANGLE = 270;
 const ARC_LENGTH = ARC_RADIUS * (SWEEP_ANGLE * Math.PI / 180);
 
+function svgNumber(value: number) {
+  return value.toFixed(3);
+}
+
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
@@ -56,10 +60,10 @@ export default function InstrumentDial({
   const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' });
   const reducedMotion = useReducedMotion();
   const [progress, setProgress] = useState(() =>
-    animateOnView && !reducedMotion ? 0 : clamp((value - min) / (max - min), 0, 1)
+    animateOnView ? 0 : clamp((value - min) / (max - min), 0, 1)
   );
   const [displayValue, setDisplayValue] = useState(() =>
-    animateOnView && !reducedMotion ? 0 : value
+    animateOnView ? 0 : value
   );
 
   const targetProgress = useMemo(() => {
@@ -120,8 +124,8 @@ export default function InstrumentDial({
         stroke="var(--ink)"
         strokeWidth="6"
         strokeLinecap="round"
-        strokeDasharray={ARC_LENGTH}
-        strokeDashoffset={ARC_LENGTH * (1 - progress)}
+        strokeDasharray={svgNumber(ARC_LENGTH)}
+        strokeDashoffset={svgNumber(ARC_LENGTH * (1 - progress))}
       />
 
       {Array.from({ length: 12 }).map((_, index) => {
@@ -132,10 +136,10 @@ export default function InstrumentDial({
         return (
           <line
             key={angle}
-            x1={inner.x}
-            y1={inner.y}
-            x2={outer.x}
-            y2={outer.y}
+            x1={svgNumber(inner.x)}
+            y1={svgNumber(inner.y)}
+            x2={svgNumber(outer.x)}
+            y2={svgNumber(outer.y)}
             stroke="var(--dim)"
             strokeWidth="1"
           />
@@ -145,8 +149,8 @@ export default function InstrumentDial({
       <line
         x1="100"
         y1="100"
-        x2={needle.x}
-        y2={needle.y}
+        x2={svgNumber(needle.x)}
+        y2={svgNumber(needle.y)}
         stroke="var(--red)"
         strokeWidth="2"
         strokeLinecap="round"

@@ -8,7 +8,6 @@ interface FadeUpProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
   reveal?: boolean;
 }
 
@@ -16,7 +15,6 @@ export default function FadeUp({
   children,
   delay = 0,
   className = '',
-  as: Tag = 'div',
   reveal = true,
 }: FadeUpProps) {
   const ref = useRef<HTMLElement>(null);

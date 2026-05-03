@@ -140,6 +140,7 @@ function ChipSelector({
             key={opt}
             type="button"
             onClick={() => onToggle(opt)}
+            aria-pressed={selected.includes(opt)}
             className={`mono-id rounded-xl border px-3 py-1.5 transition-all ${
               selected.includes(opt)
                 ? 'border-[var(--dim)] bg-[var(--ink)] text-[var(--white)]'
@@ -171,17 +172,25 @@ function RadioGroup({
   error?: string;
 }) {
   return (
-    <div>
+    <div role="radiogroup" aria-label={name}>
       <div className="mt-1 space-y-2">
         {options.map((opt) => (
           <label key={opt} className="flex cursor-pointer items-center gap-3">
+            <input
+              type="radio"
+              name={name}
+              value={opt}
+              checked={value === opt}
+              onChange={() => onChange(opt)}
+              className="sr-only"
+            />
             <span
               className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors ${
                 value === opt
                   ? 'border-[var(--dim)] bg-[var(--ink)]'
                   : 'border-[var(--faint)]'
               }`}
-              onClick={() => onChange(opt)}
+              aria-hidden="true"
             >
               {value === opt && (
                 <span className="block h-1.5 w-1.5 bg-[var(--white)]" />
@@ -344,7 +353,7 @@ export default function ContactForm() {
             <span
               className={`font-mono text-[20px] font-semibold tabular-nums leading-none ${
                 s === step
-                  ? 'text-[var(--ink)]'
+                  ? 'text-white'
                   : s < step
                     ? 'text-[var(--ink)]'
                     : 'text-[var(--dim)]'

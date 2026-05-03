@@ -13,9 +13,9 @@ const config: Config = {
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
-        white: 'var(--white)',
-        'white-2': 'var(--white-2)',
-        'white-3': 'var(--white-3)',
+        white: 'rgb(250 250 248 / <alpha-value>)',
+        'white-2': 'rgb(245 244 240 / <alpha-value>)',
+        'white-3': 'rgb(239 238 234 / <alpha-value>)',
         ink: 'var(--ink)',
         'ink-2': 'var(--ink-2)',
         muted: 'var(--muted)',

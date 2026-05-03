@@ -16,6 +16,7 @@ interface OrbitalEcosystemProps {
   coreIcon: ReactNode;
   satellites: Satellite[];
   className?: string;
+  variant?: 'light' | 'dark';
 }
 
 export default function OrbitalEcosystem({
@@ -23,7 +24,9 @@ export default function OrbitalEcosystem({
   coreIcon,
   satellites,
   className = '',
+  variant = 'light',
 }: OrbitalEcosystemProps) {
+  const isDark = variant === 'dark';
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -113,13 +116,15 @@ export default function OrbitalEcosystem({
           transform: visible ? 'scale(1)' : 'scale(0.8)',
         }}
       >
-        <StackedGlowCard size={72} variant="light">
+        <StackedGlowCard size={72} variant={variant}>
           {coreIcon}
         </StackedGlowCard>
-        <p className="mt-4 font-display text-lg font-semibold tracking-[-0.02em] text-[var(--ink)]">
+        <p className={`mt-4 font-display text-lg font-semibold tracking-[-0.02em] ${isDark ? 'text-white' : 'text-[var(--ink)]'}`}>
           {coreLabel}
         </p>
-        <p className="mono-id mt-1 text-[var(--dim)]">METHODOLOGY · CORE</p>
+        <p className={`mono-id mt-1 ${isDark ? 'text-white/62' : 'text-[var(--dim)]'}`}>
+          METHODOLOGY · CORE
+        </p>
       </div>
 
       {/* Satellite Nodes */}
@@ -145,11 +150,15 @@ export default function OrbitalEcosystem({
                   : 'none',
               }}
             >
-              <StackedGlowCard size={48} variant="light">
+              <StackedGlowCard size={48} variant={variant}>
                 {sat.icon}
               </StackedGlowCard>
               <div className="absolute top-[calc(100%+6px)] w-max max-w-[110px] text-center">
-                <span className="rounded border border-[var(--faint)] bg-[var(--white)] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-[var(--muted)]">
+                <span className={`rounded border px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider ${
+                  isDark
+                    ? 'border-white/10 bg-white/10 text-white/70'
+                    : 'border-[var(--faint)] bg-[var(--white)] text-[var(--muted)]'
+                }`}>
                   {sat.label.toUpperCase()}
                 </span>
               </div>

@@ -43,7 +43,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Chrome',
     province: 'Limpopo',
-    image: '/images/side-tippers.jpg',
+    image: '/images/manungu_coillier.jpg',
     challenge:
       'Chrome operations typically involve multiple hauliers on shared corridors with minimal independent verification. Load substitution and short-loading are persistent risks that tracking alone cannot prevent.',
     monitoring: [
@@ -56,7 +56,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Manganese',
     province: 'Northern Cape',
-    image: '/images/side-tippers.jpg',
+    image: '/images/hero-operations.jpg',
     challenge:
       'Long-haul Northern Cape corridors involve extended periods where vehicles are beyond easy intervention range. Signal drop-off zones require baseline learning to distinguish equipment failure from deliberate blackout.',
     monitoring: [
@@ -82,7 +82,7 @@ const SECTOR_DETAILS = [
   {
     label: 'Copper',
     province: 'Multi-provincial',
-    image: '/images/hero-operations.jpg',
+    image: '/images/manungu_coillier.jpg',
     challenge:
       'Cross-provincial copper logistics involves complex multi-haulier chains where verification gaps compound across handover points. Each handover is a potential diversion event without formal verification.',
     monitoring: [
@@ -116,44 +116,19 @@ export default function SectorsPage() {
       <section className="relative isolate overflow-hidden bg-[var(--white)] px-6 pb-20 pt-32 lg:px-12 lg:pb-28 lg:pt-40">
         <LineSystem tone="light" density="quiet" anchor="right" />
         <div className="relative z-10 mx-auto max-w-site">
-          <FadeUp className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-end lg:gap-20">
-            <div>
-              <Eyebrow>Sectors</Eyebrow>
-              <h1 className="mt-8 font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.94] tracking-[-0.045em] text-[var(--ink)]">
-                <MaskHeading immediate>Where we</MaskHeading>
-                <MaskHeading delay={0.12} immediate>
-                  operate.
-                </MaskHeading>
-              </h1>
-              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--muted)]">
-                Six commodity sectors across three primary provinces. Same
-                methodology, same evidence standard, same accountability —
-                regardless of what you ship.
-              </p>
-            </div>
-
-            {/* Right-side index — quiet sector list */}
-            <div className="border-t border-[var(--faint)] pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-              <p className="mono-label mb-5 text-[var(--dim)]">Sector index</p>
-              <ul className="divide-y divide-[var(--faint)]">
-                {SECTOR_DETAILS.map((s, i) => (
-                  <li
-                    key={s.label}
-                    className="flex items-center justify-between gap-4 py-3"
-                  >
-                    <span className="flex items-baseline gap-3">
-                      <span className="font-mono text-[11px] tabular-nums text-[var(--dim)]">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span className="font-display text-[15px] font-medium text-[var(--ink)]">
-                        {s.label}
-                      </span>
-                    </span>
-                    <span className="mono-id text-[var(--dim)]">{s.province}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <FadeUp className="max-w-[820px]">
+            <Eyebrow>Sectors</Eyebrow>
+            <h1 className="mt-8 font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.94] tracking-[-0.045em] text-[var(--ink)]">
+              <MaskHeading immediate>Where we</MaskHeading>
+              <MaskHeading delay={0.12} immediate>
+                operate.
+              </MaskHeading>
+            </h1>
+            <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--muted)]">
+              Six commodity sectors across three primary provinces. Same
+              methodology, same evidence standard, same accountability —
+              regardless of what you ship.
+            </p>
           </FadeUp>
         </div>
       </section>
@@ -226,14 +201,14 @@ export default function SectorsPage() {
                       fill={true}
                       loading="lazy"
                       sizes="(max-width: 1024px) 100vw, 1200px"
-                      className="absolute inset-0 z-0 scale-105 object-cover opacity-0 transition-[opacity,transform] duration-700 group-hover:scale-100 group-hover:opacity-[0.15]"
+                      className="absolute inset-0 z-0 scale-105 object-cover opacity-0 transition-[opacity,transform] duration-700 group-hover:scale-100 group-hover:opacity-[0.32]"
                     />
                     <div
                       className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                       style={{
                         background: dark
-                          ? 'linear-gradient(to bottom, transparent, rgba(14, 16, 20, 0.28))'
-                          : 'linear-gradient(to bottom, transparent, rgba(14, 16, 20, 0.03))',
+                          ? 'linear-gradient(to bottom, rgba(14, 16, 20, 0.55), rgba(14, 16, 20, 0.78))'
+                          : 'linear-gradient(to bottom, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.85))',
                       }}
                     />
                     {/* Index column */}
@@ -242,16 +217,6 @@ export default function SectorsPage() {
                         dark ? 'border-white/10' : 'border-[var(--faint)]'
                       }`}
                     >
-                      {/* Watermark on hover */}
-                      <span
-                        className={`pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[80px] font-bold tabular-nums leading-none tracking-[-0.04em] opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04] lg:text-[100px] ${
-                          dark ? 'text-white' : 'text-[var(--ink)]'
-                        }`}
-                        aria-hidden
-                      >
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-
                     <span
                       className={`font-mono text-[clamp(40px,4vw,56px)] font-semibold tabular-nums leading-none tracking-[-0.02em] transition-colors duration-300 ${
                         dark ? 'text-white/20' : 'text-[var(--ink)]'
@@ -330,7 +295,7 @@ export default function SectorsPage() {
             </section>
 
             {i === 2 && (
-              <section className="bg-[var(--red)] border-y border-white/15 px-6 py-16 lg:px-12 lg:py-20">
+              <section className="bg-[var(--red)] px-6 py-16 lg:px-12 lg:py-20">
                 <div className="mx-auto max-w-site">
                   <FadeUp>
                     <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
@@ -363,7 +328,7 @@ export default function SectorsPage() {
             <h2 className="font-display text-[clamp(40px,5vw,64px)] font-semibold leading-[0.98] tracking-[-0.04em] text-[var(--ink)]">
               <MaskHeading>Your sector.</MaskHeading>
               <MaskHeading delay={0.12}>
-                <em className="not-italic text-[var(--dim)]">Our methodology.</em>
+                <em className="not-italic text-[var(--muted)]">Our methodology.</em>
               </MaskHeading>
             </h2>
             <div>

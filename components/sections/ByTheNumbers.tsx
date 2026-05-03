@@ -1,4 +1,5 @@
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import FadeUp from '@/components/motion/FadeUp';
 import TopoContours from '@/components/graphics/TopoContours';
 import InstrumentDial from '@/components/graphics/InstrumentDial';
@@ -36,9 +37,10 @@ export default function ByTheNumbers() {
           <h2 className="mt-5 max-w-[18ch] font-display text-[clamp(30px,3.2vw,44px)] font-medium leading-[1.08] tracking-[-0.025em] text-[var(--ink)]">
             {BY_THE_NUMBERS.headline}
           </h2>
-          <p className="mt-5 max-w-[58ch] text-[15px] leading-[1.66] text-[var(--muted)]">
-            {BY_THE_NUMBERS.lede}
-          </p>
+          <Lede
+            segments={BY_THE_NUMBERS.ledeSegments}
+            className="mt-5 max-w-[58ch]"
+          />
         </FadeUp>
 
         <div className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-3 lg:mt-16">

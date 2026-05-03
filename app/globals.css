@@ -14,7 +14,7 @@
   --ink-3: #2a2f38;
 
   /* Text opacity scale */
-  --muted: rgba(14, 16, 20, 0.68);
+  --muted: rgba(14, 16, 20, 0.7);
   --dim: rgba(14, 16, 20, 0.48);
   --faint: rgba(14, 16, 20, 0.15);
   --ghost: rgba(14, 16, 20, 0.06);
@@ -88,7 +88,7 @@
   /* Mono label — the workhorse utility */
   .mono-label {
     font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -105,7 +105,7 @@
 
   .mono-id {
     font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 9.5px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;

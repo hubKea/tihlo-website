@@ -1,4 +1,5 @@
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import FadeUp from '@/components/motion/FadeUp';
 import { WHAT_WE_MONITOR } from '@/lib/constants';
 
@@ -14,9 +15,10 @@ export default function WhatWeMonitor() {
           <h2 className="mt-5 max-w-[20ch] font-display text-[clamp(30px,3.2vw,44px)] font-medium leading-[1.08] tracking-[-0.025em] text-[var(--ink)]">
             {WHAT_WE_MONITOR.headline}
           </h2>
-          <p className="mt-5 max-w-[58ch] text-[15px] leading-[1.66] text-[var(--muted)]">
-            {WHAT_WE_MONITOR.lede}
-          </p>
+          <Lede
+            segments={WHAT_WE_MONITOR.ledeSegments}
+            className="mt-5 max-w-[58ch]"
+          />
         </FadeUp>
 
         <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden border border-[var(--faint)] bg-[var(--faint)] md:grid-cols-2 lg:mt-12">

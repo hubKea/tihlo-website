@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import Button from '@/components/ui/Button';
 import MaskHeading from '@/components/motion/MaskHeading';
 import RegMarks from '@/components/ui/RegMarks';
@@ -32,9 +33,11 @@ export default function HowWeOperatePage() {
                   operate.
                 </MaskHeading>
               </h1>
-              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-[var(--muted)]">
-                {HOW_WE_OPERATE.lede}
-              </p>
+              <Lede
+                segments={HOW_WE_OPERATE.ledeSegments}
+                size="lg"
+                className="mt-8 max-w-xl"
+              />
             </div>
             <div>
               <div className="relative aspect-[5/4] overflow-hidden border border-[var(--faint)] bg-[var(--white-2)] lg:aspect-[4/5]">

@@ -69,8 +69,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       );
     }
 
+    const { type = 'button', ...rest } = props;
+
     return (
-      <button ref={ref} className={cls} {...props}>
+      <button ref={ref} type={type} className={cls} {...rest}>
         {inner}
       </button>
     );

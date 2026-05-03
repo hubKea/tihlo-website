@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import FadeUp from '@/components/motion/FadeUp';
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import Button from '@/components/ui/Button';
 import MaskHeading from '@/components/motion/MaskHeading';
 import DarkGlowSection from '@/components/sections/DarkGlowSection';
@@ -146,9 +147,12 @@ export default function AboutPage() {
                 </MaskHeading>
               </h1>
 
-              <p className="mt-8 max-w-[34ch] text-[17px] leading-[1.65] text-[rgba(250,250,248,0.75)] sm:max-w-[52ch]">
-                {ABOUT.lede}
-              </p>
+              <Lede
+                segments={ABOUT.ledeSegments}
+                size="lg"
+                tone="dark"
+                className="mt-8 max-w-[34ch] sm:max-w-[52ch]"
+              />
 
               <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                 <MagneticButton>

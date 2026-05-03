@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import FadeUp from '@/components/motion/FadeUp';
 import { HOW_IT_WORKS } from '@/lib/constants';
 
@@ -19,9 +20,7 @@ export default function HowItWorks() {
             </h2>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <p className="text-[15px] leading-[1.66] text-[var(--muted)]">
-              {HOW_IT_WORKS.lede}
-            </p>
+            <Lede segments={HOW_IT_WORKS.ledeSegments} />
           </FadeUp>
         </div>
 

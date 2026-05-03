@@ -16,7 +16,9 @@ const step1Schema = z.object({
     .string()
     .min(9, 'Enter a valid phone number')
     .regex(/^[\d\s\+\-\(\)]+$/, 'Invalid phone format'),
-  honeypot: z.string().max(0).optional(), // spam trap
+  honeypot: z.string().optional().refine((v) => !v || v.length === 0, {
+    message: 'Spam check failed',
+  }),
 });
 
 const step2Schema = z.object({
@@ -69,14 +71,16 @@ const CONTACT_PREFS = ['Email', 'Phone', 'Either'];
 function Field({
   label,
   error,
+  fieldName,
   children,
 }: {
   label: string;
   error?: string;
+  fieldName?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div data-field={fieldName}>
       <label className="mono-id mb-2 block text-[var(--muted)]">
         {label.toUpperCase()}
       </label>
@@ -88,6 +92,40 @@ function Field({
       )}
     </div>
   );
+}
+
+function FormErrorBanner() {
+  return (
+    <div
+      role="alert"
+      aria-live="polite"
+      className="mb-4 border border-[var(--red)] bg-[var(--red-tint)] px-4 py-3"
+    >
+      <p className="mono-id text-[var(--red)]">
+        Please complete the highlighted fields below.
+      </p>
+    </div>
+  );
+}
+
+function scrollToNamedField(fieldName: string) {
+  const el = document.querySelector(`[name="${fieldName}"]`);
+  if (!el) return;
+
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (
+    el instanceof HTMLElement &&
+    !(el instanceof HTMLInputElement && el.type === 'hidden')
+  ) {
+    el.focus();
+  }
+}
+
+function scrollToFieldWrapper(fieldName: string) {
+  const labelEl = document.querySelector(`[data-field="${fieldName}"]`);
+  if (labelEl) {
+    labelEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function TextInput({
@@ -230,12 +268,22 @@ export default function ContactForm() {
   const s1 = useForm<Step1>({
     resolver: zodResolver(step1Schema),
     defaultValues: formData as Partial<Step1>,
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
   });
 
-  const handleStep1 = s1.handleSubmit((data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-    setStep(2);
-  });
+  const handleStep1 = s1.handleSubmit(
+    (data) => {
+      setFormData((prev) => ({ ...prev, ...data }));
+      setStep(2);
+    },
+    (errors) => {
+      const firstErrorKey = Object.keys(errors)[0];
+      if (firstErrorKey) {
+        scrollToNamedField(firstErrorKey);
+      }
+    }
+  );
 
   // Step 2 local state (chips/multi-select)
   const [s2Errors, setS2Errors] = useState<Record<string, string>>({});
@@ -263,6 +311,10 @@ export default function ContactForm() {
         errs[i.path[0] as string] = i.message;
       });
       setS2Errors(errs);
+      const firstErrorKey = Object.keys(errs)[0];
+      if (firstErrorKey) {
+        scrollToFieldWrapper(firstErrorKey);
+      }
       return;
     }
     setS2Errors({});
@@ -279,6 +331,10 @@ export default function ContactForm() {
         errs[i.path[0] as string] = i.message;
       });
       setS3Errors(errs);
+      const firstErrorKey = Object.keys(errs)[0];
+      if (firstErrorKey) {
+        scrollToFieldWrapper(firstErrorKey);
+      }
       return;
     }
     setS3Errors({});
@@ -379,6 +435,9 @@ export default function ContactForm() {
             />
 
             <p className="mono-label mb-6 text-[var(--muted)]">About you</p>
+            {Object.keys(s1.formState.errors).length > 0 && (
+              <FormErrorBanner />
+            )}
 
             <Field label="Full name" error={s1.formState.errors.name?.message}>
               <TextInput
@@ -442,8 +501,13 @@ export default function ContactForm() {
             <p className="mono-label mb-6 text-[var(--muted)]">
               Your operation
             </p>
+            {Object.keys(s2Errors).length > 0 && <FormErrorBanner />}
 
-            <Field label="Sector(s)" error={s2Errors.sectors}>
+            <Field
+              label="Sector(s)"
+              error={s2Errors.sectors}
+              fieldName="sectors"
+            >
               <ChipSelector
                 options={SECTORS}
                 selected={formData.sectors ?? []}
@@ -452,7 +516,11 @@ export default function ContactForm() {
               />
             </Field>
 
-            <Field label="Approximate fleet size" error={s2Errors.fleetSize}>
+            <Field
+              label="Approximate fleet size"
+              error={s2Errors.fleetSize}
+              fieldName="fleetSize"
+            >
               <div className="mt-1 flex flex-wrap gap-2">
                 {FLEET_SIZES.map((s) => (
                   <button
@@ -473,7 +541,11 @@ export default function ContactForm() {
               </div>
             </Field>
 
-            <Field label="Corridors / sites" error={s2Errors.corridors}>
+            <Field
+              label="Corridors / sites"
+              error={s2Errors.corridors}
+              fieldName="corridors"
+            >
               <div className="mt-1 flex flex-wrap gap-2">
                 {CORRIDORS.map((c) => (
                   <button
@@ -494,7 +566,11 @@ export default function ContactForm() {
               </div>
             </Field>
 
-            <Field label="Province(s)" error={s2Errors.provinces}>
+            <Field
+              label="Province(s)"
+              error={s2Errors.provinces}
+              fieldName="provinces"
+            >
               <ChipSelector
                 options={PROVINCES}
                 selected={formData.provinces ?? []}
@@ -523,8 +599,13 @@ export default function ContactForm() {
         {step === 3 && (
           <div className="space-y-7">
             <p className="mono-label mb-6 text-[var(--muted)]">Your enquiry</p>
+            {Object.keys(s3Errors).length > 0 && <FormErrorBanner />}
 
-            <Field label="Engagement type" error={s3Errors.engagementType}>
+            <Field
+              label="Engagement type"
+              error={s3Errors.engagementType}
+              fieldName="engagementType"
+            >
               <RadioGroup
                 options={ENGAGEMENT_TYPES}
                 value={formData.engagementType ?? ''}
@@ -536,7 +617,11 @@ export default function ContactForm() {
               />
             </Field>
 
-            <Field label="Situation (optional)">
+            <Field
+              label="Situation (optional)"
+              error={s3Errors.situation}
+              fieldName="situation"
+            >
               <textarea
                 value={formData.situation ?? ''}
                 onChange={(e) =>
@@ -555,7 +640,11 @@ export default function ContactForm() {
               </p>
             </Field>
 
-            <Field label="Preferred contact" error={s3Errors.contactPreference}>
+            <Field
+              label="Preferred contact"
+              error={s3Errors.contactPreference}
+              fieldName="contactPreference"
+            >
               <RadioGroup
                 options={CONTACT_PREFS}
                 value={formData.contactPreference ?? ''}

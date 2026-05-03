@@ -2,6 +2,7 @@
 
 import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import MaskHeading from '@/components/motion/MaskHeading';
 import HeroTerrain from '@/components/3d/HeroTerrain';
 import ScrambleText from '@/components/motion/ScrambleText';
@@ -19,12 +20,12 @@ export default function Hero() {
       <TopoContours opacity={0.6} />
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="flex flex-col items-center pb-24 pt-32 text-center lg:pb-36 lg:pt-44">
+        <div className="flex flex-col items-center pb-20 pt-24 text-center lg:pb-28 lg:pt-32">
           <Eyebrow animate={false}>
             <ScrambleText value={HERO.eyebrow} duration={800} />
           </Eyebrow>
 
-          <h1 className="mt-7 font-display text-[clamp(48px,7vw,96px)] font-medium leading-[0.92] tracking-[-0.045em] text-[var(--ink)]">
+          <h1 className="mt-7 font-display text-[clamp(56px,8.2vw,120px)] font-medium leading-[0.9] tracking-[-0.05em] text-[var(--ink)]">
             <MaskHeading delay={0.1} immediate>
               The <span className="hero-eye-word">eye</span> that
             </MaskHeading>
@@ -35,9 +36,11 @@ export default function Hero() {
             </MaskHeading>
           </h1>
 
-          <p className="mt-7 max-w-[54ch] text-[17px] leading-[1.65] text-[var(--muted)]">
-            {HERO.lede}
-          </p>
+          <Lede
+            segments={HERO.ledeSegments}
+            size="lg"
+            className="mt-7 max-w-[54ch]"
+          />
 
           <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <MagneticButton>
@@ -60,7 +63,7 @@ export default function Hero() {
           </div>
 
           {/* Meta line */}
-          <p className="mono-id mt-14 text-[var(--dim)]">
+          <p className="mono-id mt-10 text-[var(--dim)]">
             <ScrambleText value={HERO.meta} duration={1200} />
           </p>
         </div>

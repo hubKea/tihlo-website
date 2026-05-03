@@ -15,6 +15,13 @@ export const HERO = {
   headline: ['The eye that', 'never misses.'],
   accentWord: '.',
   lede: 'TIHLO helps operations detect fuel loss, asset misuse, commodity leakage, contractor risk and movement exceptions before they become accepted cost.',
+  ledeSegments: [
+    'TIHLO helps operations detect ',
+    { kind: 'claim', text: 'fuel loss, asset misuse, commodity leakage, contractor risk and movement exceptions' },
+    ' ',
+    { kind: 'stance', text: 'before they become accepted cost' },
+    '.',
+  ],
   cta_primary: 'Request a consultation',
   cta_secondary: 'What we monitor',
   image: {
@@ -83,6 +90,13 @@ export const WHAT_WE_MONITOR = {
   headline: 'Five things we watch.',
   lede:
     'TIHLO is sector-agnostic. Mines, factories, depots, and municipal fleets all share the same five pressure points — and the same need for an independent record of what happened.',
+  ledeSegments: [
+    'TIHLO is sector-agnostic. ',
+    { kind: 'claim', text: 'Mines, factories, depots, and municipal fleets all share the same five pressure points' },
+    ' — and the same need for an ',
+    { kind: 'stance', text: 'independent record' },
+    ' of what happened.',
+  ],
   categories: [
     {
       label: 'Fuel & energy',
@@ -116,6 +130,13 @@ export const HOW_IT_WORKS = {
   headline: 'Three movements, one record.',
   lede:
     'Every engagement runs the same compact pattern. A six-stage methodology runs underneath, but at the operational level there are three movements — each ending in a named, signed record.',
+  ledeSegments: [
+    'Every engagement runs the same compact pattern. ',
+    { kind: 'claim', text: 'A six-stage methodology runs underneath' },
+    ', but at the operational level there are three movements — each ending in a ',
+    { kind: 'stance', text: 'named, signed record' },
+    '.',
+  ],
   steps: [
     {
       index: '01',
@@ -144,6 +165,13 @@ export const WHY_TIHLO = {
   headline: 'Four reasons engagements stand up.',
   lede:
     'These are non-negotiable. Each one is the precondition for evidence that survives an audit, an insurance claim, or a forensic counsel review.',
+  ledeSegments: [
+    'These are ',
+    { kind: 'stance', text: 'non-negotiable' },
+    '. ',
+    { kind: 'claim', text: 'Each one is the precondition for evidence' },
+    ' that survives an audit, an insurance claim, or a forensic counsel review.',
+  ],
   pillars: [
     {
       title: 'Independent — by design',
@@ -173,6 +201,12 @@ export const BY_THE_NUMBERS = {
   headline: 'Operational signals.',
   lede:
     'Each figure carries the conditions under which it was observed. We publish the caveats so the numbers can be challenged.',
+  ledeSegments: [
+    { kind: 'claim', text: 'Each figure carries the conditions under which it was observed' },
+    '. We publish the caveats so ',
+    { kind: 'stance', text: 'the numbers can be challenged' },
+    '.',
+  ],
 } as const;
 
 export const SECTORS = [
@@ -236,6 +270,13 @@ export const FINAL_CTA = {
   eyebrow: 'The eye that never misses',
   headline: ['Movement,', 'on the record.'],
   body: 'Engagements begin with a 30-minute briefing. We hear your current process, identify the highest-risk control gaps, and tell you whether TIHLO is the right partner for your operation.',
+  bodySegments: [
+    'Engagements begin with a 30-minute briefing. ',
+    { kind: 'claim', text: 'We hear your current process, identify the highest-risk control gaps' },
+    ', and tell you ',
+    { kind: 'stance', text: 'whether TIHLO is the right partner' },
+    ' for your operation.',
+  ],
   cta_primary: 'Request a briefing',
   cta_secondary: 'Read field notes',
 } as const;
@@ -244,6 +285,12 @@ export const HOW_WE_OPERATE = {
   eyebrow: 'Methodology',
   headline: 'How we operate.',
   lede: 'TIHLO operates a six-stage methodology across every commodity movement we monitor. The same procedure runs in Mpumalanga as in Limpopo, on yellow plant as on transport, by day as by night. This is what each stage does, and how the evidence accrues.',
+  ledeSegments: [
+    { kind: 'claim', text: 'TIHLO operates a six-stage methodology across every commodity movement we monitor' },
+    '. The same procedure runs in Mpumalanga as in Limpopo, on yellow plant as on transport, ',
+    { kind: 'stance', text: 'by day as by night' },
+    '. This is what each stage does, and how the evidence accrues.',
+  ],
   stages: [
     {
       index: '01',
@@ -348,9 +395,31 @@ export const ABOUT = {
   headline_1: 'We are',
   headline_2: 'TIHLO.',
   lede: 'An independent specialist firm operating active monitoring and verification for mining commodity movement across South Africa. We are quiet about who we work with. We are loud about what we will not tolerate on a corridor.',
+  ledeSegments: [
+    { kind: 'claim', text: 'An independent specialist firm operating active monitoring and verification' },
+    ' for mining commodity movement across South Africa. We are quiet about who we work with. ',
+    { kind: 'stance', text: 'Loud about what we will not tolerate' },
+    ' on a corridor.',
+  ],
   firm: [
     'TIHLO is independent — by design, not by description. We are not a subsidiary of a logistics provider, a reseller of telematics hardware, or a spin-off of a fleet management platform. We have no commercial relationship with any system we monitor. That is the precondition for the work.',
     'The firm was built to close a single gap: the distance between what fleet systems report and what is actually happening on the ground. Commodity loss lives in that gap. So does dispute, so does insurance exposure, so does counsel risk. We close it — every shift, every corridor, every record signed by a named controller.',
+  ],
+  firmSegments: [
+    [
+      'TIHLO is independent — ',
+      { kind: 'stance', text: 'by design, not by description' },
+      '. We are not a subsidiary of a logistics provider, a reseller of telematics hardware, or a spin-off of a fleet management platform. ',
+      { kind: 'claim', text: 'We have no commercial relationship with any system we monitor' },
+      '. That is the precondition for the work.',
+    ],
+    [
+      'The firm was built to close a single gap: the distance between what fleet systems report and what is actually happening on the ground. ',
+      { kind: 'claim', text: 'Commodity loss lives in that gap' },
+      '. So does dispute, so does insurance exposure, so does counsel risk. We close it — ',
+      { kind: 'stance', text: 'every record signed by a named controller' },
+      '.',
+    ],
   ],
   principles: [
     {
@@ -386,6 +455,12 @@ export const ABOUT = {
 export const CONTACT = {
   headline: 'Initiate.',
   sub: 'Engagements begin with a 30-minute briefing. Tell us about your operation; we will respond within one business day.',
+  subSegments: [
+    { kind: 'claim', text: 'Engagements begin with a 30-minute briefing' },
+    '. Tell us about your operation; we will respond ',
+    { kind: 'stance', text: 'within one business day' },
+    '.',
+  ],
   tiers: [
     {
       index: '01',
@@ -407,18 +482,44 @@ export const CONTACT = {
     {
       q: 'What sectors do you operate in?',
       a: 'Primarily coal, chrome, manganese, iron ore, and copper across Mpumalanga, Limpopo, and the Northern Cape. We have operated in agri-bulk and fuel logistics contexts as well.',
+      aSegments: [
+        'Primarily ',
+        { kind: 'claim', text: 'coal, chrome, manganese, iron ore, and copper' },
+        ' across ',
+        { kind: 'stance', text: 'Mpumalanga, Limpopo, and the Northern Cape' },
+        '. We have operated in agri-bulk and fuel logistics contexts as well.',
+      ],
     },
     {
       q: 'Do you replace our existing fleet management system?',
       a: 'No. TIHLO integrates above existing telematics and fleet management infrastructure. We add the verification and intervention layer — we do not require hardware replacement or system migration.',
+      aSegments: [
+        { kind: 'stance', text: 'No' },
+        '. TIHLO integrates above existing telematics and fleet management infrastructure. ',
+        { kind: 'claim', text: 'We add the verification and intervention layer' },
+        ' — we do not require hardware replacement or system migration.',
+      ],
     },
     {
       q: 'How quickly can you onboard a corridor?',
       a: 'A standard corridor onboarding takes 7–14 working days from signed NDA to first load under monitoring. Complex multi-site operations are scoped individually.',
+      aSegments: [
+        'A standard corridor onboarding takes ',
+        { kind: 'claim', text: '7–14 working days from signed NDA to first load under monitoring' },
+        '. Complex multi-site operations are ',
+        { kind: 'stance', text: 'scoped individually' },
+        '.',
+      ],
     },
     {
       q: 'What evidence do you produce?',
       a: 'Monthly evidence packs at audit grade: load logs, exception reports, controller-signed sanction records, fuel anomaly reports, and haulier performance rankings. Structured for use by legal counsel, auditors, and insurers.',
+      aSegments: [
+        { kind: 'claim', text: 'Monthly evidence packs at audit grade' },
+        ': load logs, exception reports, controller-signed sanction records, fuel anomaly reports, and haulier performance rankings. Structured for use by ',
+        { kind: 'stance', text: 'legal counsel, auditors, and insurers' },
+        '.',
+      ],
     },
   ],
 } as const;
@@ -429,6 +530,12 @@ export const SERVICES = [
     name: 'Fuel & Diesel Security',
     headline: 'Every litre accounted for.',
     body: 'AI-driven monitoring of fuel consumption per machine, per operator, per shift. Anomalies are flagged in real time and reviewed by a named controller before the next shift begins.',
+    bodySegments: [
+      { kind: 'claim', text: 'AI-driven monitoring of fuel consumption per machine, per operator, per shift' },
+      '. Anomalies are flagged in real time and reviewed by a named controller ',
+      { kind: 'stance', text: 'before the next shift begins' },
+      '.',
+    ],
     features: [
       'Consumption baseline per machine class and site',
       'Real-time anomaly detection with controller review',
@@ -441,6 +548,13 @@ export const SERVICES = [
     name: 'Transport Monitoring',
     headline: 'Route integrity from gate to gate.',
     body: '24/7 active monitoring of every truck in the fleet. Geofenced route enforcement, 3-point load verification, and automated sanction protocols that follow the asset.',
+    bodySegments: [
+      '24/7 active monitoring of every truck in the fleet. ',
+      { kind: 'claim', text: 'Geofenced route enforcement, 3-point load verification, and automated sanction protocols' },
+      ' ',
+      { kind: 'stance', text: 'that follow the asset' },
+      '.',
+    ],
     features: [
       '3-point load verification before gate clearance',
       'Geofenced route allocation and deviation detection',
@@ -453,6 +567,13 @@ export const SERVICES = [
     name: 'Yellow Plant Oversight',
     headline: 'The machine records what the operator reports.',
     body: 'Utilisation monitoring for excavators, ADTs, and dozers. Idle analysis, on-site vs off-site time, harsh operating events — all attributed to specific assets and included in the monthly evidence pack.',
+    bodySegments: [
+      'Utilisation monitoring for excavators, ADTs, and dozers. ',
+      { kind: 'claim', text: 'Idle analysis, on-site vs off-site time, harsh operating events' },
+      ' — ',
+      { kind: 'stance', text: 'all attributed to specific assets' },
+      ' and included in the monthly evidence pack.',
+    ],
     features: [
       'Machine utilisation and idle analysis',
       'On-site versus off-site time logging',

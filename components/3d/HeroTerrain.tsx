@@ -89,16 +89,16 @@ export default function HeroTerrain() {
     geom.computeVertexNormals();
 
     const wireMat = new THREE.LineBasicMaterial({
-      color: 0x0e1014,
+      color: 0x2a2f38,
       transparent: true,
-      opacity: 0.32,
+      opacity: 0.6,
     });
     const wire = new THREE.LineSegments(new THREE.WireframeGeometry(geom), wireMat);
 
     const fillMat = new THREE.MeshBasicMaterial({
-      color: 0xf8f8f8,
+      color: 0xfafaf8,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.4,
       side: THREE.DoubleSide,
     });
     const fill = new THREE.Mesh(geom, fillMat);
@@ -209,7 +209,7 @@ export default function HeroTerrain() {
       ref={mountRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 z-[5]"
-      style={{ mixBlendMode: 'multiply', opacity: 0.7 }}
+      style={{ opacity: 0.92 }}
     />
   );
 }

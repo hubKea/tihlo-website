@@ -1,8 +1,10 @@
 'use client';
 
 import Button from '@/components/ui/Button';
+import Lede from '@/components/ui/Lede';
 import MaskHeading from '@/components/motion/MaskHeading';
 import FadeUp from '@/components/motion/FadeUp';
+import { FINAL_CTA } from '@/lib/constants';
 
 export default function FinalCTA() {
   return (
@@ -32,11 +34,12 @@ export default function FinalCTA() {
         </h2>
 
         <FadeUp delay={0.3}>
-          <p className="mx-auto mt-8 max-w-[48ch] text-[17px] leading-[1.65] text-white/86">
-            Engagements begin with a 30-minute briefing. We hear your current
-            process, identify the highest-risk control gaps, and tell you
-            whether TIHLO is the right partner for your operation.
-          </p>
+          <Lede
+            segments={FINAL_CTA.bodySegments}
+            size="lg"
+            tone="red"
+            className="mx-auto mt-8 max-w-[48ch]"
+          />
         </FadeUp>
 
         <FadeUp delay={0.4}>

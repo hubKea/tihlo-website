@@ -1,4 +1,5 @@
 import Eyebrow from '@/components/ui/Eyebrow';
+import Lede from '@/components/ui/Lede';
 import FadeUp from '@/components/motion/FadeUp';
 import { WHY_TIHLO } from '@/lib/constants';
 
@@ -17,9 +18,7 @@ export default function WhyTihlo() {
             </h2>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <p className="text-[15px] leading-[1.66] text-[var(--muted)]">
-              {WHY_TIHLO.lede}
-            </p>
+            <Lede segments={WHY_TIHLO.ledeSegments} />
           </FadeUp>
         </div>
 

@@ -7,12 +7,6 @@ import FadeUp from '@/components/motion/FadeUp';
 export default function FinalCTA() {
   return (
     <section className="relative overflow-hidden bg-[var(--red)] px-6 pb-28 pt-36 lg:px-12 lg:pb-40 lg:pt-44">
-      {/* Top fade — wash from previous (white) section into red */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--white)] to-transparent"
-        aria-hidden="true"
-      />
-
       {/* Subtle texture overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
